@@ -12,3 +12,14 @@ php artisan key:generate
 
 php artisan serve
 ```
+
+
+
+### AdminLTE 后台模板
+* 官网: https://adminlte.io/
+
+* 文档: https://adminlte.io/docs/2.4/installation
+
+* 官方案例: https://adminlte.io/themes/AdminLTE/
+
+* `npm run dev` 生成压缩文件.

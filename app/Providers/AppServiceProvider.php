@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +14,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // https://stackoverflow.com/questions/23786359/laravel-migration-unique-key-is-too-long-even-if-specified
+        Schema::defaultStringLength(191);
     }
 
     /**

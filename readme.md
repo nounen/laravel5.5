@@ -20,6 +20,8 @@ php artisan serve
 
 * 文档: https://adminlte.io/docs/2.4/installation
 
+* 依赖插件: https://adminlte.io/docs/2.4/dependencies
+
 * 官方案例: https://adminlte.io/themes/AdminLTE/
 
 * `npm run dev` 生成压缩文件.

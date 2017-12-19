@@ -47,9 +47,7 @@
 
     @include('layouts.adminlte_footer')
 
-    <!-- TODO: 不知道这块干嘛用的 -->
-{{--
-    <!-- Control Sidebar -->
+    <!-- Control Sidebar : Control sidebar is the right side bar. -->
     <aside class="control-sidebar control-sidebar-dark">
         <!-- Create the tabs -->
         <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
@@ -239,7 +237,6 @@
         </div>
     </aside>
     <!-- /.control-sidebar -->
---}}
 
 
     <!-- TODO: 不知道这块干嘛用的 -->

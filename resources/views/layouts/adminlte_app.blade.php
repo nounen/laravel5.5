@@ -18,9 +18,23 @@
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
-    @include('layouts.adminlte_header')
 
-    @include('layouts.adminlte_sidebar')
+    @if(isset($hidden_header) && $hidden_header)
+        {{-- 设置不需要 header : 左侧菜单隐藏--}}
+        <style>
+            .content-wrapper, .main-footer {
+                margin-left: 0px;
+            }
+        </style>
+    @else
+        @include('layouts.adminlte_header')
+    @endif
+
+    @if(isset($hidden_sidebar) && $hidden_sidebar)
+        {{-- 设置不需要 sidebar --}}
+    @else
+        @include('layouts.adminlte_sidebar')
+    @endif
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -45,7 +59,11 @@
     </div>
     <!-- /.content-wrapper -->
 
-    @include('layouts.adminlte_footer')
+    @if(isset($hidden_footer) && $hidden_footer)
+        {{-- 设置不需要 footer --}}
+    @else
+        @include('layouts.adminlte_footer')
+    @endif
 
     <!-- Control Sidebar : Control sidebar is the right side bar. -->
     <aside class="control-sidebar control-sidebar-dark">

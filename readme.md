@@ -25,3 +25,9 @@ php artisan serve
 * 官方案例: https://adminlte.io/themes/AdminLTE/
 
 * `npm run dev` 生成压缩文件.
+
+```html
+* adminlte_app.blade.php 支持传参, 是否隐藏 header footer sidebar
+@extends('layouts.adminlte_app', ['hidden_header' => true, 'hidden_footer' => true, 'hidden_sidebar' => true])
+
+```

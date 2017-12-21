@@ -8,19 +8,10 @@
     </style>
 
     <div class="register-box">
-        @if (count($errors) > 0)
-        <div class="alert alert-danger alert-dismissible">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-        @endif
+        @include("layouts.adminlte_error")
 
         <div class="register-logo">
-            <a href="../../index2.html"><b>Admin</b>LTE</a>
+            <b>Admin</b>LTE
         </div>
 
         <div class="register-box-body">

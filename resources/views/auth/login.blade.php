@@ -12,17 +12,9 @@
             {{--</script>--}}
             {{--@endif--}}
         {{--@@endforeach--}}
-
-        <div class="alert alert-danger alert-dismissible">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            {{--<h5> <i class="icon fa fa-ban"></i> Alert! </h5>--}}
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
     @endif
+
+    @include("layouts.adminlte_error")
 
     <div class="login-logo">
         <p>某某管理系统</p>

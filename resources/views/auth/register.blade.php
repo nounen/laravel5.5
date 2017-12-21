@@ -8,7 +8,7 @@
     </style>
 
     <div class="register-box">
-        @include("layouts.adminlte_error")
+        {{--@include("layouts.adminlte_error")--}}
 
         <div class="register-logo">
             <b>Admin</b>LTE
@@ -23,34 +23,16 @@
                 <div class="form-group has-feedback">
                     <input id="name" type="text" class="form-control" placeholder="name" name="name" value="{{ old('name') }}" required autofocus>
                     <span class="glyphicon glyphicon-user form-control-feedback"></span>
-
-                    @if ($errors->has('name'))
-                    <span class="help-block">
-                        <strong>{{ $errors->first('name') }}</strong>
-                    </span>
-                    @endif
                 </div>
 
                 <div class="form-group has-feedback">
                     <input id="email" type="email" class="form-control" placeholder="email" name="email" value="{{ old('email') }}" required>
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-
-                    @if ($errors->has('email'))
-                    <span class="help-block">
-                        <strong>{{ $errors->first('email') }}</strong>
-                    </span>
-                    @endif
                 </div>
 
                 <div class="form-group has-feedback">
                     <input id="password" type="password" class="form-control" placeholder="password" name="password" required>
                     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-
-                    @if ($errors->has('password'))
-                    <span class="help-block">
-                        <strong>{{ $errors->first('password') }}</strong>
-                    </span>
-                    @endif
                 </div>
 
                 <div class="form-group has-feedback">
@@ -78,7 +60,7 @@
             </div>
             --}}
 
-            <a href="login.html" class="text-center">I already have a membership</a>
+            <a href="{{ route('login') }}" class="text-center">I already have a membership</a>
         </div>
         <!-- /.form-box -->
     </div>

@@ -2,19 +2,8 @@
 
 @section('content')
 <div class="login-box">
-    @if (count($errors) > 0)
-        {{--@@foreach($errors->toArray() as $key => $error)--}}
-            {{--@if(count($error) == 1)--}}
-            {{--<script>--}}
-            {{--var ele =$("input[name='{{$key}}']");--}}
-            {{--ele.after("<span class='help-block'><strong>{{$error[0]}}</strong></span>");--}}
-            {{--ele.parent().addClass('has-error');--}}
-            {{--</script>--}}
-            {{--@endif--}}
-        {{--@@endforeach--}}
-    @endif
 
-    @include("layouts.adminlte_error")
+    {{--@include("layouts.adminlte_error")--}}
 
     <div class="login-logo">
         <p>某某管理系统</p>
@@ -27,26 +16,14 @@
         <form method="POST" action="{{ route('login') }}">
             {{ csrf_field() }}
 
-            <div class="form-group has-feedback {{ $errors->has('email') ? ' has-error' : '' }}">
+            <div class="form-group has-feedback">
                 <input type="email" class="form-control" placeholder="Email" name="email" value="{{ old('email') }}" required autofocus>
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-
-                @if ($errors->has('email'))
-                    <span class="help-block">
-                        <strong>{{ $errors->first('email') }}</strong>
-                    </span>
-                @endif
             </div>
 
-            <div class="form-group has-feedback {{ $errors->has('password') ? ' has-error' : '' }}">
+            <div class="form-group has-feedback">
                 <input type="password" class="form-control" placeholder="Password" name="password" required>
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-
-                @if ($errors->has('password'))
-                    <span class="help-block">
-                        <strong>{{ $errors->first('password') }}</strong>
-                    </span>
-                @endif
             </div>
 
             <div class="row">

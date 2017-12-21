@@ -271,5 +271,7 @@
 <!-- ./wrapper -->
 
 <script src="{{ asset('js/adminlte.js') }}"></script>
+
+@include('layouts.adminlte_error_jq')
 </body>
 </html>

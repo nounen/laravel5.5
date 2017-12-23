@@ -38,3 +38,10 @@ php artisan serve
 
 * 表名 / 字段名 尽量都 **单数**.
 
+
+### 模型
+* `php artisan make:model Models/User [--migration]`
+
+
+### 控制器
+* `php artisan make:controller UserController --resource --model=Models/User`

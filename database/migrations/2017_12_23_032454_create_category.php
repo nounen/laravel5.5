@@ -15,6 +15,7 @@ class CreateCategory extends Migration
     {
         Schema::create('category', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('parent_id')->default(0)->comment('上级category');
             $table->string('name');
             $table->integer('sort')->default(0);
             $table->integer('article_count')->default(0)->comment('关联文章数量');

@@ -31,3 +31,10 @@ php artisan serve
 @extends('layouts.adminlte_app', ['hidden_header' => true, 'hidden_footer' => true, 'hidden_sidebar' => true])
 
 ```
+
+
+### 迁移文件
+* `php artisan make:migration create_users_table --[create|table]=users`
+
+* 表名 / 字段名 尽量都 **单数**.
+

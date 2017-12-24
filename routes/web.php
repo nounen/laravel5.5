@@ -21,8 +21,10 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::resource('/admin/tag', 'Admin\TagController')->middleware('auth');;
 
-Route::get('/adminlte', function () {
+
+Route::get('/admin', function () {
     $menus = [
         [
             'id' => 1,

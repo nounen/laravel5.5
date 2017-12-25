@@ -24,9 +24,32 @@ class TagController extends AdminBaseController
      */
     public function index()
     {
-        $this->data['tags'] = $this->tagRepository->paginate($this->auth);
+        $this->data['table_name'] = '标签列表';
 
-        dd($this->data['tags']->toArray());
+        $this->data['table_rows'] = [
+            [
+                'key' => 'id',
+                'val' => 'id',
+            ],
+            [
+                'key' => 'name',
+                'val' => '标签名',
+            ],
+            [
+                'key' => 'created_at',
+                'val' => '创建时间',
+            ],
+            [
+                'key' => 'updated_at',
+                'val' => '修改时间',
+            ],
+        ];
+
+//        $this->data['table_more']['delete'] = false;
+
+        $this->data['table_lists'] = $this->tagRepository->paginate($this->auth);
+
+        return view('admin.tag.index', $this->data);
     }
 
     /**

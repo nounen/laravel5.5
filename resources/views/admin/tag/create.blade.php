@@ -16,7 +16,7 @@
         <!-- /.box-body -->
 
         <div class="box-footer">
-            <button type="button" class="btn btn-flat btn-default" onclick="javascript:history.go(-1);">取消</button>
+            <button type="button" class="btn btn-flat btn-default" onclick="javascript:history.go(-1);">返回</button>
 
             <button type="submit" class="btn btn-flat btn-primary">提交</button>
         </div>

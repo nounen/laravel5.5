@@ -35,4 +35,16 @@ class TagRepository extends BaseRepository
     {
         Tag::create($input);
     }
+
+    /**
+     * 标签详情
+     *
+     * @param $id
+     * @param $user
+     * @return mixed
+     */
+    public function show($id, $user)
+    {
+        return Tag::where('user_id', $user->id)->find($id);
+    }
 }

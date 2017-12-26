@@ -91,12 +91,39 @@ class TagController extends AdminBaseController
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Tag  $tag
+     * TODO: 备注
+     * public function show($id) // 自己想在仓库做更多业务使用这样
+     *
+     * public function show(Tag $tag) // 简单模型查询使用这个
+     *
      * @return \Illuminate\Http\Response
      */
-    public function show(Tag $tag)
+    public function show($id)
     {
-        //
+        $this->data['page_title'] = '标签详情';
+
+        $this->data['item_rows'] = [
+            [
+                'key' => 'id',
+                'val' => 'id',
+            ],
+            [
+                'key' => 'name',
+                'val' => '标签名',
+            ],
+            [
+                'key' => 'created_at',
+                'val' => '创建时间',
+            ],
+            [
+                'key' => 'updated_at',
+                'val' => '修改时间',
+            ],
+        ];
+
+        $this->data['item'] = $this->tagRepository->show($id, $this->auth);
+
+        return view('admin.tag.show', $this->data);
     }
 
     /**

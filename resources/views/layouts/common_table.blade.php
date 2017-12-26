@@ -1,10 +1,10 @@
 <div class="row">
     <div class="col-xs-12">
-        <div class="box">
-            <div class="box-header">
-                <h3 class="box-title"><span>{{ $table_name}}</span></h3>
+        <div class="box" style="border-top: 1px solid #d2d6de;">
+            <div class="box-header" style="padding-top: 5px; padding-bottom: 0px;">
+                {{--<h3 class="box-title"><span>{{ $table_name}}</span></h3>--}}
 
-                @if($table_more['create']) <h3> <button type="button" class="btn btn-sm btn-primary">创建</button> </h3> @endif
+                @if($table_more['create']) <p> <button type="button" class="btn btn-sm btn-primary">创建</button> </p> @endif
 
                 {{--TODO:需要扩展更多搜索--}}
                 <div class="box-tools">

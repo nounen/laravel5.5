@@ -25,6 +25,7 @@ class TagController extends AdminBaseController
     public function index()
     {
         $this->data['table_name'] = '标签列表';
+        $this->data['page_title'] = '标签列表';
 
         $this->data['table_rows'] = [
             [

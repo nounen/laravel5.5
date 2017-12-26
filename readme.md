@@ -45,3 +45,6 @@ php artisan serve
 
 ### 控制器
 * `php artisan make:controller UserController --resource --model=Models/User`
+
+### 表单验证
+* `php artisan make:request Admin/TagPost`

@@ -52,7 +52,7 @@
             --}}
 
             <h1>
-                标签列表 <small>Control panel</small>
+                标签列表 <!-- small>Control panel</small -->
             </h1>
         </section>
 

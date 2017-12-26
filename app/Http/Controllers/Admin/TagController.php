@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Tag;
 use App\Repositories\TagRepository;
 use Illuminate\Http\Request;
+use App\Http\Requests\Admin\TagPost;
 
 class TagController extends AdminBaseController
 {
@@ -25,7 +26,10 @@ class TagController extends AdminBaseController
     public function index()
     {
         $this->data['table_name'] = '标签列表';
+
         $this->data['page_title'] = '标签列表';
+
+        $this->data['create_url'] = url('admin/tag/create');
 
         $this->data['table_rows'] = [
             [
@@ -60,18 +64,26 @@ class TagController extends AdminBaseController
      */
     public function create()
     {
-        //
+        return view('admin.tag.create', $this->data);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \App\Http\Requests\Admin\TagPost  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TagPost $request)
     {
-        //
+        $input = $request->only([
+            'name',
+        ]);
+
+        $input['user_id'] = $this->auth->id;
+
+        $this->tagRepository->store($input);
+
+        return redirect(url('admin/tag'));
     }
 
     /**

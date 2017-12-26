@@ -23,4 +23,16 @@ class TagRepository extends BaseRepository
 
         return $tags;
     }
+
+    /**
+     * 创建标签
+     *
+     * TODO: 如何封装通过 store 放到 BaseRepository, 且包含异常处理
+     *
+     * @param $input
+     */
+    public function store($input)
+    {
+        Tag::create($input);
+    }
 }

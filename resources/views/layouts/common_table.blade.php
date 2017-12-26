@@ -4,7 +4,13 @@
             <div class="box-header" style="padding-top: 5px; padding-bottom: 0px;">
                 {{--<h3 class="box-title"><span>{{ $table_name}}</span></h3>--}}
 
-                @if($table_more['create']) <p> <button type="button" class="btn btn-sm btn-primary">创建</button> </p> @endif
+                @if($table_more['create'])
+                <p>
+                    <a href="{{ $create_url }}">
+                        <button type="button" class="btn btn-sm btn-flat btn-primary">创建</button>
+                    </a>
+                </p>
+                @endif
 
                 {{--TODO:需要扩展更多搜索--}}
                 <div class="box-tools">

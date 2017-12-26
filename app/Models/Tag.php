@@ -9,4 +9,9 @@ namespace App\Models;
 class Tag extends BaseModel
 {
     protected $table = 'tag';
+
+    protected $fillable = [
+        'name',
+        'user_id',
+    ];
 }

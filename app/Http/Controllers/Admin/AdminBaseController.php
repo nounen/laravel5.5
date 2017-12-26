@@ -24,9 +24,19 @@ class AdminBaseController extends Controller
             return $next($request);
         });
 
+        $this->data['table_name'] = '';
+
+        $this->data['page_title'] = '';
+
+        $this->data['create_url'] = '';
+
         $this->data['menus'] = $this->getMockMenus();
 
         $this->data['table_more'] = $this->getDefaultTableMore();
+
+        $this->data['table_rows'] = [];
+
+        $this->data['table_lists'] = [];
     }
 
     /**

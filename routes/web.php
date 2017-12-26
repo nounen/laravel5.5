@@ -13,16 +13,17 @@
 
 use Illuminate\Routing\Router AS Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Auth::routes();
-
+// Test
+Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('/admin/tag', 'Admin\TagController')->middleware('auth');;
 
+// Admin
+Auth::routes();
+
+Route::middleware(['auth'])->namespace('Admin')->prefix('/admin')->name('admin.')->group(function () {
+    Route::resource('/tag', 'TagController');
+});
 
 Route::get('/admin', function () {
     $menus = [

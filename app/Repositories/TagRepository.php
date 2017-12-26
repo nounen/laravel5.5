@@ -47,4 +47,13 @@ class TagRepository extends BaseRepository
     {
         return Tag::where('user_id', $user->id)->find($id);
     }
+
+    public function update($id, $input, $user)
+    {
+        $tag = Tag::where('user_id', $user->id)->find($id);
+
+        if ($tag) {
+            $tag->update($input);
+        }
+    }
 }

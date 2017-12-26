@@ -96,6 +96,7 @@ class TagController extends AdminBaseController
      *
      * public function show(Tag $tag) // 简单模型查询使用这个
      *
+     * @param $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -129,24 +130,34 @@ class TagController extends AdminBaseController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Tag  $tag
+     * @param $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Tag $tag)
+    public function edit($id)
     {
-        //
+        $this->data['page_title'] = '编辑标签';
+
+        $this->data['item'] = $this->tagRepository->show($id, $this->auth);
+
+        return view('admin.tag.edit', $this->data);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Tag  $tag
+     * @param \App\Http\Requests\Admin\TagPost  $request
+     * @param $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Tag $tag)
+    public function update(TagPost $request, $id)
     {
-        //
+        $input = $request->only([
+            'name',
+        ]);
+
+        $this->tagRepository->update($id, $input, $this->auth);
+
+        return redirect(url('admin/tag'));
     }
 
     /**

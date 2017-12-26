@@ -51,11 +51,13 @@
             </ol>
             --}}
 
-            <h1>
+            @if(isset($hidden_sidebar) && $hidden_sidebar)
+            @else
+                <h1>
                 {{ $page_title }} <!-- small>Control panel</small -->
-            </h1>
+                </h1>
+            @endif
         </section>
-
 
         <!-- Main content -->
         <section class="content">

@@ -6,7 +6,7 @@
     {{--@include("layouts.adminlte_error")--}}
 
     <div class="login-logo">
-        <p>某某管理系统</p>
+        <p></p>
     </div>
 
     <!-- /.login-logo -->

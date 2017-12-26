@@ -55,7 +55,7 @@
 
         <div class="social-auth-links text-center">
             <p>
-                <a href="http://localhost:8000/password/reset" class="btn btn-link">Forgot Your Password? </a>
+                <a href="{{ url('password/reset') }}" class="btn btn-link">Forgot Your Password? </a>
             </p>
         </div>
     </div>

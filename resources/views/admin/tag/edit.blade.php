@@ -5,8 +5,7 @@
 <div class="box" style="border-top: 1px solid #d2d6de;">
     <!-- form start -->
     <form role="form" method="POST" action="{{ url("/admin/tag") }}/{{ $item->id }}">
-        {{ method_field('PUT') }}
-
+        {{ method_field('PATCH') }}
         {{ csrf_field() }}
 
         <div class="box-body">

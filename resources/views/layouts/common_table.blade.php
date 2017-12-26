@@ -51,9 +51,11 @@
                                 @endif
 
                                 @if($table_more['delete'])
-                                <a href="{{ $base_url }}/{{ $item->id }}">
-                                    <button type="button" class="btn btn-flat btn-xs btn-danger">删除</button>
-                                </a>
+                                <form action="{{ $base_url }}/{{ $item->id }}" method="POST" style="display: inline;">
+                                    {{ method_field('DELETE') }}
+                                    {{ csrf_field() }}
+                                    <button type="submit" class="btn btn-flat btn-xs btn-danger">删除</button>
+                                </form>
                                 @endif
                             </td>
                         </tr>

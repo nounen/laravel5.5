@@ -125,11 +125,13 @@ class TagController extends AdminBaseController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Tag  $tag
+     * @param  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Tag $tag)
+    public function destroy($id)
     {
-        //
+        $this->tagRepository->destroy($id, $this->auth);
+
+        return redirect(url('admin/tag'));
     }
 }

@@ -64,6 +64,8 @@ class TagController extends AdminBaseController
      */
     public function create()
     {
+        $this->data['page_title'] = '创建标签';
+
         return view('admin.tag.create', $this->data);
     }
 

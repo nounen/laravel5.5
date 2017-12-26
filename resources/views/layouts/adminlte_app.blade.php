@@ -52,7 +52,7 @@
             --}}
 
             <h1>
-                标签列表 <!-- small>Control panel</small -->
+                {{ $page_title }} <!-- small>Control panel</small -->
             </h1>
         </section>
 

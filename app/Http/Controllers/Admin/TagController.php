@@ -25,32 +25,11 @@ class TagController extends AdminBaseController
      */
     public function index()
     {
-        $this->data['table_name'] = '标签列表';
-
         $this->data['page_title'] = '标签列表';
 
         $this->data['base_url'] = url('admin/tag/');
 
-        $this->data['table_rows'] = [
-            [
-                'key' => 'id',
-                'val' => 'id',
-            ],
-            [
-                'key' => 'name',
-                'val' => '标签名',
-            ],
-            [
-                'key' => 'created_at',
-                'val' => '创建时间',
-            ],
-            [
-                'key' => 'updated_at',
-                'val' => '修改时间',
-            ],
-        ];
-
-//        $this->data['table_more']['delete'] = false;
+        $this->data['table_rows'] = Tag::getTableRows();
 
         $this->data['table_lists'] = $this->tagRepository->paginate($this->auth);
 
@@ -103,24 +82,7 @@ class TagController extends AdminBaseController
     {
         $this->data['page_title'] = '标签详情';
 
-        $this->data['item_rows'] = [
-            [
-                'key' => 'id',
-                'val' => 'id',
-            ],
-            [
-                'key' => 'name',
-                'val' => '标签名',
-            ],
-            [
-                'key' => 'created_at',
-                'val' => '创建时间',
-            ],
-            [
-                'key' => 'updated_at',
-                'val' => '修改时间',
-            ],
-        ];
+        $this->data['item_rows'] = Tag::getItemRows();
 
         $this->data['item'] = $this->tagRepository->show($id, $this->auth);
 

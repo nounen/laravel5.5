@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Tag;
 use App\Repositories\TagRepository;
-use Illuminate\Http\Request;
 use App\Http\Requests\Admin\TagPost;
 
 class TagController extends AdminBaseController
@@ -27,7 +26,7 @@ class TagController extends AdminBaseController
     {
         $this->data['page_title'] = '标签列表';
 
-        $this->data['base_url'] = url('admin/tag/');
+        $this->data['base_url'] = url('admin/tag');
 
         $this->data['table_rows'] = Tag::getTableRows();
 

@@ -6,7 +6,7 @@
 
                 @if($table_more['create'])
                 <p>
-                    <a href="{{ $create_url }}">
+                    <a href="{{ $base_url }}/create">
                         <button type="button" class="btn btn-sm btn-flat btn-primary">创建</button>
                     </a>
                 </p>
@@ -38,9 +38,23 @@
                             @endforeach
 
                             <td>
-                                @if($table_more['show'])<button type="button" class="btn btn-flat btn-xs btn-info">查看</button> @endif
-                                @if($table_more['edit'])<button type="button" class="btn btn-flat btn-xs btn-warning">编辑</button> @endif
-                                @if($table_more['delete'])<button type="button" class="btn btn-flat btn-xs btn-danger">删除</button> @endif
+                                @if($table_more['show'])
+                                <a href="{{ $base_url }}/{{ $item->id }}">
+                                    <button type="button" class="btn btn-flat btn-xs btn-info">查看</button>
+                                </a>
+                                @endif
+
+                                @if($table_more['edit'])
+                                <a href="{{ $base_url }}/{{ $item->id }}/edit">
+                                    <button type="button" class="btn btn-flat btn-xs btn-warning">编辑</button>
+                                </a>
+                                @endif
+
+                                @if($table_more['delete'])
+                                <a href="{{ $base_url }}/{{ $item->id }}">
+                                    <button type="button" class="btn btn-flat btn-xs btn-danger">删除</button>
+                                </a>
+                                @endif
                             </td>
                         </tr>
                         @endforeach

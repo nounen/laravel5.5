@@ -28,7 +28,7 @@ class AdminBaseController extends Controller
 
         $this->data['page_title'] = '';
 
-        $this->data['create_url'] = '';
+        $this->data['base_url'] = ''; // 拼接用, 例如 admin/tag/create  admin/tag/1
 
         $this->data['menus'] = $this->getMockMenus();
 

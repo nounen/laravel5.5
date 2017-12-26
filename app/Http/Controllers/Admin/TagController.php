@@ -29,7 +29,7 @@ class TagController extends AdminBaseController
 
         $this->data['page_title'] = '标签列表';
 
-        $this->data['create_url'] = url('admin/tag/create');
+        $this->data['base_url'] = url('admin/tag/');
 
         $this->data['table_rows'] = [
             [

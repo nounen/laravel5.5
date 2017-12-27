@@ -28,7 +28,7 @@ class TagPost extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique:tag|max:12',
+            'name' => 'required|unique:tag|max:6',
         ];
     }
 

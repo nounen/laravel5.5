@@ -31,4 +31,11 @@ class TagPost extends FormRequest
             'name' => 'required|unique:tag|max:12',
         ];
     }
+
+    public function attributes()
+    {
+        return [
+            'name' => '标签名',
+        ];
+    }
 }

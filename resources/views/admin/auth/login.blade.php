@@ -1,4 +1,4 @@
-@extends('layouts.adminlte_app', ['hidden_header' => true, 'hidden_footer' => true, 'hidden_sidebar' => true])
+@extends('admin.layouts.adminlte_app', ['hidden_header' => true, 'hidden_footer' => true, 'hidden_sidebar' => true])
 
 @section('content')
 <div class="login-box">
@@ -13,7 +13,7 @@
     <div class="login-box-body">
         <p class="login-box-msg">Sign in to start your session</p>
 
-        <form method="POST" action="{{ route('login') }}">
+        <form method="POST" action="{{ route('admin.login') }}">
             {{ csrf_field() }}
 
             <div class="form-group has-feedback">
@@ -55,7 +55,7 @@
 
         <div class="social-auth-links text-center">
             <p>
-                <a href="{{ url('password/reset') }}" class="btn btn-link">Forgot Your Password? </a>
+                <a href="{{ url('admin/password/reset') }}" class="btn btn-link">Forgot Your Password? </a>
             </p>
         </div>
     </div>

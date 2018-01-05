@@ -1,4 +1,4 @@
-@extends('layouts.adminlte_app', ['hidden_header' => true, 'hidden_footer' => true, 'hidden_sidebar' => true])
+@extends('admin.layouts.adminlte_app', ['hidden_header' => true, 'hidden_footer' => true, 'hidden_sidebar' => true])
 
 @section('content')
     <style>
@@ -17,7 +17,7 @@
         <div class="register-box-body">
             <p class="login-box-msg">Register a new membership</p>
 
-            <form class="form-horizontal" method="POST" action="{{ route('register') }}">
+            <form class="form-horizontal" method="POST" action="{{ route('admin.register') }}">
                 {{ csrf_field() }}
 
                 <div class="form-group has-feedback">
@@ -60,7 +60,7 @@
             </div>
             --}}
 
-            <a href="{{ route('login') }}" class="text-center">I already have a membership</a>
+            <a href="{{ route('admin.login') }}" class="text-center">I already have a membership</a>
         </div>
         <!-- /.form-box -->
     </div>

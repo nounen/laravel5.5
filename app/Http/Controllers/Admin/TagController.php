@@ -6,7 +6,7 @@ use App\Models\Tag;
 use App\Repositories\TagRepository;
 use App\Http\Requests\Admin\TagPost;
 
-class TagController extends AdminBaseController
+class TagController extends Controller
 {
     protected $tagRepository;
 

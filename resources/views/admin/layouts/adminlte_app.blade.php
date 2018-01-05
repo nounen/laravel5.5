@@ -27,13 +27,13 @@
             }
         </style>
     @else
-        @include('layouts.adminlte_header')
+        @include('admin.layouts.adminlte_header')
     @endif
 
     @if(isset($hidden_sidebar) && $hidden_sidebar)
         {{-- 设置不需要 sidebar --}}
     @else
-        @include('layouts.adminlte_sidebar')
+        @include('admin.layouts.adminlte_sidebar')
     @endif
 
     <!-- Content Wrapper. Contains page content -->
@@ -70,10 +70,10 @@
     @if(isset($hidden_footer) && $hidden_footer)
         {{-- 设置不需要 footer --}}
     @else
-        @include('layouts.adminlte_footer')
+        @include('admin.layouts.adminlte_footer')
     @endif
 
-    {{--@include('layouts.adminlte_sidebar_right')--}}
+    {{--@include('admin.layouts.adminlte_sidebar_right')--}}
 
     <!-- TODO: 不知道这块干嘛用的 -->
 {{--
@@ -88,6 +88,6 @@
 
 <script src="{{ asset('js/adminlte.js') }}"></script>
 
-@include('layouts.adminlte_error_jq')
+@include('admin.layouts.adminlte_error_jq')
 </body>
 </html>

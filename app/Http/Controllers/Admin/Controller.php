@@ -2,13 +2,19 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Routing\Controller;
+use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
-class AdminBaseController extends Controller
+/**
+ * 控制器基类
+ *
+ * Class Controller
+ * @package App\Http\Controllers\Admin
+ */
+class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
@@ -135,5 +141,4 @@ class AdminBaseController extends Controller
             ],
         ];
     }
-
 }

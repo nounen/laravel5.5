@@ -1,5 +1,5 @@
 @extends('admin.layouts.app')
 
 @section('content')
-    @include('admin.commons.table')
+    @include('admin.commons.index')
 @endsection

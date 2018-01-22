@@ -26,9 +26,9 @@ class TagController extends Controller
      */
     public function index()
     {
-        $this->prepareIndex();
-
         $this->data['title'] = '标签列表';
+
+        $this->data['table_permissions'] = $this->permissions();
 
         $this->data['table_rows'] = Tag::getTableRows();
 

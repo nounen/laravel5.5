@@ -40,18 +40,6 @@ class Controller extends BaseController
     }
 
     /**
-     * 准备列表相关数据
-     */
-    protected function prepareIndex()
-    {
-        $this->data['table_permissions'] = $this->permissions();
-
-        $this->data['table_rows'] = [];
-
-        $this->data['table_list'] = [];
-    }
-
-    /**
      * 权限
      *
      * @return array
@@ -60,8 +48,8 @@ class Controller extends BaseController
     {
         return [
             'create' => true,
-            'detail' => true,
-            'update' => true,
+            'show'   => true,
+            'edit'   => true,
             'delete' => true,
         ];
     }

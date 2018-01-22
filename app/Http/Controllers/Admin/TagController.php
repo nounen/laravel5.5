@@ -98,7 +98,9 @@ class TagController extends Controller
      */
     public function edit($id)
     {
-        $this->data['page_title'] = '编辑标签';
+        $this->data['title'] = '编辑标签';
+
+        $this->data['update_rows'] = Tag::getUpdateRows();
 
         $this->data['item'] = $this->tagRepository->show($id, $this->auth);
 
@@ -114,9 +116,7 @@ class TagController extends Controller
      */
     public function update(TagPost $request, $id)
     {
-        $input = $request->only([
-            'name',
-        ]);
+        $input = $request->only(Tag::getUpdateKeys());
 
         $this->tagRepository->update($id, $input, $this->auth);
 

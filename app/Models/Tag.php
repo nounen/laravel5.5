@@ -40,7 +40,10 @@ class Tag extends BaseModel
                     'type' => 'text',
 
                 ],
-                'update' => true,
+                'update' => [
+                    'type' => 'text',
+
+                ],
                 'detail' => true,
                 'rule'   => 'required|unique:tag|max:5',
             ],
@@ -51,7 +54,10 @@ class Tag extends BaseModel
                 'create' => [
                     'type' => 'number',
                 ],
-                'update' => true,
+                'update' => [
+                    'type' => 'text',
+
+                ],
                 'detail' => true,
                 'rule'   => 'required|numeric',
             ],

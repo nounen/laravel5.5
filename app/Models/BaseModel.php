@@ -143,4 +143,44 @@ class BaseModel extends Model
 
         return $keys;
     }
+
+    /**
+     * 更新页面字段
+     *
+     * @return array
+     */
+    public static function getUpdateRows()
+    {
+        $rows = [];
+
+        $fields = self::getFields();
+
+        foreach($fields as $field) {
+            if (issetAndEqual($field, 'create', true)) {
+                $rows[] = [
+                    'key'  => $field['key'],
+                    'name' => $field['name'],
+                    'attr' => $field['create'],
+                ];
+            } else {
+                continue;
+            }
+        }
+
+        return $rows;
+    }
+
+    /**
+     * 在 getUpdateRows 只提取 key
+     *
+     * @return array
+     */
+    public static function getUpdateKeys()
+    {
+        $fields = self::getUpdateRows();
+
+        $keys = array_pluck($fields, 'key');
+
+        return $keys;
+    }
 }

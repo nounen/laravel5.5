@@ -46,6 +46,8 @@ class TagController extends Controller
     {
         $this->data['title'] = '创建标签';
 
+        $this->data['create_rows'] = Tag::getCreateRows();
+
         return view('admin.tag.create', $this->data);
     }
 
@@ -57,9 +59,7 @@ class TagController extends Controller
      */
     public function store(TagPost $request)
     {
-        $input = $request->only([
-            'name',
-        ]);
+        $input = $request->only(Tag::getStoreKeys());
 
         $input['user_id'] = $this->auth->id;
 

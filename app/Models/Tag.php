@@ -12,6 +12,7 @@ class Tag extends BaseModel
 
     protected $fillable = [
         'name',
+        'sort',
         'user_id',
     ];
 
@@ -27,7 +28,7 @@ class Tag extends BaseModel
                 'key'    => 'id',
                 'name'   => 'id',
                 'table'  => true,
-                'create' => true,
+                'create' => false,
                 'update' => true,
                 'detail' => true,
             ],
@@ -35,7 +36,10 @@ class Tag extends BaseModel
                 'key'    => 'name',
                 'name'   => '标签名',
                 'table'  => true,
-                'create' => true,
+                'create' => [
+                    'type' => 'text',
+
+                ],
                 'update' => true,
                 'detail' => true,
                 'rule'   => 'required|unique:tag|max:5',
@@ -44,15 +48,18 @@ class Tag extends BaseModel
                 'key'    => 'sort',
                 'name'   => '排序',
                 'table'  => true,
-                'create' => true,
+                'create' => [
+                    'type' => 'number',
+                ],
                 'update' => true,
                 'detail' => true,
+                'rule'   => 'required|numeric',
             ],
             [
                 'key'    => 'article_count',
                 'name'   => '关联文章数',
                 'table'  => true,
-                'create' => true,
+                'create' => false,
                 'update' => true,
                 'detail' => true,
             ],
@@ -60,7 +67,7 @@ class Tag extends BaseModel
                 'key'    => 'user_id',
                 'name'   => '创建人',
                 'table'  => true,
-                'create' => true,
+                'create' => false,
                 'update' => true,
                 'detail' => true,
             ],
@@ -68,7 +75,7 @@ class Tag extends BaseModel
                 'key'    => 'created_at',
                 'name'   => '创建时间',
                 'table'  => true,
-                'create' => true,
+                'create' => false,
                 'update' => true,
                 'detail' => true,
             ],
@@ -76,7 +83,7 @@ class Tag extends BaseModel
                 'key'    => 'updated_at',
                 'name'   => '更新时间',
                 'table'  => true,
-                'create' => true,
+                'create' => false,
                 'update' => true,
                 'detail' => true,
             ],

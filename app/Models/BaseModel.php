@@ -103,4 +103,44 @@ class BaseModel extends Model
 
         return $rows;
     }
+
+    /**
+     * 创建页面字段
+     *
+     * @return array
+     */
+    public static function getCreateRows()
+    {
+        $rows = [];
+
+        $fields = self::getFields();
+
+        foreach($fields as $field) {
+            if (issetAndEqual($field, 'create', true)) {
+                $rows[] = [
+                    'key'  => $field['key'],
+                    'name' => $field['name'],
+                    'attr' => $field['create'],
+                ];
+            } else {
+                continue;
+            }
+        }
+
+        return $rows;
+    }
+
+    /**
+     * 在 getCreateRows 只提取 key
+     *
+     * @return array
+     */
+    public static function getStoreKeys()
+    {
+        $fields = self::getCreateRows();
+
+        $keys = array_pluck($fields, 'key');
+
+        return $keys;
+    }
 }

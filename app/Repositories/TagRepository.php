@@ -19,6 +19,8 @@ class TagRepository extends BaseRepository
 
         $tags = $this->search(Tag::class, $fieldMaps)
                     ->where('user_id', $user->id)
+                    ->orderBy('sort')
+                    ->orderBy('created_at', 'DESC')
                     ->paginate();
 
         return $tags;

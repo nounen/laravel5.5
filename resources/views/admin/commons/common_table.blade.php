@@ -55,7 +55,7 @@
                                     删除
                                 </button>
 
-                                @include('admin.layouts.common_delete_modal', ['id' => $item->id, 'url' => "{$base_url}/{$item->id}"])
+                                @include('admin.commons.common_delete_modal', ['id' => $item->id, 'url' => "{$base_url}/{$item->id}"])
                                 <!-- /.modal-content -->
                                 @endif
                             </td>

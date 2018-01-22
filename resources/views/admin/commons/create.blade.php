@@ -6,8 +6,13 @@
             @foreach($create_rows as $row)
                 <div class="form-group">
                     <label for="{{ $row['key'] }}">{{ $row['name'] }}</label>
-                    <input id="{{ $row['key'] }}" name="{{ $row['key'] }}" value="{{ old($row['key']) }}"
-                           type="{{ $row['attr']['type'] }}" placeholder="{{ $row['name'] }}" class="form-control">
+
+                    <input id="{{ $row['key'] }}"
+                           name="{{ $row['key'] }}"
+                           value="{{ old($row['key']) }}"
+                           type="{{ $row['attr']['type'] }}"
+                           placeholder="{{ $row['name'] }}"
+                           class="form-control">
                 </div>
             @endforeach
         </div>

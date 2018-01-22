@@ -48,3 +48,15 @@ php artisan serve
 
 ### 表单验证
 * `php artisan make:request Admin/TagPost`
+
+### CURD 通用后台设计
+* 要点: 通过配置实现
+
+* 列表: _index
+    * 列表数据
+    * 编辑入口: 创建 / 编辑 / 查看 / 删除 (权限)
+        * TODO: 如何扩展更多操作权限的入口按钮
+* 新增: _create
+* 编辑: _update
+* 查看: _detail
+* 删除: _delete

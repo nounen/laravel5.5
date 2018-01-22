@@ -4,7 +4,7 @@
             <div class="box-header" style="padding-top: 5px; padding-bottom: 0px;">
                 {{--<h3 class="box-title"><span>{{ $table_name}}</span></h3>--}}
 
-                @if($table_more['create'])
+                @if(issetAndEqual($table_permissions, 'create'))
                 <p>
                     <a href="{{ $base_url }}/create">
                         <button type="button" class="btn btn-sm btn-flat btn-primary">创建</button>
@@ -31,26 +31,26 @@
                             <th>操作</th>
                         </tr>
 
-                        @foreach($table_lists as $item)
+                        @foreach($table_list as $item)
                         <tr>
                             @foreach($table_rows as $row)
                             <td>{{ $item->{$row['key']} }}</td>
                             @endforeach
 
                             <td>
-                                @if($table_more['show'])
+                                @if(issetAndEqual($table_permissions, 'detail'))
                                 <a href="{{ $base_url }}/{{ $item->id }}">
                                     <button type="button" class="btn btn-flat btn-xs btn-info">查看</button>
                                 </a>
                                 @endif
 
-                                @if($table_more['edit'])
+                                @if(issetAndEqual($table_permissions, 'update'))
                                 <a href="{{ $base_url }}/{{ $item->id }}/edit">
                                     <button type="button" class="btn btn-flat btn-xs btn-warning">编辑</button>
                                 </a>
                                 @endif
 
-                                @if($table_more['delete'])
+                                @if(issetAndEqual($table_permissions, 'delete'))
                                 <button type="button" class="btn btn-flat btn-xs btn-danger" data-toggle="modal" data-target="#delete_modal_{{ $item->id }}">
                                     删除
                                 </button>
@@ -69,7 +69,7 @@
             {{--TODO: 分页样式应该重写--}}
             <div class="box-footer clearfix" style="padding-top: 0px; padding-bottom: 0px;">
                 {{-- 如果没有分页数据就不会显示 --}}
-                {{ $table_lists->links() }}
+                {{ $table_list->links() }}
             </div>
         </div>
         <!-- /.box -->

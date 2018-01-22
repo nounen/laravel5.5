@@ -30,36 +30,47 @@ class Controller extends BaseController
             return $next($request);
         });
 
-        $this->data['table_name'] = '';
-
-        $this->data['page_title'] = '';
-
-        $this->data['base_url'] = ''; // 拼接用, 例如 admin/tag/create  admin/tag/1
-
         $this->data['menus'] = $this->getMockMenus();
 
-        $this->data['table_more'] = $this->getDefaultTableMore();
+        // 当前操作名
+        $this->data['title'] = '';
 
-        $this->data['table_rows'] = [];
-
-        $this->data['table_lists'] = [];
+        // 当前操作基础 url (可扩展出新增 / 修改 / 删除的 url)
+        $this->data['base_url'] = url('xx/xx');
     }
 
     /**
-     * table 列表更多操作
+     * 准备列表相关数据
+     */
+    protected function prepareIndex()
+    {
+        $this->data['table_permissions'] = $this->permissions();
+
+        $this->data['table_rows'] = [];
+
+        $this->data['table_list'] = [];
+    }
+
+    /**
+     * 权限
      *
      * @return array
      */
-    protected function getDefaultTableMore()
+    protected function permissions()
     {
         return [
             'create' => true,
-            'show' => true,
-            'edit' => true,
+            'detail' => true,
+            'update' => true,
             'delete' => true,
         ];
     }
 
+    /**
+     * 模拟左侧菜单数据
+     *
+     * @return array
+     */
     protected function getMockMenus()
     {
         return [

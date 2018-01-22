@@ -14,6 +14,8 @@ class TagController extends Controller
     {
         parent::__construct();
 
+        $this->data['base_url'] = url('admin/tag');
+
         $this->tagRepository = $tagRepository;
     }
 
@@ -24,13 +26,13 @@ class TagController extends Controller
      */
     public function index()
     {
-        $this->data['page_title'] = '标签列表';
+        $this->prepareIndex();
 
-        $this->data['base_url'] = url('admin/tag');
+        $this->data['title'] = '标签列表';
 
         $this->data['table_rows'] = Tag::getTableRows();
 
-        $this->data['table_lists'] = $this->tagRepository->paginate($this->auth);
+        $this->data['table_list'] = $this->tagRepository->paginate($this->auth);
 
         return view('admin.tag.index', $this->data);
     }
@@ -42,7 +44,7 @@ class TagController extends Controller
      */
     public function create()
     {
-        $this->data['page_title'] = '创建标签';
+        $this->data['title'] = '创建标签';
 
         return view('admin.tag.create', $this->data);
     }
@@ -63,7 +65,7 @@ class TagController extends Controller
 
         $this->tagRepository->store($input);
 
-        return redirect(url('admin/tag'));
+        return redirect($this->data['base_url']);
     }
 
     /**
@@ -79,7 +81,7 @@ class TagController extends Controller
      */
     public function show($id)
     {
-        $this->data['page_title'] = '标签详情';
+        $this->data['title'] = '标签详情';
 
         $this->data['item_rows'] = Tag::getItemRows();
 
@@ -118,7 +120,7 @@ class TagController extends Controller
 
         $this->tagRepository->update($id, $input, $this->auth);
 
-        return redirect(url('admin/tag'));
+        return redirect($this->data['base_url']);
     }
 
     /**
@@ -131,6 +133,6 @@ class TagController extends Controller
     {
         $this->tagRepository->destroy($id, $this->auth);
 
-        return redirect(url('admin/tag'));
+        return redirect($this->data['base_url']);
     }
 }

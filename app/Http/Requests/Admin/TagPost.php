@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Admin;
 
+use App\Models\Tag;
 use Illuminate\Foundation\Http\FormRequest;
 
 class TagPost extends FormRequest
@@ -27,15 +28,20 @@ class TagPost extends FormRequest
      */
     public function rules()
     {
-        return [
-            'name' => 'required|unique:tag|max:6',
-        ];
+        // 更多规则可以自己添加
+        $rules = Tag::getRequestRules();
+
+        // $rules['more'] = 'required';
+
+        return $rules;
     }
 
     public function attributes()
     {
-        return [
-            'name' => '标签名',
-        ];
+        $attributes = Tag::getRequestAttributes();
+
+        // $attributes['more'] = '更多';
+
+        return $attributes;
     }
 }

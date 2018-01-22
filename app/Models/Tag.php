@@ -16,55 +16,69 @@ class Tag extends BaseModel
     ];
 
     /**
-     * 列表通用显示配置
+     * 所有字段
      *
      * @return array
      */
-    public static function getTableRows()
+    public static function getFields()
     {
         return [
             [
-                'key' => 'id',
-                'value' => 'id',
+                'key'    => 'id',
+                'name'   => 'id',
+                'table'  => true,
+                'create' => true,
+                'update' => true,
+                'detail' => true,
             ],
             [
-                'key' => 'name',
-                'value' => '标签名',
+                'key'    => 'name',
+                'name'   => '标签名',
+                'table'  => true,
+                'create' => true,
+                'update' => true,
+                'detail' => true,
+                'rule'   => 'required|unique:tag|max:5',
             ],
             [
-                'key' => 'created_at',
-                'value' => '创建时间',
+                'key'    => 'sort',
+                'name'   => '排序',
+                'table'  => true,
+                'create' => true,
+                'update' => true,
+                'detail' => true,
             ],
             [
-                'key' => 'updated_at',
-                'value' => '修改时间',
-            ],
-        ];
-    }
-
-    /**
-     * 详情通用显示配置
-     *
-     * @return array
-     */
-    public static function getItemRows()
-    {
-        return [
-            [
-                'key' => 'id',
-                'value' => 'id',
+                'key'    => 'article_count',
+                'name'   => '关联文章数',
+                'table'  => true,
+                'create' => true,
+                'update' => true,
+                'detail' => true,
             ],
             [
-                'key' => 'name',
-                'value' => '标签名',
+                'key'    => 'user_id',
+                'name'   => '创建人',
+                'table'  => true,
+                'create' => true,
+                'update' => true,
+                'detail' => true,
             ],
             [
-                'key' => 'created_at',
-                'value' => '创建时间',
+                'key'    => 'created_at',
+                'name'   => '创建时间',
+                'table'  => true,
+                'create' => true,
+                'update' => true,
+                'detail' => true,
             ],
             [
-                'key' => 'updated_at',
-                'value' => '修改时间',
+                'key'    => 'updated_at',
+                'name'   => '更新时间',
+                'table'  => true,
+                'create' => true,
+                'update' => true,
+                'detail' => true,
             ],
         ];
     }

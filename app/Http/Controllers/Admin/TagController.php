@@ -83,7 +83,7 @@ class TagController extends Controller
     {
         $this->data['title'] = '标签详情';
 
-        $this->data['item_rows'] = Tag::getItemRows();
+        $this->data['item_rows'] = Tag::getDetailRows();
 
         $this->data['item'] = $this->tagRepository->show($id, $this->auth);
 

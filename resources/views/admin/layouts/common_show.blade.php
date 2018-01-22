@@ -7,7 +7,7 @@
                     <tbody>
                     @foreach($item_rows as $row)
                         <tr>
-                            <th>{{ $row['val'] }}:</th>
+                            <th>{{ $row['value'] }}:</th>
                             <td>{{ $item->{$row['key']} }}</td>
                         </tr>
                     @endforeach

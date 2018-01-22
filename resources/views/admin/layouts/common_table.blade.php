@@ -25,7 +25,7 @@
                     <tbody>
                         <tr>
                             @foreach($table_rows as $row)
-                            <th>{{ $row['val'] }}</th>
+                            <th>{{ $row['value'] }}</th>
                             @endforeach
 
                             <th>操作</th>

@@ -25,19 +25,19 @@ class Tag extends BaseModel
         return [
             [
                 'key' => 'id',
-                'val' => 'id',
+                'value' => 'id',
             ],
             [
                 'key' => 'name',
-                'val' => '标签名',
+                'value' => '标签名',
             ],
             [
                 'key' => 'created_at',
-                'val' => '创建时间',
+                'value' => '创建时间',
             ],
             [
                 'key' => 'updated_at',
-                'val' => '修改时间',
+                'value' => '修改时间',
             ],
         ];
     }
@@ -52,19 +52,19 @@ class Tag extends BaseModel
         return [
             [
                 'key' => 'id',
-                'val' => 'id',
+                'value' => 'id',
             ],
             [
                 'key' => 'name',
-                'val' => '标签名',
+                'value' => '标签名',
             ],
             [
                 'key' => 'created_at',
-                'val' => '创建时间',
+                'value' => '创建时间',
             ],
             [
                 'key' => 'updated_at',
-                'val' => '修改时间',
+                'value' => '修改时间',
             ],
         ];
     }

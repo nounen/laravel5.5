@@ -1,5 +1,5 @@
-@extends('admin.layouts.adminlte_app')
+@extends('admin.layouts.app')
 
 @section('content')
-    @include('admin.commons.common_table')
+    @include('admin.commons.table')
 @endsection

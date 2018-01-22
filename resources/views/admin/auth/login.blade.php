@@ -1,4 +1,4 @@
-@extends('admin.layouts.adminlte_app', ['hidden_header' => true, 'hidden_footer' => true, 'hidden_sidebar' => true])
+@extends('admin.layouts.app', ['hidden_header' => true, 'hidden_footer' => true, 'hidden_sidebar' => true])
 
 @section('content')
 <div class="login-box">

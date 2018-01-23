@@ -60,3 +60,9 @@ php artisan serve
 * 编辑: _update
 * 查看: _detail
 * 删除: _delete
+
+### 表单
+* http://www.w3school.com.cn/html/html_forms.asp
+* http://www.w3school.com.cn/html/html_form_elements.asp
+* http://www.w3school.com.cn/html/html_form_input_types.asp
+* http://www.w3school.com.cn/html/html_form_attributes.asp

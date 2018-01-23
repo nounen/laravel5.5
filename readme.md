@@ -66,3 +66,9 @@ php artisan serve
 * http://www.w3school.com.cn/html/html_form_elements.asp
 * http://www.w3school.com.cn/html/html_form_input_types.asp
 * http://www.w3school.com.cn/html/html_form_attributes.asp
+
+
+### 通用表单完整案例
+* form 表: id, text, date, datetime, textarea, password, radio, file, image,  
+
+* form_checkbox 表: id, form_id, checkbox

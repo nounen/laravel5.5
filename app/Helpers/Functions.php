@@ -14,3 +14,16 @@ if (! function_exists('issetAndEqual')) {
         return isset($array[$key]) && $array[$key] == $value;
     }
 }
+
+if (! function_exists('isUpdateMethod')) {
+    /**
+     * 是否是更新操作, 也就是 method In 'PUT', 'PATCH'
+     *
+     * @param $method
+     * @return bool
+     */
+    function isUpdateMethod($method)
+    {
+        return in_array($method, ['PUT', 'PATCH']);
+    }
+}

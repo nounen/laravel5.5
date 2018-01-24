@@ -5,10 +5,10 @@
             <div class="box-body table-responsive no-padding">
                 <table class="table table-hover table-bordered text-center">
                     <tbody>
-                    @foreach($item_rows as $row)
+                    @foreach($item_rows as $key => $name)
                         <tr>
-                            <th>{{ $row['name'] }}:</th>
-                            <td>{{ $item->{$row['key']} }}</td>
+                            <th>{{ $name }}:</th>
+                            <td>{{ $item->{$key} }}</td>
                         </tr>
                     @endforeach
                     </tbody>

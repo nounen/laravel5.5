@@ -87,12 +87,9 @@ class BaseModel extends Model
 
         $fields = self::getFields();
 
-        foreach($fields as $field) {
+        foreach($fields as $fieldKey => $field) {
             if (issetAndEqual($field, 'detail', true)) {
-                $rows[] = [
-                    'key'  => $field['key'],
-                    'name' => $field['name'],
-                ];
+                $rows[$fieldKey] = $field['name'];
             } else {
                 continue;
             }

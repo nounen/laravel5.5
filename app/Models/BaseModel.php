@@ -24,9 +24,9 @@ class BaseModel extends Model
 
         $fields = self::getFields();
 
-        foreach($fields as $field) {
+        foreach($fields as $fieldKey => $field) {
             if (isset($field['rule'])) {
-                $rules[$field['key']] = $field['rule'];
+                $rules[$fieldKey] = $field['rule'];
             } else {
                 continue;
             }
@@ -46,8 +46,8 @@ class BaseModel extends Model
 
         $fields = self::getFields();
 
-        foreach($fields as $field) {
-            $attributes[$field['key']] = $field['name'];
+        foreach($fields as $fieldKey => $field) {
+            $attributes[$fieldKey] = $field['name'];
         }
 
         return $attributes;
@@ -64,12 +64,9 @@ class BaseModel extends Model
 
         $fields = self::getFields();
 
-        foreach($fields as $field) {
+        foreach($fields as $fieldKey => $field) {
             if (issetAndEqual($field, 'table', true)) {
-                $rows[] = [
-                    'key'  => $field['key'],
-                    'name' => $field['name'],
-                ];
+                $rows[$fieldKey] = $field['name'];
             } else {
                 continue;
             }

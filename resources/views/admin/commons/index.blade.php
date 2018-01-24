@@ -21,8 +21,8 @@
                 <table class="table table-hover table-bordered text-center">
                     <tbody>
                         <tr>
-                            @foreach($table_rows as $row)
-                            <th>{{ $row['name'] }}</th>
+                            @foreach($table_rows as $name)
+                            <th>{{ $name }}</th>
                             @endforeach
 
                             <th>操作</th>
@@ -30,8 +30,8 @@
 
                         @foreach($table_list as $item)
                         <tr>
-                            @foreach($table_rows as $row)
-                            <td>{{ $item->{$row['key']} }}</td>
+                            @foreach($table_rows as $key => $name)
+                            <td>{{ $item->{$key} }}</td>
                             @endforeach
 
                             <td>

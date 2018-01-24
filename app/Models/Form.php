@@ -168,42 +168,4 @@ class Form extends BaseModel
             ],
         ];
     }
-
-    /**
-     * 创建页面字段
-     *
-     * @return array
-     */
-    public static function getCreateRows()
-    {
-        $rows = [];
-
-        $fields = self::getFields();
-
-        foreach($fields as $fieldKey => $field) {
-            if (isset($field['create']) && $field['create']) {
-                // 表单元素通用属性
-                $row = [
-                    'key'       => $fieldKey,
-                    'name'      => $field['name'],
-                    'element'   => array_get($field, 'element'),
-                    'attribute' => null,
-                    'options'   => array_get($field, 'create.options', array_get($field, 'options')), // 优先 create
-                ];
-
-                // HTML 属性拼接
-                $attrs = array_get($field, 'attributes', array_get($field, 'create.attributes', []));
-
-                foreach ($attrs as $attrKey => $attr) {
-                    $row['attribute'] .= " {$attrKey}=\"{$attr}\"";
-                }
-
-                $rows[] = $row;
-            } else {
-                continue;
-            }
-        }
-
-        return $rows;
-    }
 }

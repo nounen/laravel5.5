@@ -7,8 +7,14 @@
                     <tbody>
                     @foreach($item_rows as $key => $name)
                         <tr>
+                        @if(is_array($name))
+                            {{-- slot 扩展 --}}
+                            <th>{{ $name['name'] }}:</th>
+                            <td>{{ ${$key.$item->id} }}<td>
+                        @else
                             <th>{{ $name }}:</th>
                             <td>{{ $item->{$key} }}</td>
+                        @endif
                         </tr>
                     @endforeach
                     </tbody>

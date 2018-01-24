@@ -126,7 +126,7 @@ HTML5 输入限制属性:
     pattern (regexp)            规定通过其检查输入值的正则表达式: eg `pattern="\d{11}"`
     placeholder                 规定用以描述输入字段预期值的提示
     required                    规定在提交表单之前必须填写输入字段(值: 布尔值)
-    step                        规定 input 元素的合法数字间隔
+    step                        规定 input 元素的合法数字间隔 eg: '0.1' 小数支持(包含位数)
     novalidate                  规定在提交表单时不对表单数据进行验证(form 的属性)
 </pre>
 </div>

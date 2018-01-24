@@ -160,6 +160,12 @@ class Form extends BaseModel
                     'maxlength'   => 5,
                 ],
             ],
+            'slot' => [
+                'name'       => '自定义元素',
+                'element'    => 'slot',
+                'create'     => true,
+                'attributes' => [],
+            ],
         ];
     }
 

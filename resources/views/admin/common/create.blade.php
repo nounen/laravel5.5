@@ -97,6 +97,9 @@
                         </div>
                     </div>
                     @break
+                @case('slot')
+                    {{ ${$row['key']} }}
+                    @break
                 @default
                     <h1>这是什么鬼标签???</h1>
             @endswitch

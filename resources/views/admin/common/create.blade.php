@@ -109,7 +109,7 @@
         <div class="box-footer">
             <button type="button" class="btn btn-flat btn-default" onclick="javascript:history.go(-1);">返回</button>
 
-            <button type="submit" class="btn btn-flat btn-primary">提交</button>
+            <button type="submit" class="btn btn-flat btn-primary" id="create_event">提交</button>
         </div>
     </form>
 </div>

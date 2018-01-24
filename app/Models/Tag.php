@@ -31,7 +31,7 @@ class Tag extends BaseModel
             ],
             'name' => [
                 'name'   => '标签名',
-                'table'  => true,
+                'table'  => 'slot',
                 'detail' => true,
                 'create' => true,
                 'rule'   => 'required|unique:tag|max:5',

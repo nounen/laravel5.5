@@ -39,7 +39,7 @@
                             @foreach($table_rows as $key => $name)
                             <td>
                                 @if(is_array($name))
-                                    {{-- slot 扩展 --}}
+                                    {{-- slot 扩展: 然而这个用法在调试时非常难排查错误 --}}
                                     {{ ${$key.$item->id} }}
                                 @else
                                     {{ $item->{$key} }}

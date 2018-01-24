@@ -1,5 +1,6 @@
 @extends('admin.layouts.app')
 
 @section('content')
-    @include('admin.commons.create')
+    @component('admin.common.create', ['base_url' => $base_url, 'create_rows' => $create_rows])
+    @endcomponent
 @endsection

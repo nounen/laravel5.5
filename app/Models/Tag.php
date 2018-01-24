@@ -24,73 +24,53 @@ class Tag extends BaseModel
     public static function getFields()
     {
         return [
-            [
-                'key'    => 'id',
-                'name'   => 'id',
+            'id' => [
+                'name'   => '主键',
                 'table'  => true,
-                'create' => false,
-                'update' => true,
                 'detail' => true,
             ],
-            [
-                'key'    => 'name',
+            'name' => [
                 'name'   => '标签名',
                 'table'  => true,
-                'create' => [
-                    'type' => 'text',
-
-                ],
-                'update' => [
-                    'type' => 'text',
-
-                ],
                 'detail' => true,
+                'create' => true,
                 'rule'   => 'required|unique:tag|max:5',
+                'element'=> 'input',
+                'attributes' => [
+                    'type'     => 'text',
+                    'required' => 'required',
+                ],
             ],
-            [
-                'key'    => 'sort',
+            'sort' => [
                 'name'   => '排序',
                 'table'  => true,
-                'create' => [
-                    'type' => 'number',
-                ],
-                'update' => [
-                    'type' => 'text',
-
-                ],
                 'detail' => true,
+                'create' => true,
                 'rule'   => 'required|numeric',
+                'element'=> 'input',
+                'attributes' => [
+                    'type'     => 'number',
+                    'required' => 'required',
+                ],
             ],
-            [
-                'key'    => 'article_count',
+            'article_count' => [
                 'name'   => '关联文章数',
                 'table'  => true,
-                'create' => false,
-                'update' => true,
                 'detail' => true,
             ],
-            [
-                'key'    => 'user_id',
+            'user_id' => [
                 'name'   => '创建人',
                 'table'  => true,
-                'create' => false,
-                'update' => true,
                 'detail' => true,
             ],
-            [
-                'key'    => 'created_at',
+            'created_at' => [
                 'name'   => '创建时间',
                 'table'  => true,
-                'create' => false,
-                'update' => true,
                 'detail' => true,
             ],
-            [
-                'key'    => 'updated_at',
+            'updated_at' => [
                 'name'   => '更新时间',
                 'table'  => true,
-                'create' => false,
-                'update' => true,
                 'detail' => true,
             ],
         ];

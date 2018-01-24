@@ -22,7 +22,13 @@
                     <tbody>
                         <tr>
                             @foreach($table_rows as $name)
-                            <th>{{ $name }}</th>
+                            <th>
+                                @if(is_array($name))
+                                    {{ $name['name'] }}
+                                @else
+                                    {{ $name }}
+                                @endif
+                            </th>
                             @endforeach
 
                             <th>操作</th>
@@ -31,7 +37,14 @@
                         @foreach($table_list as $item)
                         <tr>
                             @foreach($table_rows as $key => $name)
-                            <td>{{ $item->{$key} }}</td>
+                            <td>
+                                @if(is_array($name))
+                                    {{-- slot 扩展 --}}
+                                    {{ ${$key.$item->id} }}
+                                @else
+                                    {{ $item->{$key} }}
+                                @endif
+                            </td>
                             @endforeach
 
                             <td>

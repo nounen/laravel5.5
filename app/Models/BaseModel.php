@@ -65,8 +65,9 @@ class BaseModel extends Model
         $fields = self::getFields();
 
         foreach($fields as $fieldKey => $field) {
-            if (issetAndEqual($field, 'table', true)) {
-                $rows[$fieldKey] = $field['name'];
+            if (isset($field['table'])) {
+                $rows[$fieldKey] = is_bool($field['table']) ? $field['name'] : ['name' => $field['name'], 'type' => $field['table']];
+
             } else {
                 continue;
             }

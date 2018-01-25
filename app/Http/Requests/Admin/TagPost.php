@@ -5,6 +5,7 @@ namespace App\Http\Requests\Admin;
 use App\Models\Tag;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class TagPost extends FormRequest
 {
@@ -31,13 +32,13 @@ class TagPost extends FormRequest
     {
         // 更多规则可以自己添加
         $rules = Tag::getRequestRules();
-dd($request->all());
-        // TODO: sRule::unique('tags')->ignore($id)
-        // 思路: 可以把 id 放在 hidden, 作为辅助参数传上来
-        if (isUpdateMethod($request->getMethod())) {
-            dd($rules);
+
+        // 更新时不包含自己
+        if (isUpdateMethod($request->getMethod()) && $request->id) {
+            $rules['name'][] = Rule::unique('tag')->ignore($request->id);
+        } else {
+            $rules['name'][] = 'unique:tag';
         }
-        // $rules['more'] = 'required';
 
         return $rules;
     }

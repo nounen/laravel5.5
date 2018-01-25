@@ -32,7 +32,6 @@ class Tag extends BaseModel
                 'element'=> 'input',
                 'attributes' => [
                     'type'     => 'hidden',
-                    'disabled' => 'disabled',
                 ],
             ],
             'name' => [
@@ -41,7 +40,7 @@ class Tag extends BaseModel
                 'detail' => 'slot',
                 'create' => true,
                 'update' => true,
-                'rule'   => 'required|unique:tag|max:5',
+                'rule'   => ['required', 'max:5'],
                 'element'=> 'input',
                 'attributes' => [
                     'type'     => 'text',

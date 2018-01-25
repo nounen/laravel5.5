@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Exception;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
@@ -49,6 +50,11 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        // 策略 Policy 抛出的异常处理
+        if ($exception instanceof AuthorizationException) {
+            return response()->view('errors.not_allow', ['message' => $exception->getMessage(), 'message_zh' => '无权查看'], 403);
+        }
+
         return parent::render($request, $exception);
     }
 

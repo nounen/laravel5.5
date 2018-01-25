@@ -72,3 +72,7 @@ php artisan serve
 * form 表: id, text, date, datetime, textarea, password, radio, file, image,  
 
 * form_checkbox 表: id, form_id, checkbox
+
+
+### 策略 -- policy
+* `php artisan make:policy TagPolicy --model=Models/Tag`

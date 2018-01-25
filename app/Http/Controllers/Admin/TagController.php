@@ -85,6 +85,16 @@ class TagController extends Controller
 
         $this->data['item_rows'] = Tag::getDetailRows();
 
+        $tag = Tag::findOrFail($id);
+
+        // 策略处理方式 1
+//        if ($this->auth->cant('view', $tag)) {
+//            dd('策略处理方式 1!');
+//        }
+
+        // 策略处理方式 2
+        $this->authorize('view', $tag);
+
         $this->data['item'] = $this->tagRepository->show($id, $this->auth);
 
         return view('admin.tag.show', $this->data);

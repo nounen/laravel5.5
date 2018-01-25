@@ -145,6 +145,15 @@ class BaseModel extends Model
     {
         $fields = self::getCreateRows();
 
+        // 字段过滤: 含有 'disabled', 'readonly', 'hidden' 属性的不计入
+        $fields = array_filter($fields, function($filter) {
+            if (str_contains($filter['attribute'], ['disabled', 'readonly', 'hidden'])) {
+                return false;
+            }
+
+            return true;
+        });
+
         $keys = array_pluck($fields, 'key');
 
         return $keys;
@@ -196,6 +205,17 @@ class BaseModel extends Model
     public static function getUpdateKeys()
     {
         $fields = self::getUpdateRows();
+
+        // 字段过滤: 含有 'disabled', 'readonly', 'hidden' 属性的不计入
+        $fields = array_filter($fields, function($filter) {
+            if (isset($filter['attribute'])) {
+                if (str_contains($filter['attribute'], ['disabled', 'readonly', 'hidden'])) {
+                    return false;
+                }
+            }
+
+            return true;
+        });
 
         $keys = array_pluck($fields, 'key');
 

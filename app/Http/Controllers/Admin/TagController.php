@@ -32,7 +32,7 @@ class TagController extends Controller
 
         $this->data['table_rows'] = Tag::getTableRows();
 
-        $this->data['table_list'] = $this->tagRepository->paginate($this->auth);
+        $this->data['table_list'] = $this->tagRepository->paginate();
 
         return view('admin.tag.index', $this->data);
     }

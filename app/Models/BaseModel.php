@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * 模型基础
@@ -220,5 +221,15 @@ class BaseModel extends Model
         $keys = array_pluck($fields, 'key');
 
         return $keys;
+    }
+
+    /**
+     * 后台用户
+     *
+     * @return \Illuminate\Contracts\Auth\Authenticatable|null
+     */
+    public static function adminUser()
+    {
+        return Auth::user();
     }
 }

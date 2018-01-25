@@ -101,4 +101,9 @@ class Tag extends BaseModel
 
         ];
     }
+
+    public function scopeOfUser($query)
+    {
+        return $query->where('user_id', self::adminUser()->id);
+    }
 }

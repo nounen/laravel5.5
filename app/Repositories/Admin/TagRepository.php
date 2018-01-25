@@ -13,12 +13,12 @@ class TagRepository extends BaseRepository
     /**
      * 分页数据
      */
-    public function paginate($user)
+    public function paginate()
     {
         $fieldMaps = [];
 
         $tags = search(Tag::class, $fieldMaps)
-                    ->where('user_id', $user->id)
+                    ->ofUser()
                     ->orderBy('sort')
                     ->orderBy('created_at', 'DESC')
                     ->paginate();

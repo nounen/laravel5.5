@@ -23,16 +23,17 @@ class Controller extends BaseController
 
     protected $auth;
 
-    protected $calledClass;
+    // 是否有 user_id 且进行授权校验
+    protected $authorize;
+
+    // 主要模型
+    protected $model;
+
+    // 主要仓库
+    protected $repository;
 
     public function __construct()
     {
-        $this->middleware(function ($request, $next) {
-            $this->auth = Auth::user();
-
-            return $next($request);
-        });
-
         $this->data['menus'] = $this->getMockMenus();
 
         // 模块名
@@ -122,11 +123,76 @@ class Controller extends BaseController
     }
 
     /**
+     * 通用保存创建数据方法 (需要子类调用)
+     *
+     * @param $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    protected function _store($request)
+    {
+        $input = $request->only($this->model->getStoreKeys());
+
+        if ($this->authorize) {
+            $input['user_id'] = $this->auth->id;
+        }
+
+        $this->model->create($input);
+
+        return redirect($this->data['base_url']);
+    }
+
+    /**
+     * 通用保存编辑数据方法 (需要子类调用)
+     *
+     * @param $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    protected function _update($request, $id)
+    {
+        $item = $this->model->findOrFail($id);
+
+        if ($this->authorize) {
+            $this->authorize('update', $item);
+        }
+
+        $item->update($request->only($this->model->getUpdateKeys()));
+
+        return redirect($this->data['base_url']);
+    }
+
+    /**
+     * 通用删除数据方法 (需要子类调用)
+     *
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    protected function _destroy($id)
+    {
+        $item = $this->model->findOrFail($id);
+
+        if ($this->authorize) {
+            $this->authorize('delete', $item);
+        }
+
+        $item->delete($id);
+
+        return redirect($this->data['base_url']);
+    }
+
+    /**
      * 模板名 = 路由别名
      */
     protected function getViewName()
     {
         return Route::currentRouteName();
+    }
+
+    protected function adminUser()
+    {
+        return Auth::user();
     }
 
     /**

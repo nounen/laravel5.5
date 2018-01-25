@@ -16,10 +16,6 @@ class TagRequest extends FormRequest
      */
     public function authorize()
     {
-        // TODO: 待研究. 以下代码来自手册, 暂时注释
-        // $comment = Comment::find($this->route('comment'));
-        // return $comment && $this->user()->can('update', $comment);
-
         return true;
     }
 

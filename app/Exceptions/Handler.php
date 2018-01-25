@@ -5,6 +5,7 @@ namespace App\Exceptions;
 use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
@@ -53,6 +54,11 @@ class Handler extends ExceptionHandler
         // 策略 Policy 抛出的异常处理
         if ($exception instanceof AuthorizationException) {
             return response()->view('errors.not_allow', ['message' => $exception->getMessage(), 'message_zh' => '无权查看'], 403);
+        }
+
+        // 模型 findOrFail() 异常处理
+        if ($exception instanceof ModelNotFoundException) {
+            return response()->view('errors.not_found', ['message' => $exception->getMessage(), 'message_zh' => '数据不存在'], 404);
         }
 
         return parent::render($request, $exception);

@@ -76,3 +76,14 @@ php artisan serve
 
 ### 策略 -- policy
 * `php artisan make:policy TagPolicy --model=Models/Tag`
+
+* policy 两种处理方式:
+```php
+// 策略处理方式 1
+if ($this->auth->cant('view', $tag)) {
+    dd('策略处理方式 1!');
+}
+
+// 策略处理方式 2
+$this->authorize('view', $tag);
+```

@@ -36,7 +36,7 @@ class BaseModelPolicy
      */
     public function create(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -48,7 +48,7 @@ class BaseModelPolicy
      */
     public function update(User $user, BaseModel $baseModel)
     {
-        //
+        return $user->id === $baseModel->user_id;
     }
 
     /**
@@ -60,6 +60,6 @@ class BaseModelPolicy
      */
     public function delete(User $user, BaseModel $baseModel)
     {
-        //
+        return $user->id === $baseModel->user_id;
     }
 }

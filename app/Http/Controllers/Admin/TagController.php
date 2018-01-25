@@ -69,79 +69,74 @@ class TagController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * TODO: 备注
-     * public function show($id) // 自己想在仓库做更多业务使用这样
-     *
-     * public function show(Tag $tag) // 简单模型查询使用这个
-     *
      * @param $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function show($id)
     {
+        $tag = Tag::findOrFail($id);
+
+        $this->authorize('view', $tag);
+
         $this->data['title'] = '标签详情';
 
         $this->data['item_rows'] = Tag::getDetailRows();
 
-        $tag = Tag::findOrFail($id);
-
-        // 策略处理方式 1
-//        if ($this->auth->cant('view', $tag)) {
-//            dd('策略处理方式 1!');
-//        }
-
-        // 策略处理方式 2
-        $this->authorize('view', $tag);
-
-        $this->data['item'] = $this->tagRepository->show($id, $this->auth);
+        $this->data['item'] = $tag;
 
         return view('admin.tag.show', $this->data);
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
      * @param $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function edit($id)
     {
+        $tag = Tag::findOrFail($id);
+
+        $this->authorize('update', $tag);
+
         $this->data['title'] = '编辑标签';
 
         $this->data['update_rows'] = Tag::getUpdateRows();
 
-        $this->data['item'] = $this->tagRepository->show($id, $this->auth);
+        $this->data['item'] = $tag;
 
         return view('admin.tag.edit', $this->data);
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param \App\Http\Requests\Admin\TagPost  $request
+     * @param TagPost $request
      * @param $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function update(TagPost $request, $id)
     {
-        $input = $request->only(Tag::getUpdateKeys());
+        $tag = Tag::findOrFail($id);
 
-        $this->tagRepository->update($id, $input, $this->auth);
+        $this->authorize('update', $tag);
+
+        $tag->update($request->only(Tag::getUpdateKeys()));
 
         return redirect($this->data['base_url']);
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  $id
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function destroy($id)
     {
-        $this->tagRepository->destroy($id, $this->auth);
+        $tag = Tag::findOrFail($id);
+
+        $this->authorize('delete', $tag);
+
+        $tag->delete($id);
 
         return redirect($this->data['base_url']);
     }

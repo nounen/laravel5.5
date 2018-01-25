@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\Admin;
 
-use Auth;
 
 /**
  * Class BaseRepository

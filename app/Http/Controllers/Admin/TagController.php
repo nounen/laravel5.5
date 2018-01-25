@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Tag;
-use App\Repositories\TagRepository;
+use App\Repositories\Admin\TagRepository;
 use App\Http\Requests\Admin\TagPost;
 
 class TagController extends Controller

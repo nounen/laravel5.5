@@ -65,7 +65,7 @@
                                     删除
                                 </button>
 
-                                @include('admin.commons.delete', ['id' => $item->id, 'url' => "{$base_url}/{$item->id}"])
+                                @include('admin.common.delete', ['id' => $item->id, 'url' => "{$base_url}/{$item->id}"])
                                 @endif
                             </td>
                         </tr>

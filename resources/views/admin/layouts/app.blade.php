@@ -89,6 +89,6 @@
 <script src="{{ asset('js/adminlte.js') }}"></script>
 @yield('js')
 
-@include('admin.layouts.error_jq')
+@include('admin.common.error')
 </body>
 </html>

@@ -31,6 +31,7 @@ class Tag extends BaseModel
                 'update' => true,
                 'element'=> 'input',
                 'attributes' => [
+                    'type'     => 'hidden',
                     'disabled' => 'disabled',
                 ],
             ],

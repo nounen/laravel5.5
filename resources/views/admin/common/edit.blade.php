@@ -16,7 +16,7 @@
             @foreach($update_rows as $row)
                 @switch($row['element'])
                     @case('input')
-                    <div class="form-group">
+                    <div class="form-group @if(str_contains($row['attribute'], 'hidden')) hidden @endif">
                         <label for="{{ $row['key'] }}" class="col-sm-2 control-label">{{ $row['name'] }}:</label>
 
                         <div class="col-sm-10">

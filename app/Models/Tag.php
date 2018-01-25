@@ -28,12 +28,18 @@ class Tag extends BaseModel
                 'name'   => '主键',
                 'table'  => true,
                 'detail' => true,
+                'update' => true,
+                'element'=> 'input',
+                'attributes' => [
+                    'disabled' => 'disabled',
+                ],
             ],
             'name' => [
                 'name'   => '标签名',
                 'table'  => 'slot',
                 'detail' => 'slot',
                 'create' => true,
+                'update' => true,
                 'rule'   => 'required|unique:tag|max:5',
                 'element'=> 'input',
                 'attributes' => [
@@ -46,6 +52,7 @@ class Tag extends BaseModel
                 'table'  => true,
                 'detail' => true,
                 'create' => true,
+                'update' => true,
                 'rule'   => 'required|numeric',
                 'element'=> 'input',
                 'attributes' => [
@@ -57,6 +64,12 @@ class Tag extends BaseModel
                 'name'   => '关联文章数',
                 'table'  => true,
                 'detail' => true,
+                'update' => true,
+                'element'=> 'input',
+                'attributes' => [
+                    'type'     => 'number',
+                    'disabled' => 'disabled',
+                ],
             ],
             'user_id' => [
                 'name'   => '创建人',
@@ -67,12 +80,25 @@ class Tag extends BaseModel
                 'name'   => '创建时间',
                 'table'  => true,
                 'detail' => true,
+                'update' => true,
+                'element'=> 'input',
+                'attributes' => [
+                    'type'     => 'text',
+                    'disabled' => 'disabled',
+                ],
             ],
             'updated_at' => [
                 'name'   => '更新时间',
                 'table'  => true,
                 'detail' => true,
+                'update' => true,
+                'element'=> 'input',
+                'attributes' => [
+                    'type'     => 'text',
+                    'disabled' => 'disabled',
+                ],
             ],
+
         ];
     }
 }

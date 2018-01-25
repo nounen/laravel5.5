@@ -31,7 +31,7 @@ class TagPost extends FormRequest
     {
         // 更多规则可以自己添加
         $rules = Tag::getRequestRules();
-
+dd($request->all());
         // TODO: sRule::unique('tags')->ignore($id)
         // 思路: 可以把 id 放在 hidden, 作为辅助参数传上来
         if (isUpdateMethod($request->getMethod())) {

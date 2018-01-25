@@ -63,7 +63,7 @@ class TagController extends Controller
 
         $input['user_id'] = $this->auth->id;
 
-        $this->tagRepository->store($input);
+        Tag::create($input);
 
         return redirect($this->data['base_url']);
     }

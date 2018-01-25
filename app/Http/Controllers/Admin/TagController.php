@@ -10,8 +10,6 @@ class TagController extends Controller
 {
     protected $model;
 
-    protected $request;
-
     protected $repository;
 
     /**
@@ -31,13 +29,11 @@ class TagController extends Controller
 
         $this->model = $model;
 
-        $this->request = TagRequest::class;
-
         $this->repository = $repository;
     }
 
     /**
-     * Store a newly created resource in storage.
+     * 通用保存创建数据方法
      *
      * @param \App\Http\Requests\Admin\TagRequest  $request
      * @return \Illuminate\Http\Response
@@ -48,12 +44,14 @@ class TagController extends Controller
 
         $input['user_id'] = $this->auth->id;
 
-        Tag::create($input);
+        $this->model->create($input);
 
         return redirect($this->data['base_url']);
     }
 
     /**
+     * 通用保存编辑数据方法
+     *
      * @param TagRequest $request
      * @param $id
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
@@ -61,23 +59,25 @@ class TagController extends Controller
      */
     public function update(TagRequest $request, $id)
     {
-        $tag = Tag::findOrFail($id);
+        $tag = $this->model->findOrFail($id);
 
         $this->authorize('update', $tag);
 
-        $tag->update($request->only(Tag::getUpdateKeys()));
+        $tag->update($request->only($this->model->getUpdateKeys()));
 
         return redirect($this->data['base_url']);
     }
 
     /**
+     * 通用删除方法
+     *
      * @param $id
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function destroy($id)
     {
-        $tag = Tag::findOrFail($id);
+        $tag = $this->model->findOrFail($id);
 
         $this->authorize('delete', $tag);
 

@@ -7,7 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
-class TagPost extends FormRequest
+class TagRequest extends FormRequest
 {
     /**
      * 判断用户是否有权限做出此请求。

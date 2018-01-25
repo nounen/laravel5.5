@@ -4,60 +4,45 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Tag;
 use App\Repositories\Admin\TagRepository;
-use App\Http\Requests\Admin\TagPost;
+use App\Http\Requests\Admin\TagRequest;
 
 class TagController extends Controller
 {
-    protected $tagRepository;
+    protected $model;
 
-    public function __construct(TagRepository $tagRepository)
+    protected $request;
+
+    protected $repository;
+
+    /**
+     * 第一个参数是主要模型, 第二个参数是主要仓库
+     *
+     * TagController constructor.
+     * @param TagRepository $repository
+     * @param Tag $model
+     */
+    public function __construct(Tag $model, TagRepository $repository)
     {
         parent::__construct();
 
+        $this->data['module_name'] = '标签';
+
         $this->data['base_url'] = url('admin/tag');
 
-        $this->tagRepository = $tagRepository;
-    }
+        $this->model = $model;
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $this->data['title'] = '标签列表';
+        $this->request = TagRequest::class;
 
-        $this->data['table_permissions'] = $this->permissions();
-
-        $this->data['table_rows'] = Tag::getTableRows();
-
-        $this->data['table_list'] = $this->tagRepository->paginate();
-
-        return view('admin.tag.index', $this->data);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        $this->data['title'] = '创建标签';
-
-        $this->data['create_rows'] = Tag::getCreateRows();
-
-        return view('admin.tag.create', $this->data);
+        $this->repository = $repository;
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param \App\Http\Requests\Admin\TagPost  $request
+     * @param \App\Http\Requests\Admin\TagRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(TagPost $request)
+    public function store(TagRequest $request)
     {
         $input = $request->only(Tag::getStoreKeys());
 
@@ -69,52 +54,12 @@ class TagController extends Controller
     }
 
     /**
-     * @param $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     * @throws \Illuminate\Auth\Access\AuthorizationException
-     */
-    public function show($id)
-    {
-        $tag = Tag::findOrFail($id);
-
-        $this->authorize('view', $tag);
-
-        $this->data['title'] = '标签详情';
-
-        $this->data['item_rows'] = Tag::getDetailRows();
-
-        $this->data['item'] = $tag;
-
-        return view('admin.tag.show', $this->data);
-    }
-
-    /**
-     * @param $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     * @throws \Illuminate\Auth\Access\AuthorizationException
-     */
-    public function edit($id)
-    {
-        $tag = Tag::findOrFail($id);
-
-        $this->authorize('update', $tag);
-
-        $this->data['title'] = '编辑标签';
-
-        $this->data['update_rows'] = Tag::getUpdateRows();
-
-        $this->data['item'] = $tag;
-
-        return view('admin.tag.edit', $this->data);
-    }
-
-    /**
-     * @param TagPost $request
+     * @param TagRequest $request
      * @param $id
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function update(TagPost $request, $id)
+    public function update(TagRequest $request, $id)
     {
         $tag = Tag::findOrFail($id);
 

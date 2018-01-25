@@ -7,6 +7,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Route;
 
 /**
  * 控制器基类
@@ -22,6 +23,8 @@ class Controller extends BaseController
 
     protected $auth;
 
+    protected $calledClass;
+
     public function __construct()
     {
         $this->middleware(function ($request, $next) {
@@ -32,11 +35,98 @@ class Controller extends BaseController
 
         $this->data['menus'] = $this->getMockMenus();
 
+        // 模块名
+        $this->data['module_name'] = 'XX 模块';
+
         // 当前操作名
-        $this->data['title'] = '';
+        $this->data['title'] = "{$this->data['module_name']} 的 xx 操作";
 
         // 当前操作基础 url (可扩展出新增 / 修改 / 删除的 url)
         $this->data['base_url'] = url('xx/xx');
+    }
+
+    /**
+     * 通用列表页面
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function index()
+    {
+        $this->data['title'] = "{$this->data['module_name']}列表";
+
+        $this->data['table_permissions'] = $this->permissions();
+
+        $this->data['table_rows'] = $this->model->getTableRows();
+
+        $this->data['table_list'] = $this->repository->paginate();
+
+        return view($this->getViewName(), $this->data);
+    }
+
+    /**
+     * 通用创建页面
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function create()
+    {
+        $this->data['title'] = "{$this->data['module_name']}创建";
+
+        $this->data['create_rows'] = $this->model->getCreateRows();
+
+        return view($this->getViewName(), $this->data);
+    }
+
+    /**
+     * 通用详情页面
+     *
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function show($id)
+    {
+        $item = $this->model->findOrFail($id);
+
+        $this->authorize('view', $item);
+
+        $this->data['title'] = "{$this->data['module_name']}详情";
+
+        $this->data['item_rows'] = $this->model->getDetailRows();
+
+        $this->data['item'] = $item;
+
+        return view($this->getViewName(), $this->data);
+    }
+
+    /**
+     * 通用编辑页面
+     *
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function edit($id)
+    {
+        $item = $this->model->findOrFail($id);
+
+        $this->authorize('update', $item);
+
+        $this->data['title'] = "{$this->data['module_name']}标签";
+
+        $this->data['update_rows'] = $this->model->getUpdateRows();
+
+        $this->data['item'] = $item;
+
+        return view($this->getViewName(), $this->data);
+    }
+
+    /**
+     * 模板名 = 路由别名
+     */
+    protected function getViewName()
+    {
+        return Route::currentRouteName();
     }
 
     /**

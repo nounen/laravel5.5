@@ -19,9 +19,11 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    protected $data;
+    // 模块名
+    protected $moduleName;
 
-    protected $auth;
+    // 当前操作基础 url (可扩展出新增 / 修改 / 删除的 url)
+    protected $baseUrl;
 
     // 是否有 user_id 且进行授权校验
     protected $authorize;
@@ -32,18 +34,14 @@ class Controller extends BaseController
     // 主要仓库
     protected $repository;
 
+    // 视图渲染数据
+    protected $data;
+
     public function __construct()
     {
         $this->data['menus'] = $this->getMockMenus();
 
-        // 模块名
-        $this->data['module_name'] = 'XX 模块';
-
-        // 当前操作名
-        $this->data['title'] = "{$this->data['module_name']} 的 xx 操作";
-
-        // 当前操作基础 url (可扩展出新增 / 修改 / 删除的 url)
-        $this->data['base_url'] = url('xx/xx');
+        $this->data['title'] = "{$this->moduleName} 的 xx 操作";
     }
 
     /**
@@ -53,7 +51,9 @@ class Controller extends BaseController
      */
     public function index()
     {
-        $this->data['title'] = "{$this->data['module_name']}列表";
+        $this->data['title'] = "{$this->moduleName}列表";
+
+        $this->data['base_url'] = $this->baseUrl;
 
         $this->data['table_permissions'] = $this->permissions();
 
@@ -71,7 +71,9 @@ class Controller extends BaseController
      */
     public function create()
     {
-        $this->data['title'] = "{$this->data['module_name']}创建";
+        $this->data['title'] = "{$this->moduleName}创建";
+
+        $this->data['base_url'] = $this->baseUrl;
 
         $this->data['create_rows'] = $this->model->getCreateRows();
 
@@ -91,7 +93,7 @@ class Controller extends BaseController
 
         $this->authorize('view', $item);
 
-        $this->data['title'] = "{$this->data['module_name']}详情";
+        $this->data['title'] = "{$this->moduleName}详情";
 
         $this->data['item_rows'] = $this->model->getDetailRows();
 
@@ -113,7 +115,9 @@ class Controller extends BaseController
 
         $this->authorize('update', $item);
 
-        $this->data['title'] = "{$this->data['module_name']}标签";
+        $this->data['title'] = "{$this->moduleName}标签";
+
+        $this->data['base_url'] = $this->baseUrl;
 
         $this->data['update_rows'] = $this->model->getUpdateRows();
 
@@ -133,12 +137,12 @@ class Controller extends BaseController
         $input = $request->only($this->model->getStoreKeys());
 
         if ($this->authorize) {
-            $input['user_id'] = $this->auth->id;
+            $input['user_id'] = $this->adminUser()->id;
         }
 
         $this->model->create($input);
 
-        return redirect($this->data['base_url']);
+        return redirect($this->baseUrl);
     }
 
     /**
@@ -159,7 +163,7 @@ class Controller extends BaseController
 
         $item->update($request->only($this->model->getUpdateKeys()));
 
-        return redirect($this->data['base_url']);
+        return redirect($this->baseUrl);
     }
 
     /**
@@ -179,7 +183,7 @@ class Controller extends BaseController
 
         $item->delete($id);
 
-        return redirect($this->data['base_url']);
+        return redirect($this->baseUrl);
     }
 
     /**

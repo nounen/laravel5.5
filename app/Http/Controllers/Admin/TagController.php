@@ -12,22 +12,22 @@ class TagController extends Controller
      * 第一个参数是主要模型, 第二个参数是主要仓库
      *
      * TagController constructor.
-     * @param TagRepository $repository
-     * @param Tag $model
+     * @param TagRepository $tagRepository
+     * @param Tag $tag
      */
-    public function __construct(Tag $model, TagRepository $repository)
+    public function __construct(Tag $tag, TagRepository $tagRepository)
     {
         parent::__construct();
 
-        $this->data['module_name'] = '标签';
+        $this->moduleName = '标签';
 
-        $this->data['base_url'] = url('admin/tag');
+        $this->baseUrl = url('admin/tag');
 
         $this->authorize = true;
 
-        $this->model = $model;
+        $this->model = $tag;
 
-        $this->repository = $repository;
+        $this->repository = $tagRepository;
     }
 
     /**

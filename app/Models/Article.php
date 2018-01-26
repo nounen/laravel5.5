@@ -75,7 +75,6 @@ class Article extends BaseModel
             ],
             'description' => [
                 'name'   => '简介',
-                'table'  => true,
                 'detail' => true,
                 'create' => true,
                 'update' => true,
@@ -100,7 +99,6 @@ class Article extends BaseModel
             ],
             'content' => [
                 'name'   => '内容',
-                'table'  => true,
                 'detail' => true,
                 'create' => true,
                 'update' => true,

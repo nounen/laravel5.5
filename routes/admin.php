@@ -12,6 +12,8 @@ Route::namespace('Admin')->prefix('/admin')->name('admin.')->group(function () {
 
         Route::resource('/category', 'CategoryController');
 
+        Route::resource('/article', 'ArticleController');
+
         Route::resource('/form', 'FormController');
 
         // 表单元素案例

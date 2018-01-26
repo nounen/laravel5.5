@@ -14,6 +14,24 @@ class BaseModel extends Model
 {
     use SoftDeletes;
 
+    const YES = 1;
+
+    const NO = 2;
+
+    public static function getIsStates()
+    {
+        return [
+            [
+                'value' => self::YES,
+                'name'  => '是',
+            ],
+            [
+                'value' => self::NO,
+                'name'  => '否',
+            ],
+        ];
+    }
+
     /**
      * 表单校验规则
      *

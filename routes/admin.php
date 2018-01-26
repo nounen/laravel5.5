@@ -10,6 +10,8 @@ Route::namespace('Admin')->prefix('/admin')->name('admin.')->group(function () {
     Route::middleware(['auth'])->group(function () {
         Route::resource('/tag', 'TagController');
 
+        Route::resource('/category', 'CategoryController');
+
         Route::resource('/form', 'FormController');
 
         // 表单元素案例

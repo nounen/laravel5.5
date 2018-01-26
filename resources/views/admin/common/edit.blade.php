@@ -4,7 +4,13 @@
         padding-top: 7px;
         margin-bottom: 0;
         text-align: center;
-    }
+}
+
+/* 避免内容太多把标题挤没了 */
+.table_title_width {
+    min-width: 40px;
+    max-width: 120px;
+}
 </style>
 
 <div class="box box-primary">
@@ -17,7 +23,7 @@
                 @switch($row['element'])
                     @case('input')
                     <div class="form-group @if(str_contains($row['attribute'], 'hidden')) hidden @endif">
-                        <label for="{{ $row['key'] }}" class="col-sm-2 control-label">{{ $row['name'] }}:</label>
+                        <label for="{{ $row['key'] }}" class="col-sm-2 table_title_width control-label">{{ $row['name'] }}:</label>
 
                         <div class="col-sm-10">
                             <input id="{{ $row['key'] }}"
@@ -30,7 +36,7 @@
                     @break
                     @case('radio')
                     <div class="form-group">
-                        <label for="{{ $row['key'] }}" class="col-sm-2 control-label">{{ $row['name'] }}:</label>
+                        <label for="{{ $row['key'] }}" class="col-sm-2 table_title_width control-label">{{ $row['name'] }}:</label>
 
                         <div class="radio col-sm-10" id="{{ $row['key'] }}">
                             @foreach($row['options'] as $option)
@@ -48,7 +54,7 @@
                     @break
                     @case('checkbox')
                     <div class="form-group">
-                        <label for="{{ $row['key'] }}" class="col-sm-2 control-label">{{ $row['name'] }}:</label>
+                        <label for="{{ $row['key'] }}" class="col-sm-2 table_title_width control-label">{{ $row['name'] }}:</label>
 
                         <div class="checkbox col-sm-10" id="{{ $row['key'] }}">
                             @foreach($row['options'] as $option)
@@ -65,7 +71,7 @@
                     @break
                     @case('select')
                     <div class="form-group">
-                        <label for="{{ $row['key'] }}" class="col-sm-2 control-label">{{ $row['name'] }}:</label>
+                        <label for="{{ $row['key'] }}" class="col-sm-2 table_title_width control-label">{{ $row['name'] }}:</label>
 
                         <div class="col-sm-10">
                             <select id="{{ $row['key'] }}"
@@ -88,7 +94,7 @@
                     @break
                     @case('textarea')
                     <div class="form-group">
-                        <label for="{{ $row['key'] }}" class="col-sm-2 control-label">{{ $row['name'] }}:</label>
+                        <label for="{{ $row['key'] }}" class="col-sm-2 table_title_width control-label">{{ $row['name'] }}:</label>
 
                         <div class="col-sm-10">
                             <textarea id="{{ $row['key'] }}"

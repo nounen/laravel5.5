@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class Article
@@ -217,5 +218,22 @@ class Article extends BaseModel
     public function scopeOfUser($query)
     {
         return $query->where('user_id', self::adminUser()->id);
+    }
+
+    public static function getUpdateRowsHook($article)
+    {
+        // 对象引用传递, 所以无需返回值
+        $article->category_ids = self::getCategoryIds($article->id);
+    }
+
+    /**
+     * 根据文章获取分类 id
+     *
+     * @param $articleId
+     * @return mixed
+     */
+    public static function getCategoryIds($articleId)
+    {
+        return DB::table('article_category')->where('article_id', $articleId)->pluck('category_id')->toArray();
     }
 }

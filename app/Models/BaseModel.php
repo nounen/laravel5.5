@@ -158,6 +158,15 @@ class BaseModel extends Model
     }
 
     /**
+     * 创建页面字段钩子方法, 在 getCreateRows 后执行, 为 $item 对应的模型添加更多属性 (对象引用传递, 所以无需返回值)
+     *
+     * @param $item
+     */
+    public static function getUpdateRowsHook($item)
+    {
+    }
+
+    /**
      * 在 getCreateRows 只提取 key
      *
      * @return array

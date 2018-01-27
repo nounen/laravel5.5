@@ -134,6 +134,11 @@ class Controller extends BaseController
 
         $this->data['update_rows'] = $this->model->getUpdateRows();
 
+        // 钩子调用, 为模型扩展更多属性
+        if (method_exists($this->model, 'getUpdateRowsHook')) {
+            $this->model->getUpdateRowsHook($item);
+        }
+
         $this->data['item'] = $item;
 
         return view($this->getViewName(), $this->data);

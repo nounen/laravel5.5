@@ -82,11 +82,18 @@
                                     @endif
                                     {!! $row['attribute'] !!}
                                     class="form-control">
+
                                 @foreach($row['options'] as $option)
                                 <option value="{{ $option['value'] }}"
-                                        @if($option['value'] == $item->{$row['key']})checked="checked"@endif>
-                                    {{ $option['name'] }}
-                                </option>
+                                    {{-- 多选 OR 单选 --}}
+                                    @if(is_array($item->{$row['key']}))
+                                        @foreach($item->{$row['key']} as $value)
+                                            @if($option['value'] == $value) selected="selected " @endif
+                                        @endforeach
+                                    @else
+                                        @if($option['value'] == $item->{$row['key']}) selected="selected" @endif
+                                    @endif
+                                >{{ $option['name'] }}</option>
                                 @endforeach
                             </select>
                         </div>

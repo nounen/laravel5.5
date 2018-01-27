@@ -47,7 +47,11 @@ class ArticleController extends Controller
      */
     public function update(ArticleRequest $request, $id)
     {
-        return parent::_update($request, $id);
+        $article = parent::_update($request, $id, self::RETURN_MODEL);
+
+        $article->categories()->sync($request->get('category_ids'));
+
+        return redirect($this->baseUrl);
     }
 
     /**

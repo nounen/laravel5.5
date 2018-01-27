@@ -19,6 +19,15 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
+    // 返回模型
+    const RETURN_MODEL = 1;
+
+    // 返回重定向
+    const RETURN_REDIRECT = 2;
+
+    // 返回视图
+    const RETURN_VIEW = 3;
+
     // 模块名
     protected $moduleName;
 
@@ -91,7 +100,9 @@ class Controller extends BaseController
     {
         $item = $this->model->findOrFail($id);
 
-        $this->authorize('view', $item);
+        if ($this->authorize) {
+            $this->authorize('view', $item);
+        }
 
         $this->data['title'] = "{$this->moduleName}详情";
 
@@ -113,7 +124,9 @@ class Controller extends BaseController
     {
         $item = $this->model->findOrFail($id);
 
-        $this->authorize('update', $item);
+        if ($this->authorize) {
+            $this->authorize('update', $item);
+        }
 
         $this->data['title'] = "{$this->moduleName}标签";
 
@@ -132,7 +145,7 @@ class Controller extends BaseController
      * @param $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    protected function _store($request)
+    protected function _store($request, $returnType = self::RETURN_REDIRECT)
     {
         $input = $request->only($this->model->getStoreKeys());
 
@@ -140,9 +153,13 @@ class Controller extends BaseController
             $input['user_id'] = $this->adminUser()->id;
         }
 
-        $this->model->create($input);
+        $item = $this->model->create($input);
 
-        return redirect($this->baseUrl);
+        if ($returnType === self::RETURN_MODEL) {
+            return $item;
+        } elseif ($returnType === self::RETURN_REDIRECT) {
+            return redirect($this->baseUrl);
+        }
     }
 
     /**
@@ -153,7 +170,7 @@ class Controller extends BaseController
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    protected function _update($request, $id)
+    protected function _update($request, $id, $returnType = self::RETURN_REDIRECT)
     {
         $item = $this->model->findOrFail($id);
 
@@ -163,7 +180,11 @@ class Controller extends BaseController
 
         $item->update($request->only($this->model->getUpdateKeys()));
 
-        return redirect($this->baseUrl);
+        if ($returnType === self::RETURN_MODEL) {
+            return $item;
+        } elseif ($returnType === self::RETURN_REDIRECT) {
+            return redirect($this->baseUrl);
+        }
     }
 
     /**
@@ -173,7 +194,7 @@ class Controller extends BaseController
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    protected function _destroy($id)
+    protected function _destroy($id, $returnType = self::RETURN_REDIRECT)
     {
         $item = $this->model->findOrFail($id);
 
@@ -183,7 +204,11 @@ class Controller extends BaseController
 
         $item->delete($id);
 
-        return redirect($this->baseUrl);
+        if ($returnType === self::RETURN_MODEL) {
+            return $item;
+        } elseif ($returnType === self::RETURN_REDIRECT) {
+            return redirect($this->baseUrl);
+        }
     }
 
     /**

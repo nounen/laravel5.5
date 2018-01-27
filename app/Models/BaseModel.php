@@ -136,7 +136,8 @@ class BaseModel extends Model
                     'name'      => $field['name'],
                     'element'   => array_get($field, 'element'),
                     'attribute' => null,
-                    'options'   => array_get($field, 'create.options', array_get($field, 'options')), // 优先 create
+                    // 优先 update. 如果是函数会自动被调用
+                    'options'   => array_get($field, 'create.options', array_get($field, 'options')),
                 ];
 
                 // HTML 属性拼接
@@ -146,7 +147,8 @@ class BaseModel extends Model
                     $row['attribute'] .= " {$attrKey}=\"{$attr}\"";
                 }
 
-                $rows[] = $row;
+                // 方便通过 key 覆盖某些属性
+                $rows[$fieldKey] = $row;
             } else {
                 continue;
             }
@@ -197,7 +199,7 @@ class BaseModel extends Model
                     'name'      => $field['name'],
                     'element'   => array_get($field, 'element'),
                     'attribute' => null,
-                    'options'   => array_get($field, 'update.options', array_get($field, 'options')), // 优先 update
+                    'options'   => array_get($field, 'update.options', array_get($field, 'options')),
                 ];
 
                 // HTML 属性拼接
@@ -207,7 +209,7 @@ class BaseModel extends Model
                     $row['attribute'] .= " {$attrKey}=\"{$attr}\"";
                 }
 
-                $rows[] = $row;
+                $rows[$fieldKey] = $row;
             } else {
                 continue;
             }

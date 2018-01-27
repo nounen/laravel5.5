@@ -113,6 +113,27 @@ class Category extends BaseModel
         ];
     }
 
+    /**
+     * 作为下拉选项
+     *
+     * @return mixed
+     */
+    public static function beOptions()
+    {
+        $fields = [
+            'id AS value',
+            'name',
+        ];
+
+        return self::ofUser()->get($fields);
+    }
+
+    /**
+     * 查询作用域
+     *
+     * @param $query
+     * @return mixed
+     */
     public function scopeOfUser($query)
     {
         return $query->where('user_id', self::adminUser()->id);

@@ -43,6 +43,16 @@ class Article extends BaseModel
     }
 
     /**
+     * 所属分类, 多对多
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
+    }
+
+    /**
      * 所有字段
      *
      * @return array
@@ -90,11 +100,9 @@ class Article extends BaseModel
                 'detail' => true,
                 'create' => true,
                 'update' => true,
-//                'rule'   => ['required'],
                 'element'=> 'input',
                 'attributes' => [
                     'type' => 'file',
-//                    'required' => 'required',
                 ],
             ],
             'content' => [
@@ -159,6 +167,21 @@ class Article extends BaseModel
                     'required'    => 'required',
                     'placeholder' => 999,
                 ],
+            ],
+            'category_ids' => [
+                'name' => '文章分类',
+                'create' => true,
+                'update' => true,
+                'element' => 'select',
+                'attributes' => [
+                    'type'     => 'select',
+                    'required' => 'required',
+                    'multiple' => 'multiple',
+                ],
+                // 用到时才调用函数, 延迟加载
+                'options' => function() {
+                    return Category::beOptions();
+                },
             ],
             'user_id' => [
                 'name'   => '创建人',

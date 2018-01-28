@@ -107,14 +107,39 @@ class BaseModel extends Model
         $fields = self::getFields();
 
         foreach($fields as $fieldKey => $field) {
-            if (isset($field['detail'])) {
-                $rows[$fieldKey] = is_bool($field['detail']) ? $field['name'] : ['name' => $field['name'], 'type' => $field['detail']];
+            if (isset($field['update']) && $field['update']) {
+                // 表单元素通用属性
+                $row = [
+                    'key'       => $fieldKey,
+                    'name'      => $field['name'],
+                    'element'   => array_get($field, 'element'),
+                    'attribute' => null,
+                    'options'   => array_get($field, 'update.options', array_get($field, 'options')),
+                ];
+
+                // HTML 属性拼接
+                $attrs = array_get($field, 'attributes', array_get($field, 'update.attributes', []));
+
+                foreach ($attrs as $attrKey => $attr) {
+                    $row['attribute'] .= " {$attrKey}=\"{$attr}\"";
+                }
+
+                $rows[$fieldKey] = $row;
             } else {
                 continue;
             }
         }
 
         return $rows;
+    }
+
+    /**
+     * 详情显示字段钩子方法, 在 getDetailFields 后执行, 为 $item 对应的模型添加更多属性 (对象引用传递, 所以无需返回值)
+     *
+     * @param $item
+     */
+    public static function getDetailFieldsHook($item)
+    {
     }
 
     /**

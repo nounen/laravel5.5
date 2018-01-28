@@ -108,6 +108,11 @@ class Controller extends BaseController
 
         $this->data['fields'] = $this->model->getDetailFields();
 
+        // 钩子调用, 为模型扩展更多属性
+        if (method_exists($this->model, 'getDetailFieldsHook')) {
+            $this->model->getDetailFieldsHook($item);
+        }
+
         $this->data['item'] = $item;
 
         return view($this->getViewName(), $this->data);

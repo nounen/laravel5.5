@@ -226,6 +226,11 @@ class Article extends BaseModel
         $article->category_ids = self::getCategoryIds($article->id);
     }
 
+    public static function getDetailFieldsHook($article)
+    {
+        $article->category_ids = self::getCategoryIds($article->id);
+    }
+
     /**
      * 根据文章获取分类 id
      *

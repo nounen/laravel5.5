@@ -50,6 +50,9 @@
 </div>
 
 <script src="{{ asset('js/adminlte.js') }}"></script>
+{{-- common 目录下文件 js 扩展 --}}
+@yield('common_js')
+
 @yield('js')
 
 @include('admin.common.error')

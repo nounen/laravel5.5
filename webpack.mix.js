@@ -14,12 +14,22 @@ let mix = require('laravel-mix');
 // mix.js('resources/assets/js/app.js', 'public/js')
 //    .sass('resources/assets/sass/app.scss', 'public/css');
 
+/**
+ // 运行所有 Mix 任务...
+ npm run dev
 
+ // 运行所有 Mix 任务并缩小输出..
+ npm run production
+
+ npm run watch
+
+ npm run watch-poll
+ */
 // AdminLTE css
 mix.styles([
-    'resources/assets/adminlte/css/bootstrap.min.css',
     'resources/assets/adminlte/css/font-awesome.min.css',
     'resources/assets/adminlte/css/ionicons.min.css',
+    'resources/assets/adminlte/css/bootstrap.min.css',
     'resources/assets/adminlte/css/AdminLTE.min.css',
     'resources/assets/adminlte/css/_all-skins.min.css',
 ], 'public/css/adminlte.css');

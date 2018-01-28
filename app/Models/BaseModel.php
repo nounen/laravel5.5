@@ -115,18 +115,18 @@ class BaseModel extends Model
         $fields = self::getFields();
 
         foreach($fields as $fieldKey => $field) {
-            if (isset($field['update']) && $field['update']) {
+            if (isset($field['detail']) && $field['detail']) {
                 // 表单元素通用属性
                 $row = [
                     'key'       => $fieldKey,
                     'name'      => $field['name'],
                     'element'   => array_get($field, 'element'),
                     'attribute' => null,
-                    'options'   => array_get($field, 'update.options', array_get($field, 'options')),
+                    'options'   => array_get($field, 'detail.options', array_get($field, 'options')),
                 ];
 
                 // HTML 属性拼接
-                $attrs = array_get($field, 'attributes', array_get($field, 'update.attributes', []));
+                $attrs = array_get($field, 'attributes', array_get($field, 'detail.attributes', []));
 
                 foreach ($attrs as $attrKey => $attr) {
                     $row['attribute'] .= " {$attrKey}=\"{$attr}\"";

@@ -127,3 +127,13 @@
         </div>
     </form>
 </div>
+
+@section('common_js')
+<script>
+// textarea 高度自适应
+$.each($("textarea"), function(i, n){
+    // 为什么 + 5: 因为高度还是差一点, 导致出现滚轴
+    $(n).css("height", (n.scrollHeight + 5) + "px");
+})
+</script>
+@endsection

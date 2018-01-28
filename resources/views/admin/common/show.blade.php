@@ -12,10 +12,10 @@
         max-width: 120px;
     }
 
-    /* 重写光标样式 */
-    .form-control[disabled], fieldset[disabled] .form-control {
-        cursor: auto;
-    }
+    /*!* 重写光标样式 *!*/
+    /*.form-control[disabled], fieldset[disabled] .form-control {*/
+        /*cursor: auto;*/
+    /*}*/
 
     /* 灰色背景取消 */
     .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
@@ -142,7 +142,8 @@
 <script>
 // textarea 高度自适应
 $.each($("textarea"), function(i, n){
-    $(n).css("height", n.scrollHeight + "px");
+    // 为什么 + 5: 因为高度还是差一点, 导致出现滚轴
+    $(n).css("height", (n.scrollHeight + 5) + "px");
 })
 </script>
 @endsection

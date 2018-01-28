@@ -195,7 +195,7 @@ class Article extends BaseModel
                 'name'   => '浏览量',
                 'table'  => true,
                 'detail' => true,
-                'update' => true,
+                'update' => false,
                 'element'=> 'input',
                 'attributes' => [
                     'type'     => 'number',
@@ -251,17 +251,22 @@ class Article extends BaseModel
             'user_id' => [
                 'name'   => '创建人',
                 'table'  => false,
-                'detail' => true,
             ],
             'user_name' => [
                 'name'   => '创建人',
                 'table'  => true,
+                'detail' => true,
+                'element'=> 'input',
+                'attributes' => [
+                    'type'     => 'text',
+                    'disabled' => 'disabled',
+                ],
             ],
             'created_at' => [
                 'name'   => '创建时间',
                 'table'  => true,
                 'detail' => true,
-                'update' => true,
+                'update' => false,
                 'element'=> 'input',
                 'attributes' => [
                     'type'     => 'text',
@@ -272,7 +277,7 @@ class Article extends BaseModel
                 'name'   => '更新时间',
                 'table'  => true,
                 'detail' => true,
-                'update' => true,
+                'update' => false,
                 'element'=> 'input',
                 'attributes' => [
                     'type'     => 'text',

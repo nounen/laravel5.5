@@ -133,7 +133,7 @@ class Controller extends BaseController
             $this->authorize('update', $item);
         }
 
-        $this->data['title'] = "{$this->moduleName}标签";
+        $this->data['title'] = "{$this->moduleName}编辑";
 
         $this->data['base_url'] = $this->baseUrl;
 

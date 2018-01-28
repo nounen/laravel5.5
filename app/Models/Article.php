@@ -23,6 +23,12 @@ class Article extends BaseModel
         'user_id',
     ];
 
+    protected $appends = [
+        'article_state_name',
+        'is_allow_comment_name',
+        'user_name',
+    ];
+
     // 发布
     const STATE_PUBLISH = 1;
 
@@ -55,6 +61,51 @@ class Article extends BaseModel
     public function categories()
     {
         return $this->belongsToMany(Category::class);
+    }
+
+    /**
+     * 所属作者, 一对一
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * 发布状态转中文
+     *
+     * @return string
+     */
+    public function getArticleStateNameAttribute()
+    {
+        return getXxxNameAttribute($this->getArticleStates(), $this->article_state);
+    }
+
+    /**
+     * 是否允许评论转中文
+     *
+     * @return string
+     */
+    public function getIsAllowCommentNameAttribute()
+    {
+        return getXxxNameAttribute($this->getIsStates(), $this->is_allow_comment);
+    }
+
+    /**
+     * 创建人名字
+     *
+     * @return mixed
+     */
+    public function getUserNameAttribute()
+    {
+        // $this->user 来自预加载模型
+        if ($this->user) {
+            return $this->user->name;
+        } else {
+            return '';
+        }
     }
 
     /**
@@ -125,7 +176,7 @@ class Article extends BaseModel
             ],
             'article_state' => [
                 'name'   => '发布状态',
-                'table'  => true,
+                'table'  => false,
                 'detail' => true,
                 'create' => true,
                 'update' => true,
@@ -135,6 +186,10 @@ class Article extends BaseModel
                     'required' => 'required',
                 ],
                 'options' => self::getArticleStates(),
+            ],
+            'article_state_name' => [
+                'name'   => '发布状态',
+                'table'  => true,
             ],
             'view_count' => [
                 'name'   => '浏览量',
@@ -149,7 +204,7 @@ class Article extends BaseModel
             ],
             'is_allow_comment' => [
                 'name'   => '允许评论',
-                'table'  => true,
+                'table'  => false,
                 'detail' => true,
                 'create' => true,
                 'update' => true,
@@ -159,6 +214,10 @@ class Article extends BaseModel
                     'required'  => 'required',
                 ],
                 'options' => self::getIsStates(),
+            ],
+            'is_allow_comment_name' => [
+                'name'   => '允许评论',
+                'table'  => true,
             ],
             'sort' => [
                 'name'   => '排序',
@@ -191,8 +250,12 @@ class Article extends BaseModel
             ],
             'user_id' => [
                 'name'   => '创建人',
-                'table'  => true,
+                'table'  => false,
                 'detail' => true,
+            ],
+            'user_name' => [
+                'name'   => '创建人',
+                'table'  => true,
             ],
             'created_at' => [
                 'name'   => '创建时间',

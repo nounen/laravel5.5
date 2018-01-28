@@ -17,12 +17,13 @@ class ArticleRepository extends BaseRepository
     {
         $fieldMaps = [];
 
-        $tags = search(Article::class, $fieldMaps)
+        $articles = search(Article::class, $fieldMaps)
+                    ->with('user')
                     ->ofUser()
                     ->orderBy('sort')
                     ->orderBy('created_at', 'DESC')
                     ->paginate();
 
-        return $tags;
+        return $articles;
     }
 }

@@ -28,6 +28,27 @@ if (! function_exists('isUpdateMethod')) {
     }
 }
 
+if (! function_exists('getXxxNameAttribute')) {
+    /**
+     * 字典转中文
+     *
+     * @param $options
+     * @param $value
+     * @param string $default
+     * @return string
+     */
+    function getXxxNameAttribute($options, $value, $default = '')
+    {
+        foreach ($options as $option) {
+            if ($option['value'] == $value) {
+                return $option['name'];
+            }
+        }
+
+        return $default;
+    }
+}
+
 if (!function_exists('search')) {
     /**
      * 模型搜索通用方法

@@ -21,7 +21,7 @@
                 <table class="table table-hover table-bordered text-center">
                     <tbody>
                         <tr>
-                            @foreach($table_rows as $name)
+                            @foreach($fields as $name)
                             <th>
                                 @if(is_array($name))
                                     {{ $name['name'] }}
@@ -34,9 +34,9 @@
                             <th>操作</th>
                         </tr>
 
-                        @foreach($table_list as $item)
+                        @foreach($list as $item)
                         <tr>
-                            @foreach($table_rows as $key => $name)
+                            @foreach($fields as $key => $name)
                             <td>
                                 @if(is_array($name))
                                     {{-- slot 扩展: 然而这个用法在调试时非常难排查错误 --}}
@@ -77,7 +77,7 @@
             {{--TODO: 分页样式应该重写--}}
             <div class="box-footer clearfix" style="padding-top: 0px; padding-bottom: 0px;">
                 {{-- 如果没有分页数据就不会显示 --}}
-                {{ $table_list->links() }}
+                {{ $list->links() }}
             </div>
         </div>
     </div>

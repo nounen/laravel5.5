@@ -220,7 +220,7 @@ class Article extends BaseModel
         return $query->where('user_id', self::adminUser()->id);
     }
 
-    public static function getUpdateRowsHook($article)
+    public static function getUpdateFieldsHook($article)
     {
         // 对象引用传递, 所以无需返回值
         $article->category_ids = self::getCategoryIds($article->id);

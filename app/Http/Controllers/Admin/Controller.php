@@ -66,9 +66,9 @@ class Controller extends BaseController
 
         $this->data['table_permissions'] = $this->permissions();
 
-        $this->data['table_rows'] = $this->model->getTableRows();
+        $this->data['fields'] = $this->model->getTableFields();
 
-        $this->data['table_list'] = $this->repository->paginate();
+        $this->data['list'] = $this->repository->paginate();
 
         return view($this->getViewName(), $this->data);
     }
@@ -84,7 +84,7 @@ class Controller extends BaseController
 
         $this->data['base_url'] = $this->baseUrl;
 
-        $this->data['create_rows'] = $this->model->getCreateRows();
+        $this->data['fields'] = $this->model->getCreateFields();
 
         return view($this->getViewName(), $this->data);
     }
@@ -106,7 +106,7 @@ class Controller extends BaseController
 
         $this->data['title'] = "{$this->moduleName}详情";
 
-        $this->data['item_rows'] = $this->model->getDetailRows();
+        $this->data['fields'] = $this->model->getDetailFields();
 
         $this->data['item'] = $item;
 
@@ -132,11 +132,11 @@ class Controller extends BaseController
 
         $this->data['base_url'] = $this->baseUrl;
 
-        $this->data['update_rows'] = $this->model->getUpdateRows();
+        $this->data['fields'] = $this->model->getUpdateFields();
 
         // 钩子调用, 为模型扩展更多属性
-        if (method_exists($this->model, 'getUpdateRowsHook')) {
-            $this->model->getUpdateRowsHook($item);
+        if (method_exists($this->model, 'getUpdateFieldsHook')) {
+            $this->model->getUpdateFieldsHook($item);
         }
 
         $this->data['item'] = $item;

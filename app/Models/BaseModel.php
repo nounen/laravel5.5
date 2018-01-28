@@ -77,7 +77,7 @@ class BaseModel extends Model
      *
      * @return array
      */
-    public static function getTableRows()
+    public static function getTableFields()
     {
         $rows = [];
 
@@ -100,7 +100,7 @@ class BaseModel extends Model
      *
      * @return array
      */
-    public static function getDetailRows()
+    public static function getDetailFields()
     {
         $rows = [];
 
@@ -122,7 +122,7 @@ class BaseModel extends Model
      *
      * @return array
      */
-    public static function getCreateRows()
+    public static function getCreateFields()
     {
         $rows = [];
 
@@ -158,22 +158,22 @@ class BaseModel extends Model
     }
 
     /**
-     * 创建页面字段钩子方法, 在 getCreateRows 后执行, 为 $item 对应的模型添加更多属性 (对象引用传递, 所以无需返回值)
+     * 创建页面字段钩子方法, 在 getCreateFields 后执行, 为 $item 对应的模型添加更多属性 (对象引用传递, 所以无需返回值)
      *
      * @param $item
      */
-    public static function getUpdateRowsHook($item)
+    public static function getUpdateFieldsHook($item)
     {
     }
 
     /**
-     * 在 getCreateRows 只提取 key
+     * 在 getCreateFields 只提取 key
      *
      * @return array
      */
     public static function getStoreKeys()
     {
-        $fields = self::getCreateRows();
+        $fields = self::getCreateFields();
 
         // 字段过滤: 含有 'disabled', 'readonly', 'hidden' 属性的不计入
         $fields = array_filter($fields, function($filter) {
@@ -194,7 +194,7 @@ class BaseModel extends Model
      *
      * @return array
      */
-    public static function getUpdateRows()
+    public static function getUpdateFields()
     {
         $rows = [];
 
@@ -228,13 +228,13 @@ class BaseModel extends Model
     }
 
     /**
-     * 在 getUpdateRows 只提取 key
+     * 在 getUpdateFields 只提取 key
      *
      * @return array
      */
     public static function getUpdateKeys()
     {
-        $fields = self::getUpdateRows();
+        $fields = self::getUpdateFields();
 
         // 字段过滤: 含有 'disabled', 'readonly', 'hidden' 属性的不计入
         $fields = array_filter($fields, function($filter) {

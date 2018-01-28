@@ -30,7 +30,7 @@ class FormController extends Controller
     {
         $this->data['title'] = '创建表单';
 
-        $this->data['create_rows'] = Form::getCreateRows();
+        $this->data['create_rows'] = Form::getCreateFields();
 
         return view('admin.form.create', $this->data);
     }

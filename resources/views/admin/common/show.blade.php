@@ -12,7 +12,7 @@
             <div class="box-body table-responsive no-padding">
                 <table class="table table-hover table-bordered">
                     <tbody>
-                    @foreach($item_rows as $key => $name)
+                    @foreach($fields as $key => $name)
                         <tr>
                         @if(is_array($name))
                             {{-- slot 扩展 --}}

@@ -90,6 +90,7 @@ class Article extends BaseModel
             ],
             'description' => [
                 'name'   => '简介',
+                'table'  => false,
                 'detail' => true,
                 'create' => true,
                 'update' => true,
@@ -101,7 +102,7 @@ class Article extends BaseModel
             ],
             'cover' => [
                 'name'   => '封面',
-                'table'  => true,
+                'table'  => false,
                 'detail' => true,
                 'create' => true,
                 'update' => true,

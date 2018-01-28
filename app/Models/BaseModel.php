@@ -89,7 +89,11 @@ class BaseModel extends Model
 
         foreach($fields as $fieldKey => $field) {
             if (isset($field['table'])) {
-                $rows[$fieldKey] = is_bool($field['table']) ? $field['name'] : ['name' => $field['name'], 'type' => $field['table']];
+                if ($field['table'] === false) {
+                    continue;
+                } else {
+                    $rows[$fieldKey] = is_bool($field['table']) ? $field['name'] : ['name' => $field['name'], 'type' => $field['table']];
+                }
             } else {
                 continue;
             }

@@ -26,19 +26,23 @@ class Article extends BaseModel
     // 发布
     const STATE_PUBLISH = 1;
 
+    const STATE_PUBLISH_STR = '发布';
+
     // 草稿
     const STATE_DRAFT = 2;
+
+    const STATE_DRAFT_STR = '草稿';
 
     public static function getArticleStates()
     {
         return [
             [
                 'value' => self::STATE_PUBLISH,
-                'name'  => '发布',
+                'name'  => self::STATE_PUBLISH_STR,
             ],
             [
                 'value' => self::STATE_DRAFT,
-                'name'  => '草稿',
+                'name'  => self::STATE_DRAFT_STR,
             ],
         ];
     }

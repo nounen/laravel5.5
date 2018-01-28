@@ -16,18 +16,22 @@ class BaseModel extends Model
 
     const YES = 1;
 
+    const YES_STR = '是';
+
     const NO = 2;
+
+    const NO_STR = '否';
 
     public static function getIsStates()
     {
         return [
             [
                 'value' => self::YES,
-                'name'  => '是',
+                'name'  => self::YES_STR,
             ],
             [
                 'value' => self::NO,
-                'name'  => '否',
+                'name'  => self::NO_STR,
             ],
         ];
     }

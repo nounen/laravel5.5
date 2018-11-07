@@ -6,9 +6,10 @@ composer install
 
 cp .env.example .env
 
-.env 添加配置项 APP_LOG=daily
-
 php artisan key:generate
+
+创建数据库 laravel_build
+php artisan migrate
 
 php artisan serve
 ```

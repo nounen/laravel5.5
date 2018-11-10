@@ -42,6 +42,7 @@
                         </div>
                     </div>
                     @break
+
                     @case('radio')
                     <div class="form-group">
                         <label for="{{ $field['key'] }}" class="col-sm-2 table_title_width control-label">{{ $field['name'] }}:</label>
@@ -61,6 +62,7 @@
                         </div>
                     </div>
                     @break
+
                     @case('checkbox')
                     <div class="form-group">
                         <label for="{{ $field['key'] }}" class="col-sm-2 table_title_width control-label">{{ $field['name'] }}:</label>
@@ -79,6 +81,7 @@
                         </div>
                     </div>
                     @break
+
                     @case('select')
                     <div class="form-group">
                         <label for="{{ $field['key'] }}" class="col-sm-2 table_title_width control-label">{{ $field['name'] }}:</label>
@@ -110,6 +113,7 @@
                         </div>
                     </div>
                     @break
+
                     @case('textarea')
                     <div class="form-group">
                         <label for="{{ $field['key'] }}" class="col-sm-2 table_title_width control-label">{{ $field['name'] }}:</label>
@@ -123,11 +127,14 @@
                         </div>
                     </div>
                     @break
+
                     @case('slot')
                     {{ ${$field['key']} }}
                     @break
+
                     @default
                     <h3>字段元素配置错误: {{ $field['key'] }} !</h3>
+
                 @endswitch
             @endforeach
         </div>

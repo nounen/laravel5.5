@@ -33,7 +33,7 @@ class CategoryRequest extends FormRequest
         if (isUpdateMethod($request->getMethod()) && $request->id) {
             $rules['name'][] = Rule::unique('category')->ignore($request->id);
         } else {
-            $rules['name'][] = 'unique:tag';
+            $rules['name'][] = 'unique:category';
         }
 
         return $rules;

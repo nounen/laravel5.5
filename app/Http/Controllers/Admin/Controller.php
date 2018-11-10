@@ -78,7 +78,7 @@ class Controller extends BaseController
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function create()
+    protected function create()
     {
         $this->data['title'] = "{$this->moduleName}创建";
 

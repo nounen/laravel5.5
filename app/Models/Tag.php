@@ -40,7 +40,7 @@ class Tag extends BaseModel
                 'detail' => 'slot',
                 'create' => true,
                 'update' => true,
-                'rule'   => ['required', 'max:5'],
+                'rule'   => ['required', 'max:10'],
                 'element'=> 'input',
                 'attributes' => [
                     'type'     => 'text',

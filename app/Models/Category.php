@@ -51,7 +51,7 @@ class Category extends BaseModel
                 'detail' => true,
                 'create' => true,
                 'update' => true,
-                'rule'   => ['required', 'max:5'],
+                'rule'   => ['required', 'max:10'],
                 'element'=> 'input',
                 'attributes' => [
                     'type'     => 'text',

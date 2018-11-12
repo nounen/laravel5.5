@@ -276,6 +276,11 @@ class BaseModel extends Model
         return Auth::user();
     }
 
+    /**
+     * 创建人作用域
+     * @param $query
+     * @return mixed
+     */
     public function scopeOfUser($query)
     {
         return $query->where('user_id', self::adminUser()->id);

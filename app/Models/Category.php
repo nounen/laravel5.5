@@ -27,44 +27,46 @@ class Category extends BaseModel
         return [
             'id' => [
                 'name'   => '主键',
-                'table'  => true,
                 'detail' => true,
                 'update' => true,
                 'element'=> 'input',
                 'attributes' => [
-                    'type'     => 'hidden',
+                    'type' => 'hidden',
                 ],
             ],
             'parent_id' => [
                 'name'   => '父级主键',
-                'table'  => true,
                 'detail' => true,
                 'update' => true,
                 'element'=> 'input',
                 'attributes' => [
-                    'type'     => 'hidden',
+                    'type' => 'hidden',
                 ],
             ],
             'name' => [
                 'name'   => '分类名',
-                'table'  => true,
                 'detail' => true,
                 'create' => true,
                 'update' => true,
-                'rule'   => ['required', 'max:10'],
+                'rule'   => [
+                    'required',
+                    'max:10',
+                ],
                 'element'=> 'input',
                 'attributes' => [
-                    'type'     => 'text',
+                    'type' => 'text',
                     'required' => 'required',
                 ],
             ],
             'sort' => [
                 'name'   => '排序',
-                'table'  => true,
                 'detail' => true,
                 'create' => true,
                 'update' => true,
-                'rule'   => 'required|numeric',
+                'rule'   => [
+                    'required',
+                    'numeric'
+                ],
                 'element'=> 'input',
                 'attributes' => [
                     'type'     => 'number',
@@ -73,7 +75,6 @@ class Category extends BaseModel
             ],
             'article_count' => [
                 'name'   => '关联文章数',
-                'table'  => true,
                 'detail' => true,
                 'update' => true,
                 'element'=> 'input',
@@ -84,12 +85,10 @@ class Category extends BaseModel
             ],
             'user_id' => [
                 'name'   => '创建人',
-                'table'  => true,
                 'detail' => true,
             ],
             'created_at' => [
                 'name'   => '创建时间',
-                'table'  => true,
                 'detail' => true,
                 'update' => true,
                 'element'=> 'input',
@@ -100,7 +99,6 @@ class Category extends BaseModel
             ],
             'updated_at' => [
                 'name'   => '更新时间',
-                'table'  => true,
                 'detail' => true,
                 'update' => true,
                 'element'=> 'input',
@@ -109,7 +107,6 @@ class Category extends BaseModel
                     'disabled' => 'disabled',
                 ],
             ],
-
         ];
     }
 
@@ -129,13 +126,20 @@ class Category extends BaseModel
     }
 
     /**
-     * 查询作用域
-     *
-     * @param $query
-     * @return mixed
+     * 列表字段
+     * @return array
      */
-    public function scopeOfUser($query)
+    public static function tableKeys()
     {
-        return $query->where('user_id', self::adminUser()->id);
+        return [
+            'id',
+            'parent_id',
+            'name',
+            'sort',
+            'article_count',
+            'user_id',
+            'created_at',
+            'updated_at',
+        ];
     }
 }

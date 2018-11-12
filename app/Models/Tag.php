@@ -26,7 +26,6 @@ class Tag extends BaseModel
         return [
             'id' => [
                 'name'   => '主键',
-                'detail' => true,
                 'update' => true,
                 'element'=> 'input',
                 'attributes' => [
@@ -41,7 +40,10 @@ class Tag extends BaseModel
                 'detail' => 'slot',
                 'create' => true,
                 'update' => true,
-                'rule'   => ['required', 'max:10'],
+                'rule'   => [
+                    'required',
+                    'max:10'
+                ],
                 'element'=> 'input',
                 'attributes' => [
                     'type'     => 'text',
@@ -50,33 +52,20 @@ class Tag extends BaseModel
             ],
             'sort' => [
                 'name'   => '排序',
-                'detail' => true,
                 'create' => true,
                 'update' => true,
-                'rule'   => 'required|numeric',
+                'rule'   => [
+                    'required',
+                    'numeric',
+                ],
                 'element'=> 'input',
                 'attributes' => [
                     'type'     => 'number',
                     'required' => 'required',
                 ],
             ],
-            'article_count' => [
-                'name'   => '关联文章数',
-                'detail' => true,
-                'update' => true,
-                'element'=> 'input',
-                'attributes' => [
-                    'type'     => 'number',
-                    'disabled' => 'disabled',
-                ],
-            ],
-            'user_id' => [
-                'name'   => '创建人',
-                'detail' => true,
-            ],
             'created_at' => [
                 'name'   => '创建时间',
-                'detail' => true,
                 'update' => true,
                 'element'=> 'input',
                 'attributes' => [
@@ -86,7 +75,6 @@ class Tag extends BaseModel
             ],
             'updated_at' => [
                 'name'   => '更新时间',
-                'detail' => true,
                 'update' => true,
                 'element'=> 'input',
                 'attributes' => [
@@ -98,10 +86,25 @@ class Tag extends BaseModel
     }
 
     /**
-     * 类表展示字段
+     * 列表字段
      * @return array
      */
     public static function tableKeys()
+    {
+        return [
+            'id',
+            'name',
+            'sort',
+            'created_at',
+            'updated_at',
+        ];
+    }
+
+    /**
+     * 详情字段
+     * @return array
+     */
+    public static function detailKeys()
     {
         return [
             'id',

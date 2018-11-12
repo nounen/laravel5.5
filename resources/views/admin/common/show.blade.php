@@ -29,7 +29,7 @@
             @foreach($fields as $field)
                 @switch($field['element'])
                     @case('input')
-                    <div class="form-group @if(str_contains($field['attribute'], 'hidden')) hidden @endif">
+                    <div class="form-group {{getHiddenClass($field)}}">
                         <label for="{{ $field['key'] }}" class="col-sm-2 table_title_width control-label">{{ $field['name'] }}:</label>
 
                         <div class="col-sm-10">

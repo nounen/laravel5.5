@@ -103,31 +103,20 @@ class BaseModel extends Model
     public static function getDetailFields()
     {
         $rows = [];
-
+        $keys = self::detailKeys();
         $fields = self::getFields();
 
-        foreach($fields as $fieldKey => $field) {
-            if (isset($field['detail']) && $field['detail']) {
-                // 表单元素通用属性
-                $row = [
-                    'key'       => $fieldKey,
-                    'name'      => $field['name'],
-                    'element'   => array_get($field, 'element'),
-                    'attribute' => null,
-                    'options'   => array_get($field, 'detail.options', array_get($field, 'options')),
-                ];
-
-                // HTML 属性拼接
-                $attrs = array_get($field, 'attributes', array_get($field, 'detail.attributes', []));
-
-                foreach ($attrs as $attrKey => $attr) {
-                    $row['attribute'] .= " {$attrKey}=\"{$attr}\"";
-                }
-
-                $rows[$fieldKey] = $row;
-            } else {
-                continue;
-            }
+        foreach ($keys as $key) {
+            $field = $fields[$key];
+            // 表单元素通用属性
+            $rows[$key] = [
+                'key'       => $key,
+                'name'      => $field['name'],
+                'element'   => array_get($field, 'element'),
+                'attribute' => '',
+                'options'   => array_get($field, 'options'),
+                'attribute' => attrToStr(array_get($field, 'attributes', [])),
+            ];
         }
 
         return $rows;

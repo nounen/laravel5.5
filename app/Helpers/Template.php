@@ -3,14 +3,32 @@
  * 模板中使用的函数： 为了尽量减少在模板写各种表达式
  */
 
-if (! function_exists('getFieldName')) {
+if (! function_exists('attrToStr')) {
     /**
-     * 字段名获取
+     * HTML 属性拼接
      * @param $field
      * @return mixed
      */
-    function getFieldName($field)
+    function attrToStr($attrs)
     {
-        return is_array($field) ? $field['name'] : $field;
+        $attrStr = '';
+
+        foreach ($attrs as $attrKey => $attr) {
+            $attrStr .= " {$attrKey}=\"{$attr}\"";
+        }
+
+        return $attrStr;
+    }
+}
+
+if (! function_exists('getHiddenClass')) {
+    /**
+     * css 类 hidden
+     * @param $field
+     * @return string
+     */
+    function getHiddenClass($field)
+    {
+        return str_contains($field['attribute'], 'hidden') ? 'hidden' : '';
     }
 }

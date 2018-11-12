@@ -93,16 +93,26 @@ $this->authorize('view', $tag);
 ### index.blade.php
 ```
 // 模板 fields 变量 eg： 
-"fields" => array:7 [▼
-  "id" => "主键"
-  "name" => array:2 [▼
-    "name" => "标签名"
-    "type" => "slot"
+array:5 [▼
+  "id" => array:2 [▶
+    "name" => "主键"
+    "is_slot" => false
   ]
-  "sort" => "排序"
-  "article_count" => "关联文章数"
-  "user_id" => "创建人"
-  "created_at" => "创建时间"
-  "updated_at" => "更新时间"
+  "name" => array:2 [▶
+    "name" => "标签名"
+    "is_slot" => true
+  ]
+  "sort" => array:2 [▶
+    "name" => "排序"
+    "is_slot" => false
+  ]
+  "created_at" => array:2 [▶
+    "name" => "创建时间"
+    "is_slot" => false
+  ]
+  "updated_at" => array:2 [▶
+    "name" => "更新时间"
+    "is_slot" => false
+  ]
 ]
 ```

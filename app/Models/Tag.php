@@ -26,7 +26,6 @@ class Tag extends BaseModel
         return [
             'id' => [
                 'name'   => '主键',
-                'table'  => true,
                 'detail' => true,
                 'update' => true,
                 'element'=> 'input',
@@ -36,7 +35,9 @@ class Tag extends BaseModel
             ],
             'name' => [
                 'name'   => '标签名',
-                'table'  => 'slot',
+                'slots'  => [
+                    'table' => true,
+                ],
                 'detail' => 'slot',
                 'create' => true,
                 'update' => true,
@@ -49,7 +50,6 @@ class Tag extends BaseModel
             ],
             'sort' => [
                 'name'   => '排序',
-                'table'  => true,
                 'detail' => true,
                 'create' => true,
                 'update' => true,
@@ -62,7 +62,6 @@ class Tag extends BaseModel
             ],
             'article_count' => [
                 'name'   => '关联文章数',
-                'table'  => true,
                 'detail' => true,
                 'update' => true,
                 'element'=> 'input',
@@ -73,12 +72,10 @@ class Tag extends BaseModel
             ],
             'user_id' => [
                 'name'   => '创建人',
-                'table'  => true,
                 'detail' => true,
             ],
             'created_at' => [
                 'name'   => '创建时间',
-                'table'  => true,
                 'detail' => true,
                 'update' => true,
                 'element'=> 'input',
@@ -89,7 +86,6 @@ class Tag extends BaseModel
             ],
             'updated_at' => [
                 'name'   => '更新时间',
-                'table'  => true,
                 'detail' => true,
                 'update' => true,
                 'element'=> 'input',
@@ -98,7 +94,21 @@ class Tag extends BaseModel
                     'disabled' => 'disabled',
                 ],
             ],
+        ];
+    }
 
+    /**
+     * 类表展示字段
+     * @return array
+     */
+    public static function tableKeys()
+    {
+        return [
+            'id',
+            'name',
+            'sort',
+            'created_at',
+            'updated_at',
         ];
     }
 }

@@ -82,19 +82,13 @@ class BaseModel extends Model
     public static function getTableFields()
     {
         $rows = [];
-
+        $keys = self::tableKeys();
         $fields = self::getFields();
 
-        foreach($fields as $fieldKey => $field) {
-            if (isset($field['table'])) {
-                if ($field['table'] === false) {
-                    continue;
-                } else {
-                    $rows[$fieldKey] = is_bool($field['table']) ? $field['name'] : ['name' => $field['name'], 'type' => $field['table']];
-                }
-            } else {
-                continue;
-            }
+        foreach ($keys as $key) {
+            $field = $fields[$key];
+            $rows[$key]['name'] = $field['name'];
+            $rows[$key]['is_slot'] = array_get($field, 'slots.table', false); // slot
         }
 
         return $rows;

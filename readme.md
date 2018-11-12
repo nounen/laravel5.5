@@ -88,3 +88,21 @@ if ($this->auth->cant('view', $tag)) {
 // 策略处理方式 2
 $this->authorize('view', $tag);
 ```
+
+
+### index.blade.php
+```
+// 模板 fields 变量 eg： 
+"fields" => array:7 [▼
+  "id" => "主键"
+  "name" => array:2 [▼
+    "name" => "标签名"
+    "type" => "slot"
+  ]
+  "sort" => "排序"
+  "article_count" => "关联文章数"
+  "user_id" => "创建人"
+  "created_at" => "创建时间"
+  "updated_at" => "更新时间"
+]
+```

@@ -49,8 +49,16 @@ class Controller extends BaseController
     public function __construct()
     {
         $this->data['menus'] = $this->getMockMenus();
+        $this->data['title'] = "{$this->moduleName}";
+    }
 
-        $this->data['title'] = "{$this->moduleName} 的 xx 操作";
+    /**
+     * 视图渲染
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    protected function renderView()
+    {
+        return view($this->getViewName(), $this->data);
     }
 
     /**
@@ -61,16 +69,10 @@ class Controller extends BaseController
     public function index()
     {
         $this->data['title'] = "{$this->moduleName}列表";
-
         $this->data['base_url'] = $this->baseUrl;
-
-        $this->data['table_permissions'] = $this->permissions();
-
         $this->data['fields'] = $this->model->getTableFields();
-
         $this->data['list'] = $this->repository->paginate();
-
-        return view($this->getViewName(), $this->data);
+        return $this->renderView();
     }
 
     /**
@@ -81,12 +83,9 @@ class Controller extends BaseController
     protected function create()
     {
         $this->data['title'] = "{$this->moduleName}创建";
-
         $this->data['base_url'] = $this->baseUrl;
-
         $this->data['fields'] = $this->model->getCreateFields();
-
-        return view($this->getViewName(), $this->data);
+        return $this->renderView();
     }
 
     /**
@@ -105,7 +104,6 @@ class Controller extends BaseController
         }
 
         $this->data['title'] = "{$this->moduleName}详情";
-
         $this->data['fields'] = $this->model->getDetailFields();
 
         // 钩子调用, 为模型扩展更多属性
@@ -115,7 +113,7 @@ class Controller extends BaseController
 
         $this->data['item'] = $item;
 
-        return view($this->getViewName(), $this->data);
+        return $this->renderView();
     }
 
     /**
@@ -146,7 +144,7 @@ class Controller extends BaseController
 
         $this->data['item'] = $item;
 
-        return view($this->getViewName(), $this->data);
+        return $this->renderView();
     }
 
     /**

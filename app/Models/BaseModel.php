@@ -15,11 +15,9 @@ class BaseModel extends Model
     use SoftDeletes;
 
     const YES = 1;
-
     const YES_NAME = '是';
 
     const NO = 2;
-
     const NO_NAME = '否';
 
     public static function getIsStates()
@@ -293,5 +291,10 @@ class BaseModel extends Model
     public static function adminUser()
     {
         return Auth::user();
+    }
+
+    public function scopeOfUser($query)
+    {
+        return $query->where('user_id', self::adminUser()->id);
     }
 }

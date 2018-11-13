@@ -142,4 +142,21 @@ class Category extends BaseModel
             'updated_at',
         ];
     }
+
+    /**
+     * 详情字段
+     * @return array
+     */
+    public static function detailKeys()
+    {
+        return [
+            'id',
+            'parent_id',
+            'name',
+            'sort',
+            'article_count',
+            'created_at',
+            'updated_at',
+        ];
+    }
 }

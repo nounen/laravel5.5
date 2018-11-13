@@ -23,6 +23,7 @@ class CreateArticle extends Migration
             $table->tinyInteger('is_allow_comment')->default(1)->comment('是否允许评论');
             $table->integer('view_count')->default(0);
             $table->integer('sort')->default(999);
+            $table->integer('category_id');
             $table->integer('user_id');
             $table->timestamps();
             $table->softDeletes();

@@ -20,6 +20,7 @@ class Article extends BaseModel
         'is_allow_comment',
         'view_count',
         'sort',
+        'category_id',
         'user_id',
     ];
 
@@ -52,13 +53,13 @@ class Article extends BaseModel
     }
 
     /**
-     * 所属分类, 多对多
+     * 关联标签, 多对多
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function categories()
+    public function tags()
     {
-        return $this->belongsToMany(Category::class);
+        return $this->belongsToMany(Tag::class);
     }
 
     /**
@@ -69,6 +70,16 @@ class Article extends BaseModel
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * 所属分类, 一对一
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
     }
 
     /**
@@ -101,6 +112,22 @@ class Article extends BaseModel
         // $this->user 来自预加载模型
         if ($this->user) {
             return $this->user->name;
+        } else {
+            return '';
+        }
+    }
+
+
+    /**
+     * 栏目名
+     *
+     * @return mixed
+     */
+    public function getCategoryNameAttribute()
+    {
+        // $this->user 来自预加载模型
+        if ($this->category) {
+            return $this->category->name;
         } else {
             return '';
         }
@@ -172,7 +199,7 @@ class Article extends BaseModel
                 'attributes' => [
                     'required' => 'required',
                 ],
-                'options' => self::getArticleStates(),
+                'options' => Article::getArticleStates(),
             ],
             'article_state_name' => [
                 'name'   => '发布状态',
@@ -212,8 +239,8 @@ class Article extends BaseModel
                     'placeholder' => 999,
                 ],
             ],
-            'category_ids' => [
-                'name' => '文章分类',
+            'tag_ids' => [
+                'name' => '文章标签',
                 'create' => true,
                 'update' => true,
                 'element' => 'select',
@@ -222,10 +249,30 @@ class Article extends BaseModel
                     'required' => 'required',
                     'multiple' => 'multiple',
                 ],
-                // 用到时才调用函数, 延迟加载
+                'options' => function() {
+                    return Tag::beOptions();
+                },
+            ],
+            'category_id' => [
+                'name' => '文章栏目',
+                'create' => true,
+                'update' => true,
+                'element' => 'select',
+                'attributes' => [
+                    'type'     => 'select',
+                    'required' => 'required',
+                ],
                 'options' => function() {
                     return Category::beOptions();
                 },
+            ],
+            'category_name' => [
+                'name'   => '文章栏目',
+                'element'=> 'input',
+                'attributes' => [
+                    'type'     => 'text',
+                    'disabled' => 'disabled',
+                ],
             ],
             'user_id' => [
                 'name'   => '创建人',
@@ -256,7 +303,6 @@ class Article extends BaseModel
                     'disabled' => 'disabled',
                 ],
             ],
-
         ];
     }
 
@@ -275,6 +321,7 @@ class Article extends BaseModel
             'article_state_name',
             'view_count',
             'is_allow_comment_name',
+            'category_name',
             'user_name',
             'created_at',
             'updated_at',
@@ -304,25 +351,11 @@ class Article extends BaseModel
     public static function getUpdateFieldsHook($article)
     {
         // 对象引用传递, 所以无需返回值
-        $article->category_ids = self::getCategoryIds($article->id);
+        $article->tag_ids = Tag::getTagIds($article->id);
     }
 
     public static function getDetailFieldsHook($article)
     {
-        $article->category_ids = self::getCategoryIds($article->id);
-    }
-
-    /**
-     * 根据文章获取分类 id
-     *
-     * @param $articleId
-     * @return mixed
-     */
-    public static function getCategoryIds($articleId)
-    {
-        return DB::table('article_category')
-            ->where('article_id', $articleId)
-            ->pluck('category_id')
-            ->toArray();
+        $article->tag_ids = Tag::getTagIds($article->id);
     }
 }

@@ -20,13 +20,9 @@ class ArticleController extends Controller
         parent::__construct();
 
         $this->moduleName = '文章';
-
         $this->baseUrl = url('admin/article');
-
         $this->authorize = true;
-
         $this->model = $article;
-
         $this->repository = $articleRepository;
     }
 
@@ -49,7 +45,7 @@ class ArticleController extends Controller
     {
         $article = parent::_update($request, $id, self::RETURN_MODEL);
 
-        $article->categories()->sync($request->get('category_ids'));
+        $article->tags()->sync($request->get('tags_ids'));
 
         return redirect($this->baseUrl);
     }

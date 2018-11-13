@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
+use function PHPSTORM_META\type;
 
 /**
  * 模型基础
@@ -94,17 +95,14 @@ class BaseModel extends Model
         return $rows;
     }
 
-
     /**
-     * 详情显示字段
+     * 字段处理
      *
      * @return array
      */
-    public static function getDetailFields()
+    public static function dealFields($keys, $fields)
     {
         $rows = [];
-        $keys = self::detailKeys();
-        $fields = self::getFields();
 
         foreach ($keys as $key) {
             $field = $fields[$key];
@@ -113,13 +111,22 @@ class BaseModel extends Model
                 'key'       => $key,
                 'name'      => $field['name'],
                 'element'   => array_get($field, 'element'),
-                'attribute' => '',
                 'options'   => array_get($field, 'options'),
                 'attribute' => attrToStr(array_get($field, 'attributes', [])),
             ];
         }
 
         return $rows;
+    }
+
+    /**
+     * 详情显示字段
+     *
+     * @return array
+     */
+    public static function getDetailFields()
+    {
+        return self::dealFields(self::detailKeys(), self::getFields());
     }
 
     /**
@@ -138,37 +145,7 @@ class BaseModel extends Model
      */
     public static function getCreateFields()
     {
-        $rows = [];
-
-        $fields = self::getFields();
-
-        foreach($fields as $fieldKey => $field) {
-            if (isset($field['create']) && $field['create']) {
-                // 表单元素通用属性
-                $row = [
-                    'key'       => $fieldKey,
-                    'name'      => $field['name'],
-                    'element'   => array_get($field, 'element'),
-                    'attribute' => null,
-                    // 优先 update. 如果是函数会自动被调用
-                    'options'   => array_get($field, 'create.options', array_get($field, 'options')),
-                ];
-
-                // HTML 属性拼接
-                $attrs = array_get($field, 'attributes', array_get($field, 'create.attributes', []));
-
-                foreach ($attrs as $attrKey => $attr) {
-                    $row['attribute'] .= " {$attrKey}=\"{$attr}\"";
-                }
-
-                // 方便通过 key 覆盖某些属性
-                $rows[$fieldKey] = $row;
-            } else {
-                continue;
-            }
-        }
-
-        return $rows;
+        return self::dealFields(self::createKeys(), self::getFields());
     }
 
     /**
@@ -210,35 +187,7 @@ class BaseModel extends Model
      */
     public static function getUpdateFields()
     {
-        $rows = [];
-
-        $fields = self::getFields();
-
-        foreach($fields as $fieldKey => $field) {
-            if (isset($field['update']) && $field['update']) {
-                // 表单元素通用属性
-                $row = [
-                    'key'       => $fieldKey,
-                    'name'      => $field['name'],
-                    'element'   => array_get($field, 'element'),
-                    'attribute' => null,
-                    'options'   => array_get($field, 'update.options', array_get($field, 'options')),
-                ];
-
-                // HTML 属性拼接
-                $attrs = array_get($field, 'attributes', array_get($field, 'update.attributes', []));
-
-                foreach ($attrs as $attrKey => $attr) {
-                    $row['attribute'] .= " {$attrKey}=\"{$attr}\"";
-                }
-
-                $rows[$fieldKey] = $row;
-            } else {
-                continue;
-            }
-        }
-
-        return $rows;
+        return self::dealFields(self::updateKeys(), self::getFields());
     }
 
     /**

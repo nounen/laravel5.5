@@ -14,38 +14,51 @@
 </style>
 
 <div class="box box-primary">
-    <form role="form" class="form-horizontal" enctype="multipart/form-data" method="POST" action="{{ $base_url }}" >
+    <form role="form"
+          class="form-horizontal"
+          enctype="multipart/form-data"
+          method="POST"
+          action="{{ $base_url }}" >
+
         {{ csrf_field() }}
 
         <div class="box-body">
-        @foreach($fields as $field)
+        @foreach($fields as $key => $field)
             @switch($field['element'])
+
+                {{-- 输入框: 输入 颜色选择 日期选择 等等 --}}
                 @case('input')
                 <div class="form-group">
-                    <label for="{{ $field['key'] }}" class="col-sm-2 table_title_width control-label">{{ $field['name'] }}:</label>
+                    <label for="{{ $key }}"
+                           class="col-sm-2 table_title_width control-label">
+                        {{ $field['name'] }}:
+                    </label>
 
                     <div class="col-sm-10">
-                        <input id="{{ $field['key'] }}"
-                               name="{{ $field['key'] }}"
-                               value="{{ old($field['key']) }}"
-                               {!! $field['attribute'] !!}
-                               class="form-control">
+                        <input id="{{ $key }}"
+                               name="{{ $key }}"
+                               value="{{ old($key) }}"
+                               class="form-control"
+                                {!! $field['attribute'] !!}>
                     </div>
                 </div>
                 @break
 
+                {{-- 单选按钮 --}}
                 @case('radio')
                 <div class="form-group">
-                    <label for="{{ $field['key'] }}" class="col-sm-2 table_title_width control-label">{{ $field['name'] }}:</label>
+                    <label for="{{ $key }}"
+                           class="col-sm-2 table_title_width control-label">
+                        {{ $field['name'] }}:
+                    </label>
 
-                    <div class="radio col-sm-10" id="{{ $field['key'] }}">
+                    <div class="radio col-sm-10" id="{{ $key }}">
                         @foreach($field['options'] as $option)
                         <label>
-                            <input name="{{ $field['key'] }}"
+                            <input name="{{ $key }}"
                                    value="{{ $option['value'] }}"
-                                   {!! $field['attribute'] !!}
-                                   {{-- 默认选中情况怎么处理 --}}
-                                   @if($option['value'] == old($field['key']))checked="checked"@endif>
+                                    {!! getCheckedResult($option, $field) !!}
+                                    {!! $field['attribute'] !!} >
                             {{ $option['name'] }}
                         </label>
                         @endforeach
@@ -53,17 +66,21 @@
                 </div>
                 @break
 
+                {{-- 复选框 --}}
                 @case('checkbox')
                 <div class="form-group">
-                    <label for="{{ $field['key'] }}" class="col-sm-2 table_title_width control-label">{{ $field['name'] }}:</label>
+                    <label for="{{ $key }}"
+                           class="col-sm-2 table_title_width control-label">
+                        {{ $field['name'] }}:
+                    </label>
 
-                    <div class="checkbox col-sm-10" id="{{ $field['key'] }}">
+                    <div class="checkbox col-sm-10" id="{{ $key }}">
                         @foreach($field['options'] as $option)
                         <label>
-                            <input name="{{ $field['key'] }}[]"
+                            <input name="{{ $key }}[]"
                                    value="{{ $option['value'] }}"
-                                   {!! $field['attribute'] !!}
-                                   @if($option['value'] == old($field['key']))checked="checked"@endif>
+                                   {!! getCheckedResult($option, $field) !!}
+                                    {!! $field['attribute'] !!} >
                             {{ $option['name'] }}
                         </label>
                         @endforeach
@@ -71,57 +88,63 @@
                 </div>
                 @break
 
+                {{-- 下拉列表 --}}
                 @case('select')
                 <div class="form-group">
-                    <label for="{{ $field['key'] }}" class="col-sm-2 table_title_width control-label">{{ $field['name'] }}:</label>
+                    <label for="{{ $key }}"
+                           class="col-sm-2 table_title_width control-label">
+                        {{ $field['name'] }}:
+                    </label>
 
                     <div class="col-sm-10">
-                        <select id="{{ $field['key'] }}"
-                                @if(strpos($field['attribute'], 'multiple'))
-                                    name="{{ $field['key'] }}[]"
-                                @else
-                                    name="{{ $field['key'] }}"
-                                @endif
-                                {!! $field['attribute'] !!}
-                                class="form-control">
-
+                        <select id="{{ $key }}"
+                                name="{{ getSelectName($field) }}"
+                                class="form-control"
+                                {!! $field['attribute'] !!}>
 
                             @foreach($field['options'] as $option)
-                                <option value="{{ $option['value'] }}"
-                                    {{-- 多选 OR 单选 --}}
-                                    @if(is_array(old($field['key'])))
-                                        @foreach(old($field['key']) as $value)
-                                            @if($option['value'] == $value) selected="selected " @endif
-                                        @endforeach
-                                    @else
-                                        @if($option['value'] == old($field['key'])) selected="selected" @endif
-                                    @endif
-                                >{{ $option['name'] }}</option>
+                            <option value="{{ $option['value'] }}"
+                                {{-- 多选 --}}
+                                @if(is_array(old($key)))
+                                    @foreach(old($key) as $value)
+                                    {{ getSelectResult($option['value'], $value) }}
+                                    @endforeach
+                                {{-- 单选 --}}
+                                @else
+                                    {{ getSelectResult($option['value'], old($key)) }}
+                                @endif
+                            >{{ $option['name'] }}</option>
                             @endforeach
                         </select>
                     </div>
                 </div>
                 @break
 
+                {{-- 文本域 --}}
                 @case('textarea')
                 <div class="form-group">
-                    <label for="{{ $field['key'] }}" class="col-sm-2 table_title_width control-label">{{ $field['name'] }}:</label>
+                    <label for="{{ $key }}"
+                           class="col-sm-2 table_title_width control-label">
+                        {{ $field['name'] }}:
+                    </label>
 
                     <div class="col-sm-10">
-                        <textarea id="{{ $field['key'] }}"
-                                  name="{{ $field['key'] }}"
-                                  {!! $field['attribute'] !!}
-                                  class="form-control">{{ old($field['key']) }}</textarea>
+                        <textarea id="{{ $key }}"
+                                  name="{{ $key }}"
+                                  class="form-control"
+                                {!! $field['attribute'] !!}>{{ old($key) }}</textarea>
                     </div>
                 </div>
                 @break
 
+                {{-- blade 自定义扩展 --}}
                 @case('slot')
-                {{ ${$field['key']} }}
+                {{ ${$key} }}
                 @break
 
+                {{-- 配置错误 --}}
                 @default
-                <h3>字段元素配置错误: {{ $field['key'] }} !</h3>
+                <h3>字段元素配置错误: {{ $key }} !</h3>
 
             @endswitch
         @endforeach

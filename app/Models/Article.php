@@ -151,9 +151,11 @@ class Article extends BaseModel
             ],
             'title' => [
                 'name'   => '标题',
-                'create' => true,
                 'update' => true,
-                'rule'   => ['required'],
+                'rule'   => [
+                    'required',
+                    'max:10',
+                ],
                 'element'=> 'input',
                 'attributes' => [
                     'type'     => 'text',
@@ -162,9 +164,10 @@ class Article extends BaseModel
             ],
             'description' => [
                 'name'   => '简介',
-                'create' => true,
                 'update' => true,
-                'rule'   => ['required'],
+                'rule'   => [
+                    'required',
+                ],
                 'element'=> 'textarea',
                 'attributes' => [
                     'required' => 'required',
@@ -172,7 +175,6 @@ class Article extends BaseModel
             ],
             'cover' => [
                 'name'   => '封面',
-                'create' => true,
                 'update' => true,
                 'element'=> 'input',
                 'attributes' => [
@@ -181,9 +183,10 @@ class Article extends BaseModel
             ],
             'content' => [
                 'name'   => '内容',
-                'create' => true,
                 'update' => true,
-                'rule'   => ['required'],
+                'rule'   => [
+                    'required',
+                ],
                 'element'=> 'textarea',
                 'attributes' => [
                     'rows' => 8,
@@ -192,14 +195,16 @@ class Article extends BaseModel
             ],
             'article_state' => [
                 'name'   => '发布状态',
-                'create' => true,
                 'update' => true,
-                'rule'   => 'required|numeric',
+                'rule'   => [
+                    'required',
+                    'numeric',
+                ],
                 'element'=> 'select',
+                'options' => Article::getArticleStates(),
                 'attributes' => [
                     'required' => 'required',
                 ],
-                'options' => Article::getArticleStates(),
             ],
             'article_state_name' => [
                 'name'   => '发布状态',
@@ -215,7 +220,6 @@ class Article extends BaseModel
             ],
             'is_allow_comment' => [
                 'name'   => '允许评论',
-                'create' => true,
                 'update' => true,
                 'element'=> 'radio',
                 'attributes' => [
@@ -229,9 +233,11 @@ class Article extends BaseModel
             ],
             'sort' => [
                 'name'   => '排序',
-                'create' => true,
                 'update' => true,
-                'rule'   => 'required|numeric',
+                'rule'   => [
+                    'required',
+                    'numeric'
+                ],
                 'element'=> 'input',
                 'attributes' => [
                     'type'        => 'number',
@@ -241,30 +247,27 @@ class Article extends BaseModel
             ],
             'tag_ids' => [
                 'name' => '文章标签',
-                'create' => true,
                 'update' => true,
                 'element' => 'select',
+                'options' => Tag::beOptions(),
                 'attributes' => [
                     'type'     => 'select',
                     'required' => 'required',
                     'multiple' => 'multiple',
                 ],
-                'options' => function() {
-                    return Tag::beOptions();
-                },
+//                'options' => function() {
+//                    return Tag::beOptions();
+//                },
             ],
             'category_id' => [
                 'name' => '文章栏目',
-                'create' => true,
                 'update' => true,
                 'element' => 'select',
+                'options' => Category::beOptions(),
                 'attributes' => [
                     'type'     => 'select',
                     'required' => 'required',
                 ],
-                'options' => function() {
-                    return Category::beOptions();
-                },
             ],
             'category_name' => [
                 'name'   => '文章栏目',
@@ -303,6 +306,25 @@ class Article extends BaseModel
                     'disabled' => 'disabled',
                 ],
             ],
+        ];
+    }
+
+    /**
+     * 创建字段
+     * @return array
+     */
+    public static function createKeys()
+    {
+        return [
+            'title',
+            'description',
+            'cover',
+            'content',
+            'article_state',
+            'is_allow_comment',
+            'sort',
+            'tag_ids',
+            'category_id',
         ];
     }
 

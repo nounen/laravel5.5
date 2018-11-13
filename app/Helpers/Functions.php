@@ -28,7 +28,7 @@ if (! function_exists('isUpdateMethod')) {
     }
 }
 
-if (! function_exists('getXxxNameAttribute')) {
+if (! function_exists('getAttributeName')) {
     /**
      * 字典转中文
      *
@@ -37,7 +37,7 @@ if (! function_exists('getXxxNameAttribute')) {
      * @param string $default
      * @return string
      */
-    function getXxxNameAttribute($options, $value, $default = '')
+    function getAttributeName($options, $value, $default = '')
     {
         foreach ($options as $option) {
             if ($option['value'] == $value) {

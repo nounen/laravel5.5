@@ -31,12 +31,10 @@ class Article extends BaseModel
 
     // 发布
     const STATE_PUBLISH = 1;
-
     const STATE_PUBLISH_NAME = '发布';
 
     // 草稿
     const STATE_DRAFT = 2;
-
     const STATE_DRAFT_NAME = '草稿';
 
     public static function getArticleStates()
@@ -80,7 +78,7 @@ class Article extends BaseModel
      */
     public function getArticleStateNameAttribute()
     {
-        return getXxxNameAttribute($this->getArticleStates(), $this->article_state);
+        return getAttributeName($this->getArticleStates(), $this->article_state);
     }
 
     /**
@@ -90,7 +88,7 @@ class Article extends BaseModel
      */
     public function getIsAllowCommentNameAttribute()
     {
-        return getXxxNameAttribute($this->getIsStates(), $this->is_allow_comment);
+        return getAttributeName($this->getIsStates(), $this->is_allow_comment);
     }
 
     /**
@@ -118,8 +116,6 @@ class Article extends BaseModel
         return [
             'id' => [
                 'name'   => '主键',
-                'table'  => true,
-                'detail' => true,
                 'update' => true,
                 'element'=> 'input',
                 'attributes' => [
@@ -128,8 +124,6 @@ class Article extends BaseModel
             ],
             'title' => [
                 'name'   => '标题',
-                'table'  => true,
-                'detail' => true,
                 'create' => true,
                 'update' => true,
                 'rule'   => ['required'],
@@ -141,8 +135,6 @@ class Article extends BaseModel
             ],
             'description' => [
                 'name'   => '简介',
-                'table'  => false,
-                'detail' => true,
                 'create' => true,
                 'update' => true,
                 'rule'   => ['required'],
@@ -153,8 +145,6 @@ class Article extends BaseModel
             ],
             'cover' => [
                 'name'   => '封面',
-                'table'  => false,
-                'detail' => true,
                 'create' => true,
                 'update' => true,
                 'element'=> 'input',
@@ -164,7 +154,6 @@ class Article extends BaseModel
             ],
             'content' => [
                 'name'   => '内容',
-                'detail' => true,
                 'create' => true,
                 'update' => true,
                 'rule'   => ['required'],
@@ -176,8 +165,6 @@ class Article extends BaseModel
             ],
             'article_state' => [
                 'name'   => '发布状态',
-                'table'  => false,
-                'detail' => true,
                 'create' => true,
                 'update' => true,
                 'rule'   => 'required|numeric',
@@ -189,12 +176,9 @@ class Article extends BaseModel
             ],
             'article_state_name' => [
                 'name'   => '发布状态',
-                'table'  => true,
             ],
             'view_count' => [
                 'name'   => '浏览量',
-                'table'  => true,
-                'detail' => true,
                 'update' => false,
                 'element'=> 'input',
                 'attributes' => [
@@ -204,8 +188,6 @@ class Article extends BaseModel
             ],
             'is_allow_comment' => [
                 'name'   => '允许评论',
-                'table'  => false,
-                'detail' => true,
                 'create' => true,
                 'update' => true,
                 'element'=> 'radio',
@@ -217,12 +199,9 @@ class Article extends BaseModel
             ],
             'is_allow_comment_name' => [
                 'name'   => '允许评论',
-                'table'  => true,
             ],
             'sort' => [
                 'name'   => '排序',
-                'table'  => true,
-                'detail' => true,
                 'create' => true,
                 'update' => true,
                 'rule'   => 'required|numeric',
@@ -250,12 +229,9 @@ class Article extends BaseModel
             ],
             'user_id' => [
                 'name'   => '创建人',
-                'table'  => false,
             ],
             'user_name' => [
                 'name'   => '创建人',
-                'table'  => true,
-                'detail' => true,
                 'element'=> 'input',
                 'attributes' => [
                     'type'     => 'text',
@@ -264,8 +240,6 @@ class Article extends BaseModel
             ],
             'created_at' => [
                 'name'   => '创建时间',
-                'table'  => true,
-                'detail' => true,
                 'update' => false,
                 'element'=> 'input',
                 'attributes' => [
@@ -275,8 +249,6 @@ class Article extends BaseModel
             ],
             'updated_at' => [
                 'name'   => '更新时间',
-                'table'  => true,
-                'detail' => true,
                 'update' => false,
                 'element'=> 'input',
                 'attributes' => [
@@ -288,9 +260,45 @@ class Article extends BaseModel
         ];
     }
 
-    public function scopeOfUser($query)
+    /**
+     * 列表字段
+     * @return array
+     */
+    public static function tableKeys()
     {
-        return $query->where('user_id', self::adminUser()->id);
+        return [
+            'id',
+            'title',
+            'description',
+            'cover',
+            'content',
+            'article_state_name',
+            'view_count',
+            'is_allow_comment_name',
+            'user_name',
+            'created_at',
+            'updated_at',
+        ];
+    }
+
+    /**
+     * 详情字段
+     * @return array
+     */
+    public static function detailKeys()
+    {
+        return [
+            'id',
+            'title',
+            'description',
+            'cover',
+            'content',
+            'article_state',
+            'view_count',
+            'is_allow_comment',
+            'created_at',
+            'updated_at',
+        ];
     }
 
     public static function getUpdateFieldsHook($article)
@@ -312,6 +320,9 @@ class Article extends BaseModel
      */
     public static function getCategoryIds($articleId)
     {
-        return DB::table('article_category')->where('article_id', $articleId)->pluck('category_id')->toArray();
+        return DB::table('article_category')
+            ->where('article_id', $articleId)
+            ->pluck('category_id')
+            ->toArray();
     }
 }

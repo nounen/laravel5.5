@@ -160,6 +160,9 @@ class Article extends BaseModel
                     'required',
                     'max:10',
                 ],
+                'slots' => [
+                    'table' => true,
+                ],
                 'element'=> 'input',
                 'attributes' => [
                     'type'     => 'text',

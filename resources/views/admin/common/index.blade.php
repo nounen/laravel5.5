@@ -31,13 +31,22 @@
                         @foreach($list as $item)
                         <tr>
                             @foreach($fields as $key => $field)
-                            <td>
-                                @if($field['is_slot'])
+                            <td class="text-center" style="vertical-align: middle;">
+                                @switch($field['element'])
+                                    @case('slot')
                                     {{-- slot 扩展: 一定要实现扩展，否则报错 slot_key_xx 变量未定义 --}}
                                     {{ ${"slot_{$key}_{$item->id}"} }}
-                                @else
+                                    @break
+
+                                    @case('image-single')
+                                    <img class="img-responsive"
+                                         style="display: unset; max-width: 80px;"
+                                         src="{{ $item->{$key} }}" >
+                                    @break
+
+                                    @default
                                     {{ $item->{$key} }}
-                                @endif
+                                @endswitch
                             </td>
                             @endforeach
 

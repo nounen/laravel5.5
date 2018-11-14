@@ -28,6 +28,7 @@ class Article extends BaseModel
         'article_state_name',
         'is_allow_comment_name',
         'user_name',
+        'cover_url',
     ];
 
     // 发布
@@ -117,7 +118,6 @@ class Article extends BaseModel
         }
     }
 
-
     /**
      * 栏目名
      *
@@ -131,6 +131,11 @@ class Article extends BaseModel
         } else {
             return '';
         }
+    }
+
+    public function getCoverUrlAttribute()
+    {
+        return getAssetUrl($this->cover);
     }
 
     /**
@@ -179,6 +184,11 @@ class Article extends BaseModel
                 'attributes' => [
                     'type' => 'file',
                 ],
+            ],
+
+            'cover_url' => [
+                'name'   => '封面',
+                'element'=> 'image-single',
             ],
 
             'content' => [
@@ -354,7 +364,7 @@ class Article extends BaseModel
             'id',
             'title',
             'description',
-            'cover',
+            'cover_url',
             'content',
             'article_state_name',
             'view_count',

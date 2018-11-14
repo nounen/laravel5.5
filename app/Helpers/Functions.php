@@ -117,3 +117,18 @@ if (! function_exists('saveFile')) {
         return \Illuminate\Support\Facades\Storage::putFile("public/{$saveDir}", $file);
     }
 }
+
+if (! function_exists('getAssetUrl')) {
+    /**
+     * @param $relateUrl
+     * @return mixed
+     */
+    function getAssetUrl($relateUrl)
+    {
+        return str_replace(
+            '/public/',
+            '/',
+            asset("storage/$relateUrl")
+        );
+    }
+}

@@ -88,8 +88,11 @@ class BaseModel extends Model
 
         foreach ($keys as $key) {
             $field = $fields[$key];
+            $isSlot = array_get($field, 'slots.table', false);
+
             $rows[$key]['name'] = $field['name'];
-            $rows[$key]['is_slot'] = array_get($field, 'slots.table', false); // slot
+            // slot 优先
+            $rows[$key]['element'] = $isSlot ? 'slot' : array_get($field, 'element', '');
         }
 
         return $rows;

@@ -86,8 +86,8 @@ var loadFile = function(event, id) {
                         <label>
                             <input name="{{ $key }}"
                                    value="{{ $option['value'] }}"
-                                    {!! getCheckedResult($option, $field) !!}
-                                    {!! $field['attribute'] !!} >
+                                   {!! getCheckedResult($option['value'], old($field['key'], $field['value'])) !!}
+                                   {!! $field['attribute'] !!} >
                             {{ $option['name'] }}
                         </label>
                         @endforeach
@@ -108,8 +108,8 @@ var loadFile = function(event, id) {
                         <label>
                             <input name="{{ $key }}[]"
                                    value="{{ $option['value'] }}"
-                                   {!! getCheckedResult($option, $field) !!}
-                                    {!! $field['attribute'] !!} >
+                                   {!! getCheckedResult($option['value'], old($field['key'], $field['value'])) !!}
+                                   {!! $field['attribute'] !!} >
                             {{ $option['name'] }}
                         </label>
                         @endforeach

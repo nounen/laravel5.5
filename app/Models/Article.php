@@ -29,6 +29,7 @@ class Article extends BaseModel
         'is_allow_comment_name',
         'user_name',
         'cover_url',
+        'tag_ids',
     ];
 
     // 发布
@@ -133,9 +134,22 @@ class Article extends BaseModel
         }
     }
 
+    /**
+     * 封面链接
+     * @return mixed
+     */
     public function getCoverUrlAttribute()
     {
         return getAssetUrl($this->cover);
+    }
+
+    /**
+     * 关联的标签 ids
+     * @return array
+     */
+    public function getTagIdsAttribute()
+    {
+        return array_pluck($this->tags, 'id');
     }
 
     /**

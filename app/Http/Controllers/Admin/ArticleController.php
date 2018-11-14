@@ -33,7 +33,7 @@ class ArticleController extends Controller
      */
     public function store(ArticleRequest $request)
     {
-        $this->repository->store($request, $this->model);
+        $this->repository->store($request);
         return redirect($this->baseUrl);
     }
 

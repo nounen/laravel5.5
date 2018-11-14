@@ -56,14 +56,14 @@
 
                         <div class="radio col-sm-10" id="{{ $key }}">
                             @foreach($field['options'] as $option)
-                                <label>
-                                    <input name="{{ $key }}"
-                                           value="{{ $option['value'] }}"
-                                           {!! getCheckedResult($option['value'], $item->$key) !!}
-                                           {!! $field['attribute'] !!}
-                                           disabled>
-                                    {{ $option['name'] }}
-                                </label>
+                            <label>
+                                <input name="{{ $key }}"
+                                       value="{{ $option['value'] }}"
+                                       {!! getCheckedResult($option['value'], $item->$key) !!}
+                                       {!! $field['attribute'] !!}
+                                       disabled>
+                                {{ $option['name'] }}
+                            </label>
                             @endforeach
                         </div>
                     </div>
@@ -78,14 +78,14 @@
 
                         <div class="checkbox col-sm-10" id="{{ $key }}">
                             @foreach($field['options'] as $option)
-                                <label>
-                                    <input name="{{ $key }}[]"
-                                           value="{{ $option['value'] }}"
-                                           {!! $field['attribute'] !!}
-                                           {!! getCheckedResult($option['value'], $item->$key) !!}
-                                           disabled>
-                                    {{ $option['name'] }}
-                                </label>
+                            <label>
+                                <input name="{{ $key }}[]"
+                                       value="{{ $option['value'] }}"
+                                       {!! $field['attribute'] !!}
+                                       {!! getCheckedResult($option['value'], $item->$key) !!}
+                                       disabled>
+                                {{ $option['name'] }}
+                            </label>
                             @endforeach
                         </div>
                     </div>
@@ -106,16 +106,16 @@
                                     disabled>
 
                                 @foreach($field['options'] as $option)
-                                    <option value="{{ $option['value'] }}"
-                                            {{-- 多选 OR 单选 --}}
-                                            @if(is_array($item->{$key}))
-                                                @foreach($item->{$key} as $value)
-                                                    @if($option['value'] == $value) selected="selected " @endif
-                                                @endforeach
-                                                    @else
-                                                @if($option['value'] == $item->{$key}) selected="selected" @endif
-                                            @endif
-                                    >{{ $option['name'] }}</option>
+                                <option value="{{ $option['value'] }}"
+                                    {{-- 多选 OR 单选 --}}
+                                    @if(is_array($item->$key))
+                                        @foreach($item->$key as $value)
+                                        {{ getSelectResult($option['value'], $value) }}
+                                        @endforeach
+                                    @else
+                                        {{ getSelectResult($option['value'], $item->$key) }}
+                                    @endif
+                                >{{ $option['name'] }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -164,7 +164,11 @@
         </div>
 
         <div class="box-footer">
-            <button type="button" class="btn btn-flat btn-default" onclick="javascript:history.go(-1);">返回</button>
+            <button type="button"
+                    class="btn btn-flat btn-default"
+                    onclick="javascript:history.go(-1);">
+                返回
+            </button>
         </div>
     </form>
 </div>

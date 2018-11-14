@@ -13,14 +13,15 @@ class ArticleRepository extends BaseRepository
     /**
      * 创建文章
      * @param $request
-     * @param $article
      */
-    public function store($request, $article)
+    public function store($request)
     {
-        $input = $request->only($article->getStoreKeys());
+        $input = $request->only(Article::getStoreKeys());
         $input['user_id'] = $this->adminUser()->id;
         $input['cover'] = saveFile($request->file('cover'), 'covers');
-        $article->create($input);
+
+        $article = Article::create($input);
+        $article->tags()->sync($request->get('tag_ids'));
     }
 
     /**

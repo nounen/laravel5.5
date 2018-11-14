@@ -36,13 +36,13 @@ if (! function_exists('getHiddenClass')) {
 if (! function_exists('getCheckedResult')) {
     /**
      * radio checkbox 选中效果计算
-     * @param $option
+     * @param $value
      * @param $oldValue
      * @return string
      */
-    function getCheckedResult($option, $field)
+    function getCheckedResult($value, $oldValue)
     {
-        return $option['value'] == old($field['key'], $field['value']) ? 'checked' : '';
+        return $value == $oldValue ? ' checked ' : '';
     }
 }
 
@@ -62,12 +62,12 @@ if (! function_exists('getSelectName')) {
 if (! function_exists('getSelectResult')) {
     /**
      * select 的 selected 选中效果计算
-     * @param $option
-     * @param $field
+     * @param $value
+     * @param $oldValue
      * @return string
      */
     function getSelectResult($value, $oldValue)
     {
-        return $value == $oldValue ? 'selected' : '';
+        return $value == $oldValue ? ' selected ' : '';
     }
 }

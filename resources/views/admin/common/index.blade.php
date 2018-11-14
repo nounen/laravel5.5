@@ -50,7 +50,8 @@
                             </td>
                             @endforeach
 
-                            <td>
+                            {{-- 操作 --}}
+                            <td class="text-center" style="vertical-align: middle;">
                                 <a href="{{ $base_url }}/{{ $item->id }}">
                                     <button type="button"
                                             class="btn btn-flat btn-xs btn-info">

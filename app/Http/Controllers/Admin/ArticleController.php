@@ -33,10 +33,7 @@ class ArticleController extends Controller
      */
     public function store(ArticleRequest $request)
     {
-        $input = $request->only($this->model->getStoreKeys());
-        $input['user_id'] = $this->adminUser()->id;
-        $input['cover'] = saveFile($request->file('cover'), 'covers');
-        $this->model->create($input);
+        $this->repository->store($request, $this->model);
         return redirect($this->baseUrl);
     }
 

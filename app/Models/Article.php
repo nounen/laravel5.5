@@ -183,7 +183,7 @@ class Article extends BaseModel
 
             'cover' => [
                 'name'   => '封面',
-                'element'=> 'input',
+                'element'=> 'input-image',
                 'attributes' => [
                     'type' => 'file',
                 ],

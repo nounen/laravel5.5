@@ -5,6 +5,8 @@ namespace App\Http\Requests\Admin;
 use App\Models\Article;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class ArticleRequest extends FormRequest
 {

@@ -20,7 +20,6 @@ class ArticleRepository extends BaseRepository
         $articles = search(Article::class, $fieldMaps)
                     ->with('user')
                     ->ofUser()
-                    ->orderBy('sort')
                     ->orderBy('created_at', 'DESC')
                     ->paginate();
 

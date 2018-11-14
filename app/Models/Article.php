@@ -143,15 +143,14 @@ class Article extends BaseModel
         return [
             'id' => [
                 'name'   => '主键',
-                'update' => true,
                 'element'=> 'input',
                 'attributes' => [
                     'type'     => 'hidden',
                 ],
             ],
+
             'title' => [
                 'name'   => '标题',
-                'update' => true,
                 'rule'   => [
                     'required',
                     'max:10',
@@ -162,9 +161,9 @@ class Article extends BaseModel
                     'required' => 'required',
                 ],
             ],
+
             'description' => [
                 'name'   => '简介',
-                'update' => true,
                 'rule'   => [
                     'required',
                 ],
@@ -173,17 +172,17 @@ class Article extends BaseModel
                     'required' => 'required',
                 ],
             ],
+
             'cover' => [
                 'name'   => '封面',
-                'update' => true,
                 'element'=> 'input',
                 'attributes' => [
                     'type' => 'file',
                 ],
             ],
+
             'content' => [
                 'name'   => '内容',
-                'update' => true,
                 'rule'   => [
                     'required',
                 ],
@@ -193,61 +192,65 @@ class Article extends BaseModel
                     'required' => 'required',
                 ],
             ],
+
             'article_state' => [
                 'name'   => '发布状态',
-                'update' => true,
-                'rule'   => [
-                    'required',
-                    'numeric',
-                ],
                 'element'=> 'select',
+                'value' => Article::STATE_DRAFT,
                 'options' => Article::getArticleStates(),
                 'attributes' => [
                     'required' => 'required',
                 ],
+                'rule'   => [
+                    'required',
+                    'numeric',
+                ],
             ],
+
             'article_state_name' => [
                 'name'   => '发布状态',
             ],
+
             'view_count' => [
                 'name'   => '浏览量',
-                'update' => false,
                 'element'=> 'input',
                 'attributes' => [
                     'type'     => 'number',
                     'disabled' => 'disabled',
                 ],
             ],
+
             'is_allow_comment' => [
                 'name'   => '允许评论',
-                'update' => true,
                 'element'=> 'radio',
+                'options' => self::getIsStates(),
                 'attributes' => [
                     'type'      => 'radio',
                     'required'  => 'required',
                 ],
-                'options' => self::getIsStates(),
             ],
+
             'is_allow_comment_name' => [
                 'name'   => '允许评论',
             ],
+
             'sort' => [
                 'name'   => '排序',
-                'update' => true,
-                'rule'   => [
-                    'required',
-                    'numeric'
-                ],
                 'element'=> 'input',
+                'value' => 999, // 默认值
                 'attributes' => [
                     'type'        => 'number',
                     'required'    => 'required',
                     'placeholder' => 999,
                 ],
+                'rule'   => [
+                    'required',
+                    'numeric'
+                ],
             ],
+
             'tag_ids' => [
                 'name' => '文章标签',
-                'update' => true,
                 'element' => 'select',
                 'options' => Tag::beOptions(),
                 'attributes' => [
@@ -255,13 +258,10 @@ class Article extends BaseModel
                     'required' => 'required',
                     'multiple' => 'multiple',
                 ],
-//                'options' => function() {
-//                    return Tag::beOptions();
-//                },
             ],
+
             'category_id' => [
                 'name' => '文章栏目',
-                'update' => true,
                 'element' => 'select',
                 'options' => Category::beOptions(),
                 'attributes' => [
@@ -269,6 +269,7 @@ class Article extends BaseModel
                     'required' => 'required',
                 ],
             ],
+
             'category_name' => [
                 'name'   => '文章栏目',
                 'element'=> 'input',
@@ -277,9 +278,11 @@ class Article extends BaseModel
                     'disabled' => 'disabled',
                 ],
             ],
+
             'user_id' => [
                 'name'   => '创建人',
             ],
+
             'user_name' => [
                 'name'   => '创建人',
                 'element'=> 'input',
@@ -288,6 +291,7 @@ class Article extends BaseModel
                     'disabled' => 'disabled',
                 ],
             ],
+
             'created_at' => [
                 'name'   => '创建时间',
                 'update' => false,
@@ -297,6 +301,7 @@ class Article extends BaseModel
                     'disabled' => 'disabled',
                 ],
             ],
+
             'updated_at' => [
                 'name'   => '更新时间',
                 'update' => false,

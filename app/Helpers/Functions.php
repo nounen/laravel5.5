@@ -104,3 +104,16 @@ if (!function_exists('search')) {
         return $model;
     }
 }
+
+if (! function_exists('saveFile')) {
+    /**
+     * 文件保存
+     * @param $file  $request->file('xxx')
+     * @param $saveDir 保存目录，
+     * @return mixed
+     */
+    function saveFile($file, $saveDir)
+    {
+        return \Illuminate\Support\Facades\Storage::putFile("public/{$saveDir}", $file);
+    }
+}

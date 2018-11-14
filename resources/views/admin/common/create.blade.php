@@ -37,7 +37,7 @@
                     <div class="col-sm-10">
                         <input id="{{ $key }}"
                                name="{{ $key }}"
-                               value="{{ old($key) }}"
+                               value="{{ old($key, $field['value']) }}"
                                class="form-control"
                                 {!! $field['attribute'] !!}>
                     </div>
@@ -111,7 +111,7 @@
                                     @endforeach
                                 {{-- 单选 --}}
                                 @else
-                                    {{ getSelectResult($option['value'], old($key)) }}
+                                    {{ getSelectResult($option['value'], old($key, $field['value'])) }}
                                 @endif
                             >{{ $option['name'] }}</option>
                             @endforeach
@@ -132,7 +132,7 @@
                         <textarea id="{{ $key }}"
                                   name="{{ $key }}"
                                   class="form-control"
-                                {!! $field['attribute'] !!}>{{ old($key) }}</textarea>
+                                {!! $field['attribute'] !!}>{{ old($key, $field['value']) }}</textarea>
                     </div>
                 </div>
                 @break

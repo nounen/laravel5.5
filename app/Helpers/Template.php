@@ -42,7 +42,7 @@ if (! function_exists('getCheckedResult')) {
      */
     function getCheckedResult($option, $field)
     {
-        return $option['value'] == old($field['key']) ? 'checked' : '';
+        return $option['value'] == old($field['key'], $field['value']) ? 'checked' : '';
     }
 }
 

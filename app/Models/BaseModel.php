@@ -111,6 +111,7 @@ class BaseModel extends Model
                 'key'       => $key,
                 'name'      => $field['name'],
                 'element'   => array_get($field, 'element'),
+                'value'     => array_get($field, 'value'),
                 'options'   => array_get($field, 'options'),
                 'attribute' => attrToStr(array_get($field, 'attributes', [])),
             ];

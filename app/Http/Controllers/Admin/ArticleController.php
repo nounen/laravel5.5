@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Article;
 use App\Repositories\Admin\ArticleRepository;
 use App\Http\Requests\Admin\ArticleRequest;
+use Illuminate\Support\Facades\Log;
 
 class ArticleController extends Controller
 {
@@ -32,7 +33,11 @@ class ArticleController extends Controller
      */
     public function store(ArticleRequest $request)
     {
-        return parent::_store($request);
+        $input = $request->only($this->model->getStoreKeys());
+        $input['user_id'] = $this->adminUser()->id;
+        $input['cover'] = saveFile($request->file('cover'), 'covers');
+        $this->model->create($input);
+        return redirect($this->baseUrl);
     }
 
     /**

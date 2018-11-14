@@ -26,18 +26,22 @@
 <div class="box box-primary">
     <form role="form" class="form-horizontal">
         <div class="box-body">
-            @foreach($fields as $field)
+            @foreach($fields as $key => $field)
                 @switch($field['element'])
+
                     @case('input')
                     <div class="form-group {{getHiddenClass($field)}}">
-                        <label for="{{ $field['key'] }}" class="col-sm-2 table_title_width control-label">{{ $field['name'] }}:</label>
+                        <label for="{{ $key }}"
+                               class="col-sm-2 table_title_width control-label">
+                            {{ $field['name'] }}:
+                        </label>
 
                         <div class="col-sm-10">
-                            <input id="{{ $field['key'] }}"
-                                   name="{{ $field['key'] }}"
-                                   value="{{ $item->{$field['key']} }}"
-                                   {!! $field['attribute'] !!}
+                            <input id="{{ $key }}"
+                                   name="{{ $key }}"
+                                   value="{{ $item->{$key} }}"
                                    class="form-control"
+                                   {!! $field['attribute'] !!}
                                    disabled>
                         </div>
                     </div>
@@ -45,16 +49,18 @@
 
                     @case('radio')
                     <div class="form-group">
-                        <label for="{{ $field['key'] }}" class="col-sm-2 table_title_width control-label">{{ $field['name'] }}:</label>
+                        <label for="{{ $key }}"
+                               class="col-sm-2 table_title_width control-label">
+                            {{ $field['name'] }}:
+                        </label>
 
-                        <div class="radio col-sm-10" id="{{ $field['key'] }}">
+                        <div class="radio col-sm-10" id="{{ $key }}">
                             @foreach($field['options'] as $option)
                                 <label>
-                                    <input name="{{ $field['key'] }}"
+                                    <input name="{{ $key }}"
                                            value="{{ $option['value'] }}"
+                                           {!! getCheckedResult($option['value'], $item->$key) !!}
                                            {!! $field['attribute'] !!}
-                                           {{-- 默认选中情况怎么处理 --}}
-                                           @if($option['value'] == $item->{$field['key']})checked="checked"@endif
                                            disabled>
                                     {{ $option['name'] }}
                                 </label>
@@ -65,15 +71,18 @@
 
                     @case('checkbox')
                     <div class="form-group">
-                        <label for="{{ $field['key'] }}" class="col-sm-2 table_title_width control-label">{{ $field['name'] }}:</label>
+                        <label for="{{ $key }}"
+                               class="col-sm-2 table_title_width control-label">
+                            {{ $field['name'] }}:
+                        </label>
 
-                        <div class="checkbox col-sm-10" id="{{ $field['key'] }}">
+                        <div class="checkbox col-sm-10" id="{{ $key }}">
                             @foreach($field['options'] as $option)
                                 <label>
-                                    <input name="{{ $field['key'] }}[]"
+                                    <input name="{{ $key }}[]"
                                            value="{{ $option['value'] }}"
                                            {!! $field['attribute'] !!}
-                                           @if($option['value'] == $item->{$field['key']})checked="checked"@endif
+                                           {!! getCheckedResult($option['value'], $item->$key) !!}
                                            disabled>
                                     {{ $option['name'] }}
                                 </label>
@@ -84,28 +93,27 @@
 
                     @case('select')
                     <div class="form-group">
-                        <label for="{{ $field['key'] }}" class="col-sm-2 table_title_width control-label">{{ $field['name'] }}:</label>
+                        <label for="{{ $key }}"
+                               class="col-sm-2 table_title_width control-label">
+                            {{ $field['name'] }}:
+                        </label>
 
                         <div class="col-sm-10">
-                            <select id="{{ $field['key'] }}"
-                                    @if(strpos($field['attribute'], 'multiple'))
-                                    name="{{ $field['key'] }}[]"
-                                    @else
-                                    name="{{ $field['key'] }}"
-                                    @endif
-                                    {!! $field['attribute'] !!}
+                            <select id="{{ $key }}"
+                                    name="{{ getSelectName($field) }}"
                                     class="form-control"
+                                    {!! $field['attribute'] !!}
                                     disabled>
 
                                 @foreach($field['options'] as $option)
                                     <option value="{{ $option['value'] }}"
                                             {{-- 多选 OR 单选 --}}
-                                            @if(is_array($item->{$field['key']}))
-                                                @foreach($item->{$field['key']} as $value)
+                                            @if(is_array($item->{$key}))
+                                                @foreach($item->{$key} as $value)
                                                     @if($option['value'] == $value) selected="selected " @endif
                                                 @endforeach
                                                     @else
-                                                @if($option['value'] == $item->{$field['key']}) selected="selected" @endif
+                                                @if($option['value'] == $item->{$key}) selected="selected" @endif
                                             @endif
                                     >{{ $option['name'] }}</option>
                                 @endforeach
@@ -116,36 +124,40 @@
 
                     @case('textarea')
                     <div class="form-group">
-                        <label for="{{ $field['key'] }}" class="col-sm-2 table_title_width control-label">{{ $field['name'] }}:</label>
+                        <label for="{{ $key }}"
+                               class="col-sm-2 table_title_width control-label">
+                            {{ $field['name'] }}:
+                        </label>
 
                         <div class="col-sm-10">
-                            <textarea id="{{ $field['key'] }}"
-                                      name="{{ $field['key'] }}"
-                                      {!! $field['attribute'] !!}
+                            <textarea id="{{ $key }}"
+                                      name="{{ $key }}"
                                       class="form-control"
-                                      disabled>{{ $item->{$field['key']} }}</textarea>
+                                      {!! $field['attribute'] !!}disabled>{{ $item->{$key} }}</textarea>
                         </div>
                     </div>
                     @break
 
                     @case('image-single')
                     <div class="form-group">
-                        <label for="{{ $field['key'] }}"
-                               class="col-sm-2 table_title_width control-label">{{ $field['name'] }}:
+                        <label for="{{ $key }}"
+                               class="col-sm-2 table_title_width control-label">
+                            {{ $field['name'] }}:
                         </label>
 
                         <div class="col-sm-10">
-                            <img class="img-responsive" src="{{ $item->{$field['key']} }}" >
+                            <img class="img-responsive"
+                                 src="{{ $item->{$key} }}">
                         </div>
                     </div>
                     @break
 
                     @case('slot')
-                    {{ ${$field['key']} }}
+                    {{ ${$key} }}
                     @break
 
                     @default
-                    <h3>字段元素配置错误: {{ $field['key'] }} !</h3>
+                    <h3>字段元素配置错误: {{ $key }} !</h3>
 
                 @endswitch
             @endforeach

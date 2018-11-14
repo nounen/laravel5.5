@@ -394,6 +394,8 @@ class Article extends BaseModel
             'article_state',
             'view_count',
             'is_allow_comment',
+            'tag_ids',
+            'category_id',
             'created_at',
             'updated_at',
         ];

@@ -29,8 +29,6 @@ class Category extends BaseModel
         return [
             'id' => [
                 'name'   => '主键',
-                'detail' => true,
-                'update' => true,
                 'element'=> 'input',
                 'attributes' => [
                     'type' => 'hidden',
@@ -38,8 +36,6 @@ class Category extends BaseModel
             ],
             'parent_id' => [
                 'name'   => '父级主键',
-                'detail' => true,
-                'update' => true,
                 'element'=> 'input',
                 'attributes' => [
                     'type' => 'hidden',
@@ -47,9 +43,6 @@ class Category extends BaseModel
             ],
             'name' => [
                 'name'   => '分类名',
-                'detail' => true,
-                'create' => true,
-                'update' => true,
                 'rule'   => [
                     'required',
                     'max:10',
@@ -62,9 +55,6 @@ class Category extends BaseModel
             ],
             'sort' => [
                 'name'   => '排序',
-                'detail' => true,
-                'create' => true,
-                'update' => true,
                 'rule'   => [
                     'required',
                     'numeric'
@@ -77,8 +67,6 @@ class Category extends BaseModel
             ],
             'article_count' => [
                 'name'   => '关联文章数',
-                'detail' => true,
-                'update' => true,
                 'element'=> 'input',
                 'attributes' => [
                     'type'     => 'number',
@@ -87,12 +75,9 @@ class Category extends BaseModel
             ],
             'user_id' => [
                 'name'   => '创建人',
-                'detail' => true,
             ],
             'created_at' => [
                 'name'   => '创建时间',
-                'detail' => true,
-                'update' => true,
                 'element'=> 'input',
                 'attributes' => [
                     'type'     => 'text',
@@ -101,8 +86,6 @@ class Category extends BaseModel
             ],
             'updated_at' => [
                 'name'   => '更新时间',
-                'detail' => true,
-                'update' => true,
                 'element'=> 'input',
                 'attributes' => [
                     'type'     => 'text',
@@ -142,6 +125,14 @@ class Category extends BaseModel
             'user_id',
             'created_at',
             'updated_at',
+        ];
+    }
+
+    public static function createKeys()
+    {
+        return [
+            'sort',
+            'name',
         ];
     }
 

@@ -102,6 +102,14 @@ class Tag extends BaseModel
         ];
     }
 
+    public static function createKeys()
+    {
+        return [
+            'sort',
+            'name',
+        ];
+    }
+
     /**
      * 详情字段
      * @return array

@@ -260,6 +260,17 @@ class Article extends BaseModel
                 ],
             ],
 
+// checkbox 复选框配置。 不允许 required 属性，不然变成每个复选框都要勾选。
+//            'tag_ids' => [
+//                'name' => '文章标签',
+//                'element' => 'checkbox',
+//                'options' => Tag::beOptions(),
+//                'attributes' => [
+//                    'type'     => 'checkbox',
+//                    'multiple' => 'multiple',
+//                ],
+//            ],
+
             'category_id' => [
                 'name' => '文章栏目',
                 'element' => 'select',

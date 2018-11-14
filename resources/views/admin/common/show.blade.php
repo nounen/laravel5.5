@@ -128,6 +128,18 @@
                     </div>
                     @break
 
+                    @case('image-single')
+                    <div class="form-group">
+                        <label for="{{ $field['key'] }}"
+                               class="col-sm-2 table_title_width control-label">{{ $field['name'] }}:
+                        </label>
+
+                        <div class="col-sm-10">
+                            <img class="img-responsive" src="{{ $item->{$field['key']} }}" >
+                        </div>
+                    </div>
+                    @break
+
                     @case('slot')
                     {{ ${$field['key']} }}
                     @break

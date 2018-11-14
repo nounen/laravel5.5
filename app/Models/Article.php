@@ -389,7 +389,7 @@ class Article extends BaseModel
             'id',
             'title',
             'description',
-            'cover',
+            'cover_url',
             'content',
             'article_state',
             'view_count',

@@ -16,7 +16,7 @@
             </div>
 
             <div class="box-body table-responsive no-padding">
-                <table class="table table-hover table-bordered">
+                <table class="table table-hover table-bordered text-center">
                     <tbody style="font-size: small">
                         {{-- 表头 --}}
                         <tr>

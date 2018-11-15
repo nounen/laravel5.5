@@ -32,6 +32,7 @@ mix.styles([
     'resources/assets/adminlte/css/bootstrap.min.css',
     'resources/assets/adminlte/css/AdminLTE.min.css',
     'resources/assets/adminlte/css/_all-skins.min.css',
+    'resources/assets/css/common.css',
 ], 'public/css/adminlte.css');
 
 

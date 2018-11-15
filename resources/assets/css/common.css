@@ -1,0 +1,14 @@
+/* 文字3行显示多余部分隐藏 */
+.show_3_line {
+    max-width: 500px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+/* 上下居中 */
+.vertical-middle {
+    vertical-align: middle !important;;
+}

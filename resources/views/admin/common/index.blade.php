@@ -16,7 +16,7 @@
             </div>
 
             <div class="box-body table-responsive no-padding">
-                <table class="table table-hover table-bordered text-center">
+                <table class="table table-hover table-bordered">
                     <tbody style="font-size: small">
                         {{-- 表头 --}}
                         <tr>
@@ -24,14 +24,14 @@
                             <th>{{ $field['name'] }}</th>
                             @endforeach
 
-                            <th>操作</th>
+                            <th class="text-center">操作</th>
                         </tr>
 
                         {{-- 表格数据 --}}
                         @foreach($list as $item)
                         <tr>
                             @foreach($fields as $key => $field)
-                            <td class="" style="vertical-align: middle;">
+                            <td class="vertical-middle">
                                 @switch($field['element'])
                                     @case('slot')
                                     {{-- slot 扩展: 一定要实现扩展，否则报错 slot_key_xx 变量未定义 --}}
@@ -51,7 +51,7 @@
                             @endforeach
 
                             {{-- 操作 --}}
-                            <td class="" style="vertical-align: middle;">
+                            <td class="text-center vertical-middle">
                                 <a href="{{ $base_url }}/{{ $item->id }}">
                                     <button type="button"
                                             class="btn btn-flat btn-xs btn-info">

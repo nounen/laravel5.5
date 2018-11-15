@@ -172,7 +172,7 @@ class Article extends BaseModel
                 'name'   => '标题',
                 'rule'   => [
                     'required',
-                    'max:10',
+                    'max:200',
                 ],
                 'slots' => [
                     'table' => true,
@@ -186,12 +186,15 @@ class Article extends BaseModel
 
             'description' => [
                 'name'   => '简介',
-                'rule'   => [
-                    'required',
-                ],
                 'element'=> 'textarea',
+                'slots' => [
+                    'table' => true,
+                ],
                 'attributes' => [
                     'required' => 'required',
+                ],
+                'rule'   => [
+                    'required',
                 ],
             ],
 
@@ -382,14 +385,10 @@ class Article extends BaseModel
             'title',
             'description',
             'cover_url',
-            'content',
-            'article_state_name',
-            'view_count',
-            'is_allow_comment_name',
             'category_name',
-            'user_name',
+            'is_allow_comment_name',
+            'article_state_name',
             'created_at',
-            'updated_at',
         ];
     }
 

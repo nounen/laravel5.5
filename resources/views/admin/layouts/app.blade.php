@@ -7,7 +7,7 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link href="{{ asset('css/adminlte.css') }}" rel="stylesheet">
 </head>
-<body class="hold-transition skin-blue sidebar-mini sidebar-collapse">
+<body id="sidebar-effect" class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
     @if(isset($hidden_header) && $hidden_header)

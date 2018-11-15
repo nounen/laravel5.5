@@ -1,5 +1,6 @@
 <aside class="main-sidebar">
     <section class="sidebar">
+        {{-- 菜单搜索 --}}
         <form method="get" class="sidebar-form" id="sidebar-form">
             <div class="input-group">
                 <input type="text" name="q" class="form-control" placeholder="菜单搜索" id="search-input">
@@ -11,11 +12,13 @@
             </div>
         </form>
 
+        {{-- 菜单 --}}
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">MAIN NAVIGATION</li>
 
+            {{-- 菜单一级 --}}
             @foreach($menus AS $menu)
-            <li class="{{--active--}} treeview">
+            <li class="active treeview">
                 <a href="#">
                     <i class="fa {{ $menu['icon'] }}"></i>
                     <span>{{ $menu['name'] }}</span>
@@ -24,9 +27,10 @@
                     </span>
                 </a>
 
+                {{-- 菜单二级 --}}
                 <ul class="treeview-menu">
                     @foreach($menu['childrens'] AS $children)
-                    <li class="{{--active--}}">
+                    <li class="{{ getActiveClass($children['url']) }}">
                         <a href="{{ $children['url'] }}">
                             <i class="fa {{ $children['icon'] }}"></i> {{ $children['name'] }}
                         </a>

@@ -71,3 +71,15 @@ if (! function_exists('getSelectResult')) {
         return $value == $oldValue ? ' selected ' : '';
     }
 }
+
+if (! function_exists('getActiveClass')) {
+    /**
+     * 菜单选中 css 类
+     * @param $path
+     * @return string
+     */
+    function getActiveClass($path)
+    {
+        return str_contains(request()->url(), $path) ? ' active ' : '';
+    }
+}

@@ -6,6 +6,7 @@
     <title>CURD</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link href="{{ asset('css/adminlte.css') }}" rel="stylesheet">
+    <script src="{{ asset('js/adminlte.js') }}"></script>
 </head>
 <body id="sidebar-effect" class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -49,7 +50,6 @@
     @endif
 </div>
 
-<script src="{{ asset('js/adminlte.js') }}"></script>
 {{-- common 目录下文件 js 扩展 --}}
 @yield('common_js')
 

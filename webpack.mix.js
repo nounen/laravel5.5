@@ -43,6 +43,7 @@ mix.scripts([
     'resources/assets/adminlte/js/adminlte.min.js',
     'resources/assets/adminlte/js/menu_filter.js',
     'resources/assets/js/cookie.js',
+    'resources/assets/js/wangEditor.min.js',
     'resources/assets/js/common.js',
 ], 'public/js/adminlte.js');
 

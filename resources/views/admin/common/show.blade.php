@@ -25,7 +25,7 @@
 
 <div class="box box-primary">
     <form role="form" class="form-horizontal">
-        <div class="box-body">
+        <div class="box-body" style="font-size: small !important;">
             @foreach($fields as $key => $field)
                 @switch($field['element'])
 

@@ -216,7 +216,8 @@ class Article extends BaseModel
                 'rule'   => [
                     'required',
                 ],
-                'element'=> 'textarea',
+                'element'=> 'wang-editor',
+                //                'element'=> 'textarea',
                 'attributes' => [
                     'rows' => 8,
                     'required' => 'required',

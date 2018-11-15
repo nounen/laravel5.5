@@ -30,7 +30,7 @@ var loadFile = function(event, id) {
 
         {{ csrf_field() }}
 
-        <div class="box-body">
+        <div class="box-body" style="font-size: small;">
         @foreach($fields as $key => $field)
             @switch($field['element'])
 
@@ -163,6 +163,42 @@ var loadFile = function(event, id) {
                                   class="form-control"
                                 {!! $field['attribute'] !!}>{{ old($key, $field['value']) }}</textarea>
                     </div>
+                </div>
+                @break
+
+                {{-- wangEditor --}}
+                @case('wang-editor')
+                <div class="form-group">
+                    <label for="{{ $key }}"
+                           class="col-sm-2 table_title_width control-label">
+                        {{ $field['name'] }}:
+                    </label>
+
+                    <div class="col-sm-10">
+                        <div id="wang-editor-{{ $key }}"></div>
+                    </div>
+
+
+                    <textarea id="wang-editor-textarea-{{ $key }}"
+                              name="{{ $key }}"
+                              class="hidden"></textarea>
+
+                    <script type="text/javascript">
+                    // wangEditor 编辑器初始化
+                    var E = window.wangEditor;
+                    var editor{{ $key }} = new E('#wang-editor-{{ $key }}');
+                    var textarea{{ $key }} = $("#wang-editor-textarea-{{ $key }}");
+
+                    // wangEditor 内容变化监测，同步更新到 textarea
+                    editor{{ $key }}.customConfig.onchange = function (html) {
+                        textarea{{ $key }}.html(html);
+                    }
+
+                    // 初始化
+                    editor{{ $key }}.create();
+                    editor{{ $key }}.txt.html("{{ old($key, $field['value']) }}");
+                    textarea{{ $key }}.html(editor{{ $key }}.txt.html())
+                    </script>
                 </div>
                 @break
 

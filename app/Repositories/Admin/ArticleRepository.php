@@ -18,7 +18,11 @@ class ArticleRepository extends BaseRepository
     {
         $input = $request->only(Article::getStoreKeys());
         $input['user_id'] = $this->adminUser()->id;
-        $input['cover'] = saveFile($request->file('cover'), 'covers');
+
+        $cover = $request->file('cover');
+        if (! is_null($cover)) {
+            $input['cover'] = saveFile($cover, 'covers');
+        }
 
         $article = Article::create($input);
         $article->tags()->sync($request->get('tag_ids'));

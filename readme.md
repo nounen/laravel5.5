@@ -116,3 +116,7 @@ array:5 [▼
   ]
 ]
 ```
+
+
+### 资源上传
+* 软连接设置 `php artisan storage:link`

@@ -1,7 +1,7 @@
 <div class="row">
     <form role="form" method="get">
         <div class="col-xs-2">
-            <select id="category_id" name="equal[category_id]" class="form-control" type="select">
+            <select id="category_id" name="equal[category_id]" class="form-control" type="select" style="font-size: small">
                 <option selected disabled>栏目</option>
                 <option value="1">linux</option>
                 <option value="2">math</option>
@@ -32,7 +32,6 @@
                 </div>
             </div>
         </div>
-
         <script type="text/javascript">
         $(function () {
             var formatStr = "YYYY-MM-DD HH:mm:ss";
@@ -58,8 +57,27 @@
         });
         </script>
 
+        <div class="col-xs-3">
+            <div class="input-group">
+                <div class="input-group-btn">
+                    <button type="button"
+                            class="btn btn-default dropdown-toggle"
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false">
+                        请选择&nbsp;&nbsp;<span class="caret"></span>&nbsp;
+                    </button>
+                    <ul class="dropdown-menu" style="font-size: small">
+                        <li><a href="#">标题</a></li>
+                        <li><a href="#">简介</a></li>
+                    </ul>
+                </div><!-- /btn-group -->
+                <input type="text" class="form-control" aria-label="...">
+            </div><!-- /input-group -->
+        </div><!-- /.col-lg-6 -->
+
         <div class="col-xs-2">
-            <button type="submit" class="btn btn-flat btn-primary" id="create_event">提交</button>
+            <button type="submit" class="btn btn-flat btn-primary" id="search_event">搜索</button>
         </div>
     </form>
 </div>

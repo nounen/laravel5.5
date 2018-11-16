@@ -160,7 +160,8 @@
 
                         <div class="col-sm-10">
                             <img class="img-responsive"
-                                 src="{{ $item->{$key} }}">
+                                 src="{{ $item->{$key} }}"
+                                 style="max-width: 500px">
                         </div>
                     </div>
                     @break

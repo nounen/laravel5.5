@@ -24,13 +24,14 @@ class Article extends BaseModel
         'user_id',
     ];
 
-    protected $appends = [
-        'article_state_name',
-        'is_allow_comment_name',
-        'user_name',
-        'cover_url',
-        'tag_ids',
-    ];
+// 并不需要 append， 只要做好关联模型的预加载即可。
+//    protected $appends = [
+//        'article_state_name',
+//        'is_allow_comment_name',
+//        'user_name',
+//        'cover_url',
+//        'tag_ids',
+//    ];
 
     // 发布
     const STATE_PUBLISH = 1;
@@ -228,7 +229,9 @@ class Article extends BaseModel
                 'name'   => '发布状态',
                 'element'=> 'select',
                 'value' => Article::STATE_DRAFT,
-                'options' => Article::getArticleStates(),
+                'options' => function() {
+                    return Article::getArticleStates();
+                },
                 'attributes' => [
                     'required' => 'required',
                 ],
@@ -254,7 +257,9 @@ class Article extends BaseModel
             'is_allow_comment' => [
                 'name'   => '允许评论',
                 'element'=> 'radio',
-                'options' => self::getIsStates(),
+                'options' => function() {
+                    return parent::getIsStates();
+                },
                 'attributes' => [
                     'type'      => 'radio',
                     'required'  => 'required',
@@ -283,7 +288,9 @@ class Article extends BaseModel
             'tag_ids' => [
                 'name' => '文章标签',
                 'element' => 'select',
-                'options' => Tag::beOptions(),
+                'options' => function() {
+                    return Tag::beOptions();
+                },
                 'attributes' => [
                     'type'     => 'select',
                     'required' => 'required',
@@ -305,7 +312,9 @@ class Article extends BaseModel
             'category_id' => [
                 'name' => '文章栏目',
                 'element' => 'select',
-                'options' => Category::beOptions(),
+                'options' => function() {
+                    return Category::beOptions();
+                },
                 'attributes' => [
                     'type'     => 'select',
                     'required' => 'required',

@@ -20,7 +20,7 @@ class ArticleRepository extends BaseRepository
         $input['user_id'] = $this->adminUser()->id;
 
         $cover = $request->file('cover');
-        if (! is_null($cover)) {
+        if (!is_null($cover)) {
             $input['cover'] = saveFile($cover, 'covers');
         }
 
@@ -36,10 +36,13 @@ class ArticleRepository extends BaseRepository
         $fieldMaps = [];
 
         $articles = search(Article::class, $fieldMaps)
-                    ->with('user')
-                    ->ofUser()
-                    ->orderBy('created_at', 'DESC')
-                    ->paginate();
+            ->with([
+                'user',
+                'category',
+            ])
+            ->ofUser()
+            ->orderBy('created_at', 'DESC')
+            ->paginate();
 
         return $articles;
     }

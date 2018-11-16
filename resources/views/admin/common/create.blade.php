@@ -82,7 +82,7 @@ var loadFile = function(event, id) {
                     </label>
 
                     <div class="radio col-sm-10" id="{{ $key }}">
-                        @foreach($field['options'] as $option)
+                        @foreach($field['options']() as $option)
                         <label>
                             <input name="{{ $key }}"
                                    value="{{ $option['value'] }}"
@@ -104,7 +104,7 @@ var loadFile = function(event, id) {
                     </label>
 
                     <div class="checkbox col-sm-10" id="{{ $key }}">
-                        @foreach($field['options'] as $option)
+                        @foreach($field['options']() as $option)
                         <label>
                             <input name="{{ $key }}[]"
                                    value="{{ $option['value'] }}"
@@ -131,7 +131,7 @@ var loadFile = function(event, id) {
                                 class="form-control"
                                 {!! $field['attribute'] !!}>
 
-                            @foreach($field['options'] as $option)
+                            @foreach($field['options']() as $option)
                             <option value="{{ $option['value'] }}"
                                 {{-- 多选 --}}
                                 @if(is_array(old($key)))

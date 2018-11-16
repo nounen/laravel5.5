@@ -33,7 +33,10 @@ class ArticleRepository extends BaseRepository
      */
     public function paginate()
     {
-        $fieldMaps = [];
+        $fieldMaps = [
+            'category_id' => 'category_id',
+            'created_at' => 'created_at',
+        ];
 
         $articles = search(Article::class, $fieldMaps)
             ->with([

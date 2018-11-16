@@ -91,8 +91,12 @@ if (!function_exists('search')) {
                         $model = $model->whereIn($trueField, $value);
                         break;
                     case 'between' :
-                        $model = $model->where($trueField, '>=', $value[0]);
-                        $model = $model->where($trueField, '<=', $value[1]);
+                        $start = array_get($value, 0);
+                        $end = array_get($value, 1);
+                        if (!empty($start) && !empty($end)) {
+                            $model = $model->where($trueField, '>=', $start);
+                            $model = $model->where($trueField, '<=', $end);
+                        }
                         break;
                     case 'order' :
                         $model = $model->orderBy($trueField, $value);

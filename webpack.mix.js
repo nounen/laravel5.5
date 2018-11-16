@@ -32,6 +32,7 @@ mix.styles([
     'resources/assets/adminlte/css/bootstrap.min.css',
     'resources/assets/adminlte/css/AdminLTE.min.css',
     'resources/assets/adminlte/css/_all-skins.min.css',
+    'resources/assets/css/bootstrap-datetimepicker.min.css',
     'resources/assets/css/common.css',
 ], 'public/css/adminlte.css');
 
@@ -44,6 +45,8 @@ mix.scripts([
     'resources/assets/adminlte/js/menu_filter.js',
     'resources/assets/js/cookie.js',
     'resources/assets/js/wangEditor.min.js',
+    'resources/assets/js/moment.min.js',
+    'resources/assets/js/bootstrap-datetimepicker.min.js',
     'resources/assets/js/common.js',
 ], 'public/js/adminlte.js');
 

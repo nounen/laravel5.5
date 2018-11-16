@@ -1,6 +1,9 @@
 @extends('admin.layouts.app')
 
 @section('content')
+    @component('admin.common.search')
+    @endcomponent
+
     @component('admin.common.index', ['base_url' => $base_url, 'fields' => $fields, 'list' => $list])
         @foreach($list as $item)
             {{-- solt 扩展实现 --}}

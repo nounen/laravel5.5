@@ -138,6 +138,19 @@
                     </div>
                     @break
 
+                    @case('wang-editor')
+                    <div class="form-group">
+                        <label for="{{ $key }}"
+                               class="col-sm-2 table_title_width control-label">
+                            {{ $field['name'] }}:
+                        </label>
+
+                        <div class="col-sm-10">
+                            {!! $item->{$key}  !!}
+                        </div>
+                    </div>
+                    @break
+
                     @case('image-single')
                     <div class="form-group">
                         <label for="{{ $key }}"

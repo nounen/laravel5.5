@@ -62,19 +62,29 @@
             <div class="input-group">
                 <div class="input-group-btn">
                     <button type="button"
+                            id="dropdown-btn"
                             class="btn btn-default dropdown-toggle"
                             data-toggle="dropdown"
                             aria-haspopup="true"
                             aria-expanded="false">
-                        请选择&nbsp;&nbsp;<span class="caret"></span>&nbsp;
+                        请选择&nbsp;&nbsp;
                     </button>
                     <ul class="dropdown-menu" style="font-size: small">
-                        <li><a href="#">标题</a></li>
-                        <li><a href="#">简介</a></li>
+                        <li><a href="#" data="like[title]">标题</a></li>
+                        <li><a href="#" data="like[description]">简介</a></li>
                     </ul>
                 </div>
                 <input type="text" class="form-control" aria-label="...">
             </div>
+
+            <script>
+            $(function() {
+                $(".dropdown-menu li a").click(function() {
+                    $("#dropdown-btn").text($(this).text());
+                    $("#dropdown-btn").val($(this).text());
+                });
+            });
+            </script>
         </div>
 
         <div class="col-xs-2">

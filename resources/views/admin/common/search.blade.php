@@ -31,31 +31,32 @@
                 </span>
                 </div>
             </div>
+
+            <script type="text/javascript">
+            $(function () {
+                var formatStr = "YYYY-MM-DD HH:mm:ss";
+
+                $("#create_at_start").datetimepicker({
+                    format: formatStr,
+                });
+
+                $("#created_at_end").datetimepicker({
+                    useCurrent: false,
+                    format: formatStr,
+                });
+
+                $("#create_at_start").on("dp.change", function (e) {
+                    $("#created_at_end").data("DateTimePicker").minDate(e.date);
+                    $("#created_at_start_input").val(e.date.format(formatStr));
+                });
+
+                $("#created_at_end").on("dp.change", function (e) {
+                    $("#create_at_start").data("DateTimePicker").maxDate(e.date);
+                    $("#created_at_end_input").val(e.date.format(formatStr));
+                });
+            });
+            </script>
         </div>
-        <script type="text/javascript">
-        $(function () {
-            var formatStr = "YYYY-MM-DD HH:mm:ss";
-
-            $("#create_at_start").datetimepicker({
-                format: formatStr,
-            });
-
-            $("#created_at_end").datetimepicker({
-                useCurrent: false, //Important! See issue #1075
-                format: formatStr,
-            });
-
-            $("#create_at_start").on("dp.change", function (e) {
-                $("#created_at_end").data("DateTimePicker").minDate(e.date);
-                $("#created_at_start_input").val(e.date.format(formatStr));
-            });
-
-            $("#created_at_end").on("dp.change", function (e) {
-                $("#create_at_start").data("DateTimePicker").maxDate(e.date);
-                $("#created_at_end_input").val(e.date.format(formatStr));
-            });
-        });
-        </script>
 
         <div class="col-xs-3">
             <div class="input-group">
@@ -71,10 +72,10 @@
                         <li><a href="#">标题</a></li>
                         <li><a href="#">简介</a></li>
                     </ul>
-                </div><!-- /btn-group -->
+                </div>
                 <input type="text" class="form-control" aria-label="...">
-            </div><!-- /input-group -->
-        </div><!-- /.col-lg-6 -->
+            </div>
+        </div>
 
         <div class="col-xs-2">
             <button type="submit" class="btn btn-flat btn-primary" id="search_event">搜索</button>

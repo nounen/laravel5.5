@@ -85,7 +85,7 @@
             {{--TODO: 分页样式应该重写--}}
             <div class="box-footer clearfix" style="padding-top: 0px; padding-bottom: 0px;">
                 {{-- 如果没有分页数据就不会显示 --}}
-                {{ $list->links() }}
+                {{ $list->appends(request()->all())->links() }}
             </div>
         </div>
     </div>

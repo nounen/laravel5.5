@@ -47,7 +47,7 @@ class ArticleRepository extends BaseRepository
             ])
             ->ofUser()
             ->orderBy('created_at', 'DESC')
-            ->paginate();
+            ->paginate(3);
 
         return $articles;
     }

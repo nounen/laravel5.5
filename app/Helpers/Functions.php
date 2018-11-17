@@ -78,6 +78,11 @@ if (!function_exists('search')) {
                     continue;
                 }
 
+                // url 传参为空则跳过
+                if (empty($value)) {
+                    continue;
+                }
+
                 $trueField = $fieldMaps[$field];
 
                 switch ($key) {

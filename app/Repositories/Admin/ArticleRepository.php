@@ -34,6 +34,8 @@ class ArticleRepository extends BaseRepository
     public function paginate()
     {
         $fieldMaps = [
+            'title' => 'title',
+            'description' => 'description',
             'category_id' => 'category_id',
             'created_at' => 'created_at',
         ];

@@ -90,34 +90,77 @@
                 <div class="col-xs-2">
                     <div class="input-group">
                         <div class="input-group-btn">
+                            {{-- 下拉按钮 --}}
                             <button type="button"
-                                    id="dropdown-btn"
+                                    id="dropdownBtn"
                                     class="btn btn-default dropdown-toggle"
                                     data-toggle="dropdown"
                                     aria-haspopup="true"
                                     aria-expanded="false">
                                 {{ $filter['name'] }}
                             </button>
+
+                            {{-- 下拉项 --}}
                             <ul class="dropdown-menu" style="font-size: small">
                                 @foreach($filter['options'] as $option)
-                                <li><a data-name="like[{{ $option['key'] }}]">{{ $option['name'] }}</a></li>
+                                <li>
+                                    <a data-key="{{ $option['key'] }}"
+                                       data-name="{{ $option['name'] }}">
+                                        {{ $option['name'] }}
+                                    </a>
+                                </li>
                                 @endforeach
                             </ul>
                         </div>
-                        <input id="inputValue" type="text" class="form-control">
+
+                        {{-- 搜索使用的值 --}}
+                        <input id="dropdownValue"
+                               name="like[{{ $filter['default_key'] }}]"
+                               value="{{ $filter['default_value'] }}"
+                               type="text"
+                               class="form-control">
+
+                        {{-- 辅助字段，用于显示当前下拉文本 --}}
+                        <input id="optionKey"
+                               name="option_key"
+                               value="{{ $filter['default_key'] }}"
+                               type="text"
+                               class="form-control hidden">
+
+                        <input id="optionName"
+                               name="option_name"
+                               value="{{ $filter['name'] }}"
+                               type="text"
+                               class="form-control hidden">
+
+                        <input id="optionValue"
+                               name="option_value"
+                               value="{{ $filter['default_value'] }}"
+                               type="text"
+                               class="form-control hidden">
+
                     </div>
 
                     <script>
-                        $(function() {
-                            $(".dropdown-menu li a").click(function() {
-                                // 下拉切换变更显示文字
-                                $("#dropdown-btn").text($(this).text());
-                                $("#dropdown-btn").val($(this).text());
+                    $(function() {
+                        $('.dropdown-menu li a').click(function() {
+                            // 下拉切换变更显示文字
+                            var optionKey = $(this).data('key').trim();
+                            var optionName = $(this).data('name').trim();
 
-                                // 下拉切换变更 input 框的 name 属性
-                                $('#inputValue').attr('name', $(this).data('name'))
-                            });
+                            $("#dropdownBtn").text(optionName);
+                            $("#optionKey").val(optionKey);
+                            $("#optionName").val(optionName);
+
+                            // 下拉切换变更 input 框的 name 属性
+                            $('#dropdownValue').attr('name', 'like[' + optionKey + ']')
                         });
+
+                        $('#dropdownValue').change(function() {
+                            var dropdownValue = $(this).val().trim();
+                            $("#optionValue").val(dropdownValue);
+                        });
+                    });
                     </script>
                 </div>
                 @break

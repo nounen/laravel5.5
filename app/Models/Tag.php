@@ -18,6 +18,11 @@ class Tag extends BaseModel
         'user_id',
     ];
 
+    public static function getSearchFields()
+    {
+        return [];
+    }
+
     /**
      * 所有字段
      *

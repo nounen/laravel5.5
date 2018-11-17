@@ -180,7 +180,9 @@ class Article extends BaseModel
                 ],
             ],
             'dropdown' => [
-                'name' => '请选择',
+                'name' => array_get($input, 'option_name', '请选择'),
+                'default_key' => array_get($input, 'option_key', ''),
+                'default_value' => array_get($input, 'option_value', ''),
                 'element' => 'dropdown',
                 'options' => [
                     [

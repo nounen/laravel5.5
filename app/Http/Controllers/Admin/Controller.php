@@ -70,6 +70,8 @@ class Controller extends BaseController
     {
         $this->data['title'] = "{$this->moduleName}列表";
         $this->data['base_url'] = $this->baseUrl;
+        $this->data['filters'] = $this->model->getSearchFields();
+//        dd($this->data['filters']);
         $this->data['fields'] = $this->model->getTableFields();
         $this->data['list'] = $this->repository->paginate();
         return $this->renderView();

@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
 @section('content')
-    @component('admin.common.search', ['base_url' => $base_url])
+    @component('admin.common.search', ['base_url' => $base_url, 'filters' => $filters])
     @endcomponent
 
     @component('admin.common.index', ['base_url' => $base_url, 'fields' => $fields, 'list' => $list])

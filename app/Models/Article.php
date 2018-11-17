@@ -153,6 +153,49 @@ class Article extends BaseModel
         return array_pluck($this->tags, 'id');
     }
 
+    public static function getSearchFields()
+    {
+        $input = request()->all();
+
+        return [
+            'category_id' => [
+                'name' => '所在栏目',
+                'element' => 'select',
+                'default' => array_get($input, 'equal.category_id', ''),
+                'options' => function() {
+                    return Category::beOptions();
+                },
+            ],
+            'created_at' => [
+                'name' => '创建时间',
+                'element' => 'date-range',
+                'format' => 'YYYY-MM-DD HH:mm:ss',
+                'date_start' => [
+                    'placeholder' => '开始日期',
+                    'default' => array_get($input, 'between.created_at.0', ''),
+                ],
+                'date_end' => [
+                    'placeholder' => '结束日期',
+                    'default' => array_get($input, 'between.created_at.0', ''),
+                ],
+            ],
+            'dropdown' => [
+                'name' => '请选择',
+                'element' => 'dropdown',
+                'options' => [
+                    [
+                        'key' => 'title',
+                        'name' => '标题',
+                    ],
+                    [
+                        'key' => 'description',
+                        'name' => '简介',
+                    ],
+                ],
+            ],
+        ];
+    }
+
     /**
      * 所有字段
      *

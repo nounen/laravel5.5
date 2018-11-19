@@ -13,40 +13,79 @@
 }
 </style>
 
+<script>
+    // 图片预览
+    var loadFile = function(event, id) {
+        var output = document.getElementById(id);
+        output.src = URL.createObjectURL(event.target.files[0]);
+    };
+</script>
+
 <div class="box box-primary">
-    <form role="form" class="form-horizontal" enctype="multipart/form-data" method="POST" action="{{ $base_url }}/{{ $item->id }}" >
+    <form role="form"
+          class="form-horizontal"
+          enctype="multipart/form-data"
+          method="POST"
+          action="{{ $base_url }}/{{ $item->id }}" >
+
         {{ method_field('PATCH') }}
         {{ csrf_field() }}
 
         <div class="box-body">
-            @foreach($fields as $field)
+            @foreach($fields as $key => $field)
                 @switch($field['element'])
                     @case('input')
-                    <div class="form-group @if(str_contains($field['attribute'], 'hidden')) hidden @endif">
-                        <label for="{{ $field['key'] }}" class="col-sm-2 table_title_width control-label">{{ $field['name'] }}:</label>
+                    <div class="form-group {{ getHiddenClass($field['attribute']) }}">
+                        <label for="{{ $key }}"
+                               class="col-sm-2 table_title_width control-label">
+                            {{ $field['name'] }}:
+                        </label>
 
                         <div class="col-sm-10">
-                            <input id="{{ $field['key'] }}"
-                                   name="{{ $field['key'] }}"
-                                   value="{{ $item->{$field['key']} }}"
-                                   {!! $field['attribute'] !!}
-                                   class="form-control">
+                            <input id="{{ $key }}"
+                                   name="{{ $key }}"
+                                   value="{{ $item->{$key} }}"
+                                   class="form-control"
+                                   {!! $field['attribute'] !!} >
+                        </div>
+                    </div>
+                    @break
+
+                    @case('input-image')
+                    <div class="form-group">
+                        <label for="{{ $key }}"
+                               class="col-sm-2 table_title_width control-label">
+                            {{ $field['name'] }}:
+                        </label>
+
+                        <div class="col-sm-10">
+                            <input name="{{ $key }}"
+                                   type="file"
+                                   accept="image/*"
+                                   onchange="loadFile(event, 'input-image-{{ $key }}')"
+                                   style="margin-bottom: 15px;">
+
+                            <img id="input-image-{{ $key }}"
+                                 src="{{ getAssetUrl($item->{$key}) }}"
+                                 class="img-responsive"/>
                         </div>
                     </div>
                     @break
 
                     @case('radio')
                     <div class="form-group">
-                        <label for="{{ $field['key'] }}" class="col-sm-2 table_title_width control-label">{{ $field['name'] }}:</label>
+                        <label for="{{ $key }}"
+                               class="col-sm-2 table_title_width control-label">
+                            {{ $field['name'] }}:
+                        </label>
 
-                        <div class="radio col-sm-10" id="{{ $field['key'] }}">
-                            @foreach($field['options'] as $option)
+                        <div class="radio col-sm-10" id="{{ $key }}">
+                            @foreach($field['options']() as $option)
                             <label>
-                                <input name="{{ $field['key'] }}"
+                                <input name="{{ $key }}"
                                        value="{{ $option['value'] }}"
-                                       {!! $field['attribute'] !!}
-                                       {{-- 默认选中情况怎么处理 --}}
-                                       @if($option['value'] == $item->{$field['key']})checked="checked"@endif>
+                                        {!! getCheckedResult($option['value'], old($field['key'], $item->$key)) !!}
+                                        {!! $field['attribute'] !!} >
                                 {{ $option['name'] }}
                             </label>
                             @endforeach
@@ -56,15 +95,18 @@
 
                     @case('checkbox')
                     <div class="form-group">
-                        <label for="{{ $field['key'] }}" class="col-sm-2 table_title_width control-label">{{ $field['name'] }}:</label>
+                        <label for="{{ $key }}"
+                               class="col-sm-2 table_title_width control-label">
+                            {{ $field['name'] }}:
+                        </label>
 
-                        <div class="checkbox col-sm-10" id="{{ $field['key'] }}">
+                        <div class="checkbox col-sm-10" id="{{ $key }}">
                             @foreach($field['options'] as $option)
                             <label>
-                                <input name="{{ $field['key'] }}[]"
+                                <input name="{{ $key }}[]"
                                        value="{{ $option['value'] }}"
                                        {!! $field['attribute'] !!}
-                                       @if($option['value'] == $item->{$field['key']})checked="checked"@endif>
+                                       @if($option['value'] == $item->{$key})checked="checked"@endif>
                                 {{ $option['name'] }}
                             </label>
                             @endforeach
@@ -74,28 +116,27 @@
 
                     @case('select')
                     <div class="form-group">
-                        <label for="{{ $field['key'] }}" class="col-sm-2 table_title_width control-label">{{ $field['name'] }}:</label>
+                        <label for="{{ $key }}"
+                               class="col-sm-2 table_title_width control-label">
+                            {{ $field['name'] }}:
+                        </label>
 
                         <div class="col-sm-10">
-                            <select id="{{ $field['key'] }}"
-                                    @if(strpos($field['attribute'], 'multiple'))
-                                    name="{{ $field['key'] }}[]"
-                                    @else
-                                    name="{{ $field['key'] }}"
-                                    @endif
-                                    {!! $field['attribute'] !!}
-                                    class="form-control">
+                            <select id="{{ $key }}"
+                                    name="{{ getSelectName($field) }}"
+                                    class="form-control"
+                                    {!! $field['attribute'] !!}>
 
-                                @foreach($field['options'] as $option)
+                                @foreach($field['options']() as $option)
                                 <option value="{{ $option['value'] }}"
-                                    {{-- 多选 OR 单选 --}}
-                                    @if(is_array($item->{$field['key']}))
-                                        @foreach($item->{$field['key']} as $value)
-                                            @if($option['value'] == $value) selected="selected " @endif
-                                        @endforeach
-                                    @else
-                                        @if($option['value'] == $item->{$field['key']}) selected="selected" @endif
-                                    @endif
+                               {{-- 多选 OR 单选 --}}
+                                @if(is_array(old($key, $item->$key)))
+                                    @foreach(old($key, $item->$key) as $value)
+                                    {{ getSelectResult($option['value'], $value) }}
+                                    @endforeach
+                                @else
+                                    {{ getSelectResult($option['value'], old($key, $item->$key)) }}
+                                @endif
                                 >{{ $option['name'] }}</option>
                                 @endforeach
                             </select>
@@ -105,23 +146,61 @@
 
                     @case('textarea')
                     <div class="form-group">
-                        <label for="{{ $field['key'] }}" class="col-sm-2 table_title_width control-label">{{ $field['name'] }}:</label>
+                        <label for="{{ $key }}"
+                               class="col-sm-2 table_title_width control-label">
+                            {{ $field['name'] }}:
+                        </label>
 
                         <div class="col-sm-10">
-                            <textarea id="{{ $field['key'] }}"
-                                      name="{{ $field['key'] }}"
-                                      {!! $field['attribute'] !!}
-                                      class="form-control">{{ $item->{$field['key']} }}</textarea>
+                            <textarea id="{{ $key }}"
+                                      name="{{ $key }}"
+                                      class="form-control"
+                                      {!! $field['attribute'] !!}>{{ $item->{$key} }}</textarea>
                         </div>
                     </div>
                     @break
 
+                    {{-- wangEditor --}}
+                    @case('wang-editor')
+                    <div class="form-group">
+                        <label for="{{ $key }}"
+                               class="col-sm-2 table_title_width control-label">
+                            {{ $field['name'] }}:
+                        </label>
+
+                        <div class="col-sm-10">
+                            <div id="wang-editor-{{ $key }}"></div>
+                        </div>
+
+                        <textarea id="wang-editor-textarea-{{ $key }}"
+                                  name="{{ $key }}"
+                                  class="hidden">{!! old($key, $item->$key)  !!}</textarea>
+
+                        <script type="text/javascript">
+                        // wangEditor 编辑器初始化
+                        var E = window.wangEditor;
+                        var editor{{ $key }} = new E('#wang-editor-{{ $key }}');
+                        var textarea{{ $key }} = $("#wang-editor-textarea-{{ $key }}");
+
+                        // wangEditor 内容变化监测，同步更新到 textarea
+                        editor{{ $key }}.customConfig.onchange = function (html) {
+                            textarea{{ $key }}.html(html);
+                        }
+
+                        // 初始化
+                        editor{{ $key }}.create();
+                        editor{{ $key }}.txt.html(`{!! old($key, $item->$key)  !!}`);
+                        textarea{{ $key }}.html(editor{{ $key }}.txt.html())
+                        </script>
+                    </div>
+                    @break
+
                     @case('slot')
-                    {{ ${$field['key']} }}
+                    {{ ${$key} }}
                     @break
 
                     @default
-                    <h3>字段元素配置错误: {{ $field['key'] }} !</h3>
+                    <h3>字段元素配置错误: {{ $key }} !</h3>
 
                 @endswitch
             @endforeach

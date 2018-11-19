@@ -429,6 +429,21 @@ class Article extends BaseModel
         ];
     }
 
+    public static function updateKeys()
+    {
+        return [
+            'title',
+            'description',
+            'cover',
+            'content',
+            'article_state',
+            'is_allow_comment',
+            'sort',
+            'tag_ids',
+            'category_id',
+        ];
+    }
+
     /**
      * 列表字段
      * @return array

@@ -30,7 +30,7 @@
                 @switch($field['element'])
 
                     @case('input')
-                    <div class="form-group {{getHiddenClass($field)}}">
+                    <div class="form-group {{getHiddenClass($field['attribute'])}}">
                         <label for="{{ $key }}"
                                class="col-sm-2 table_title_width control-label">
                             {{ $field['name'] }}:

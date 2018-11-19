@@ -47,7 +47,7 @@ class ArticleController extends Controller
     {
         $article = parent::_update($request, $id, self::RETURN_MODEL);
 
-        $article->tags()->sync($request->get('tags_ids'));
+        $article->tags()->sync($request->get('tag_ids'));
 
         return redirect($this->baseUrl);
     }

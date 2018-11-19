@@ -24,12 +24,12 @@ if (! function_exists('attrToStr')) {
 if (! function_exists('getHiddenClass')) {
     /**
      * css 类 hidden
-     * @param $field
+     * @param attribute
      * @return string
      */
-    function getHiddenClass($field)
+    function getHiddenClass($attribute)
     {
-        return str_contains($field['attribute'], 'hidden') ? 'hidden' : '';
+        return str_contains($attribute, 'hidden') ? 'hidden' : '';
     }
 }
 

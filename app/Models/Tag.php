@@ -115,6 +115,14 @@ class Tag extends BaseModel
         ];
     }
 
+    public static function updateKeys()
+    {
+        return [
+            'sort',
+            'name',
+        ];
+    }
+
     /**
      * 详情字段
      * @return array

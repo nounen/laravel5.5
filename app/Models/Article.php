@@ -141,7 +141,7 @@ class Article extends BaseModel
      */
     public function getCoverUrlAttribute()
     {
-        return getAssetUrl($this->cover);
+        return !empty($this->cover) ? getAssetUrl($this->cover) : $this->cover;
     }
 
     /**

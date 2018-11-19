@@ -8,11 +8,15 @@
         @foreach($list as $item)
             {{-- solt 扩展实现 --}}
             @slot("slot_title_{$item->id}")
+            <div class="text-left">
                 <span style="color: red;">{{ $item->title }}</span>
+            </div>
             @endslot
 
             @slot("slot_description_{$item->id}")
+            <div class="text-left">
                 <span class="show_3_line" style="color: red;">{{ $item->description }}</span>
+            </div>
             @endslot
         @endforeach
     @endcomponent

@@ -55,7 +55,7 @@
                         </label>
 
                         <div class="radio col-sm-10" id="{{ $key }}">
-                            @foreach($field['options'] as $option)
+                            @foreach($field['options']() as $option)
                             <label>
                                 <input name="{{ $key }}"
                                        value="{{ $option['value'] }}"
@@ -77,7 +77,7 @@
                         </label>
 
                         <div class="checkbox col-sm-10" id="{{ $key }}">
-                            @foreach($field['options'] as $option)
+                            @foreach($field['options']() as $option)
                             <label>
                                 <input name="{{ $key }}[]"
                                        value="{{ $option['value'] }}"
@@ -105,7 +105,7 @@
                                     {!! $field['attribute'] !!}
                                     disabled>
 
-                                @foreach($field['options'] as $option)
+                                @foreach($field['options']() as $option)
                                 <option value="{{ $option['value'] }}"
                                     {{-- 多选 OR 单选 --}}
                                     @if(is_array($item->$key))

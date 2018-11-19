@@ -188,6 +188,7 @@
                         }
 
                         // 初始化
+                        editor{{ $key }}.customConfig.uploadImgShowBase64 = true
                         editor{{ $key }}.create();
                         editor{{ $key }}.txt.html(`{!! old($key, $item->$key)  !!}`);
                         textarea{{ $key }}.html(editor{{ $key }}.txt.html())

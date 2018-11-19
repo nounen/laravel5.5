@@ -195,6 +195,7 @@ var loadFile = function(event, id) {
                     }
 
                     // 初始化
+                    editor{{ $key }}.customConfig.uploadImgShowBase64 = true
                     editor{{ $key }}.create();
                     editor{{ $key }}.txt.html("{{ old($key, $field['value']) }}");
                     textarea{{ $key }}.html(editor{{ $key }}.txt.html())

@@ -19,6 +19,11 @@ class Category extends BaseModel
         'user_id',
     ];
 
+    public function getSearchFields()
+    {
+        return [];
+    }
+
     /**
      * 所有字段
      *
@@ -118,11 +123,8 @@ class Category extends BaseModel
     {
         return [
             'id',
-            'parent_id',
             'name',
             'sort',
-            'article_count',
-            'user_id',
             'created_at',
             'updated_at',
         ];

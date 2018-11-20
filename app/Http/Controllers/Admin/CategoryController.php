@@ -19,14 +19,10 @@ class CategoryController extends Controller
     {
         parent::__construct();
 
-        $this->moduleName = '分类';
-
-        $this->baseUrl = url('admin/category');
-
-        $this->authorize = true;
+        $this->setTitle('分类');
+        $this->setBaseUrl(url('admin/category'));
 
         $this->model = $category;
-
         $this->repository = $categoryRepository;
     }
 

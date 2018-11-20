@@ -20,9 +20,9 @@ class ArticleController extends Controller
     {
         parent::__construct();
 
-        $this->moduleName = '文章';
-        $this->baseUrl = url('admin/article');
-        $this->authorize = true;
+        $this->setTitle('文章');
+        $this->setBaseUrl(url('admin/article'));
+
         $this->model = $article;
         $this->repository = $articleRepository;
     }

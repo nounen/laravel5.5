@@ -18,9 +18,10 @@ class TagController extends Controller
     public function __construct(Tag $tag, TagRepository $tagRepository)
     {
         parent::__construct();
-        $this->moduleName = '标签';
-        $this->baseUrl = url('admin/tag');
-        $this->authorize = true;
+
+        $this->setTitle('标签');
+        $this->setBaseUrl(url('admin/tag'));
+
         $this->model = $tag;
         $this->repository = $tagRepository;
     }

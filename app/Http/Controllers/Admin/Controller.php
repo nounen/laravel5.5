@@ -28,14 +28,8 @@ class Controller extends BaseController
     // 返回视图
     const RETURN_VIEW = 3;
 
-    // 模块名
-    protected $moduleName;
-
-    // 当前操作基础 url (可扩展出新增 / 修改 / 删除的 url)
-    protected $baseUrl;
-
     // 是否有 user_id 且进行授权校验
-    protected $authorize;
+    protected $authorize = true;
 
     // 主要模型
     protected $model;
@@ -44,12 +38,31 @@ class Controller extends BaseController
     protected $repository;
 
     // 视图渲染数据
-    protected $data;
+    protected $data = [
+        'title' => '',
+        'base_url' => '',
+        'filters' => [],
+        'fields' => [],
+        'list' => [],
+        'item' => [],
+        'menus' => [],
+    ];
 
     public function __construct()
     {
         $this->data['menus'] = $this->getMockMenus();
-        $this->data['title'] = "{$this->moduleName}";
+    }
+
+    // <title></title> 设置
+    protected function setTitle($title)
+    {
+        $this->data['title'] = $title;
+    }
+
+    // 模块所属 url
+    protected function setBaseUrl($baseUrl)
+    {
+        $this->data['base_url'] = $baseUrl;
     }
 
     /**
@@ -68,8 +81,7 @@ class Controller extends BaseController
      */
     public function index()
     {
-        $this->data['title'] = "{$this->moduleName}列表";
-        $this->data['base_url'] = $this->baseUrl;
+        $this->data['title'] = "{$this->data['title']}列表";
         $this->data['filters'] = $this->model->getSearchFields();
         $this->data['fields'] = $this->model->getIndexFields();
         $this->data['list'] = $this->repository->paginate();
@@ -83,8 +95,7 @@ class Controller extends BaseController
      */
     protected function create()
     {
-        $this->data['title'] = "{$this->moduleName}创建";
-        $this->data['base_url'] = $this->baseUrl;
+        $this->data['title'] = "{$this->data['title']}创建";
         $this->data['fields'] = $this->model->getCreateFields();
         return $this->renderView();
     }
@@ -104,7 +115,7 @@ class Controller extends BaseController
             $this->authorize('view', $item);
         }
 
-        $this->data['title'] = "{$this->moduleName}详情";
+        $this->data['title'] = "{$this->data['title']}详情";
         $this->data['fields'] = $this->model->getShowFields();
 
         // 钩子调用, 为模型扩展更多属性
@@ -132,10 +143,7 @@ class Controller extends BaseController
             $this->authorize('update', $item);
         }
 
-        $this->data['title'] = "{$this->moduleName}编辑";
-
-        $this->data['base_url'] = $this->baseUrl;
-
+        $this->data['title'] = "{$this->data['title']}编辑";
         $this->data['fields'] = $this->model->getEditFields();
 
         // 钩子调用, 为模型扩展更多属性
@@ -167,7 +175,7 @@ class Controller extends BaseController
         if ($returnType === self::RETURN_MODEL) {
             return $item;
         } elseif ($returnType === self::RETURN_REDIRECT) {
-            return redirect($this->baseUrl);
+            return redirect($this->data['base_url']);
         }
     }
 
@@ -192,7 +200,7 @@ class Controller extends BaseController
         if ($returnType === self::RETURN_MODEL) {
             return $item;
         } elseif ($returnType === self::RETURN_REDIRECT) {
-            return redirect($this->baseUrl);
+            return redirect($this->data['base_url']);
         }
     }
 

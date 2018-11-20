@@ -484,13 +484,13 @@ class Article extends BaseModel
         ];
     }
 
-    public static function getUpdateFieldsHook($article)
+    public static function getEditFieldsHook($article)
     {
         // 对象引用传递, 所以无需返回值
         $article->tag_ids = Tag::getTagIds($article->id);
     }
 
-    public static function getDetailFieldsHook($article)
+    public static function getShowFieldsHook($article)
     {
         $article->tag_ids = Tag::getTagIds($article->id);
     }

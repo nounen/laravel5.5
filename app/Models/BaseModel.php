@@ -80,7 +80,7 @@ class BaseModel extends Model
      *
      * @return array
      */
-    public static function getTableFields()
+    public static function getIndexFields()
     {
         $rows = [];
         $keys = self::tableKeys();
@@ -128,17 +128,17 @@ class BaseModel extends Model
      *
      * @return array
      */
-    public static function getDetailFields()
+    public static function getShowFields()
     {
         return self::dealFields(self::detailKeys(), self::getFields());
     }
 
     /**
-     * 详情显示字段钩子方法, 在 getDetailFields 后执行, 为 $item 对应的模型添加更多属性 (对象引用传递, 所以无需返回值)
+     * 详情显示字段钩子方法, 在 getShowFields 后执行, 为 $item 对应的模型添加更多属性 (对象引用传递, 所以无需返回值)
      *
      * @param $item
      */
-    public static function getDetailFieldsHook($item)
+    public static function getShowFieldsHook($item)
     {
     }
 
@@ -157,7 +157,7 @@ class BaseModel extends Model
      *
      * @param $item
      */
-    public static function getUpdateFieldsHook($item)
+    public static function getEditFieldsHook($item)
     {
     }
 
@@ -189,19 +189,19 @@ class BaseModel extends Model
      *
      * @return array
      */
-    public static function getUpdateFields()
+    public static function getEditFields()
     {
         return self::dealFields(self::updateKeys(), self::getFields());
     }
 
     /**
-     * 在 getUpdateFields 只提取 key
+     * 在 getEditFields 只提取 key
      *
      * @return array
      */
     public static function getUpdateKeys()
     {
-        $fields = self::getUpdateFields();
+        $fields = self::getEditFields();
 
         // 字段过滤: 含有 'disabled', 'readonly', 'hidden' 属性的不计入
         $fields = array_filter($fields, function($filter) {

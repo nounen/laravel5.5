@@ -71,8 +71,7 @@ class Controller extends BaseController
         $this->data['title'] = "{$this->moduleName}列表";
         $this->data['base_url'] = $this->baseUrl;
         $this->data['filters'] = $this->model->getSearchFields();
-//        dd($this->data['filters']);
-        $this->data['fields'] = $this->model->getTableFields();
+        $this->data['fields'] = $this->model->getIndexFields();
         $this->data['list'] = $this->repository->paginate();
         return $this->renderView();
     }
@@ -106,11 +105,11 @@ class Controller extends BaseController
         }
 
         $this->data['title'] = "{$this->moduleName}详情";
-        $this->data['fields'] = $this->model->getDetailFields();
+        $this->data['fields'] = $this->model->getShowFields();
 
         // 钩子调用, 为模型扩展更多属性
-        if (method_exists($this->model, 'getDetailFieldsHook')) {
-            $this->model->getDetailFieldsHook($item);
+        if (method_exists($this->model, 'getShowFieldsHook')) {
+            $this->model->getShowFieldsHook($item);
         }
 
         $this->data['item'] = $item;
@@ -137,11 +136,11 @@ class Controller extends BaseController
 
         $this->data['base_url'] = $this->baseUrl;
 
-        $this->data['fields'] = $this->model->getUpdateFields();
+        $this->data['fields'] = $this->model->getEditFields();
 
         // 钩子调用, 为模型扩展更多属性
-        if (method_exists($this->model, 'getUpdateFieldsHook')) {
-            $this->model->getUpdateFieldsHook($item);
+        if (method_exists($this->model, 'getEditFieldsHook')) {
+            $this->model->getEditFieldsHook($item);
         }
 
         $this->data['item'] = $item;

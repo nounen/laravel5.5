@@ -1,5 +1,6 @@
 <?php
 
+// 路由别名决定视图位置。
 Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
     Auth::routes();
 

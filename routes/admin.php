@@ -57,11 +57,5 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
             Route::get('{id}/edit', 'ArticleController@edit')->name('edit');
             Route::patch('{id}', 'ArticleController@update')->name('update');
         });
-
-        Route::resource('/form', 'FormController');
-
-        // 表单元素案例
-        Route::get('/form_example', 'FormController@example');
-        Route::post('/form_example', 'FormController@postExample');
     });
 });

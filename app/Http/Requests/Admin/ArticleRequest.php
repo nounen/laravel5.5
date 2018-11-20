@@ -7,6 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 
 class ArticleRequest extends FormRequest
 {
@@ -29,6 +30,13 @@ class ArticleRequest extends FormRequest
     {
         // 更多规则可以自己添加
         $rules = Article::getRequestRules();
+
+        // 更新时不包含自己
+        if (isUpdateAction($request)) {
+            $rules['title'][] = Rule::unique('article')->ignore($request->id);
+        } else {
+            $rules['title'][] = Rule::unique('article');
+        }
 
         return $rules;
     }

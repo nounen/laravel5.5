@@ -141,3 +141,24 @@ if (! function_exists('getAssetUrl')) {
         );
     }
 }
+
+if (! function_exists('getQueryLog')) {
+    /**
+     * 打印数据库查询
+     */
+    function getQueryLog()
+    {
+        dd(\Illuminate\Support\Facades\DB::getQueryLog());
+    }
+}
+
+if (! function_exists('isUpdateAction')) {
+    /**
+     * 是否更新操作
+     * $request
+     */
+    function isUpdateAction($request)
+    {
+        isUpdateMethod($request->getMethod()) && $request->id;
+    }
+}

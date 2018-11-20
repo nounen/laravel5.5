@@ -30,10 +30,10 @@ class CategoryRequest extends FormRequest
         $rules = Category::getRequestRules();
 
         // 更新时不包含自己
-        if (isUpdateMethod($request->getMethod()) && $request->id) {
+        if (isUpdateAction($request)) {
             $rules['name'][] = Rule::unique('category')->ignore($request->id);
         } else {
-            $rules['name'][] = 'unique:category';
+            $rules['name'][] = Rule::unique('category');
         }
 
         return $rules;

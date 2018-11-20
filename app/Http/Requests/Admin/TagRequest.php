@@ -30,10 +30,10 @@ class TagRequest extends FormRequest
         $rules = Tag::getRequestRules();
 
         // 更新时不包含自己
-        if (isUpdateMethod($request->getMethod()) && $request->id) {
+        if (isUpdateAction($request)) {
             $rules['name'][] = Rule::unique('tag')->ignore($request->id);
         } else {
-            $rules['name'][] = 'unique:tag';
+            $rules['name'][] = Rule::unique('tag');
         }
 
         return $rules;

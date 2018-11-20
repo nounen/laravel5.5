@@ -159,6 +159,6 @@ if (! function_exists('isUpdateAction')) {
      */
     function isUpdateAction($request)
     {
-        isUpdateMethod($request->getMethod()) && $request->id;
+        return isUpdateMethod($request->getMethod()) && $request->id;
     }
 }

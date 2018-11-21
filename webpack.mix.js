@@ -27,28 +27,39 @@ let mix = require('laravel-mix');
  */
 // AdminLTE css
 mix.styles([
-    'resources/assets/adminlte/css/font-awesome.min.css',
-    'resources/assets/adminlte/css/ionicons.min.css',
-    'resources/assets/adminlte/css/bootstrap.min.css',
-    'resources/assets/adminlte/css/AdminLTE.min.css',
-    'resources/assets/adminlte/css/_all-skins.min.css',
-    'resources/assets/css/bootstrap-datetimepicker.min.css',
+    'node_modules/bootstrap/dist/css/bootstrap.min.css',
+    'node_modules/admin-lte/dist/css/AdminLTE.min.css',
+    'node_modules/admin-lte/dist/css/skins/_all-skins.min.css',
+    'node_modules/admin-lte/bower_components/font-awesome/css/font-awesome.min.css',
+    'node_modules/admin-lte/bower_components/Ionicons/css/ionicons.min.css',
+    'node_modules/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css',
+    'node_modules/wangeditor/release/wangEditor.min.css',
+], 'public/css/base.css');
+
+mix.styles([
     'resources/assets/css/common.css',
-], 'public/css/adminlte.css');
+], 'public/css/custom.css');
 
 
 // AdminLTE js
 mix.scripts([
-    'resources/assets/adminlte/js/jquery.min.js',
-    'resources/assets/adminlte/js/bootstrap.min.js',
-    'resources/assets/adminlte/js/adminlte.min.js',
-    'resources/assets/adminlte/js/menu_filter.js',
+    'node_modules/jquery/dist/jquery.min.js',
+    'node_modules/bootstrap/dist/js/bootstrap.min.js',
+    'node_modules/admin-lte/dist/js/adminlte.min.js',
+    'node_modules/moment/min/moment.min.js', // 必须在 datetimepicker 之前
+    'node_modules/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js',
+    'node_modules/wangeditor/release/wangEditor.min.js',
     'resources/assets/js/cookie.js',
-    'resources/assets/js/wangEditor.min.js',
-    'resources/assets/js/moment.min.js',
-    'resources/assets/js/bootstrap-datetimepicker.min.js',
+], 'public/js/base.js');
+
+mix.scripts([
+    'resources/assets/js/menu_filter.js',
     'resources/assets/js/common.js',
-], 'public/js/adminlte.js');
+], 'public/js/custom.js');
+
 
 // AdminLTE fonts
-mix.copy('resources/assets/adminlte/fonts', 'public/fonts');
+mix.copy([
+    'node_modules/admin-lte/bower_components/font-awesome/fonts',
+    'node_modules/bootstrap/fonts',
+], 'public/fonts');

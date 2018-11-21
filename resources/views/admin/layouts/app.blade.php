@@ -5,8 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>CURD</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <link href="{{ asset('css/adminlte.css') }}" rel="stylesheet">
-    <script src="{{ asset('js/adminlte.js') }}"></script>
+    <link href="{{ asset('css/base.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
+    <script src="{{ asset('js/base.js') }}"></script>
+    <script src="{{ asset('js/custom.js') }}"></script>
 </head>
 <body id="sidebar-effect" class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">

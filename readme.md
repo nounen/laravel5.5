@@ -128,3 +128,7 @@ array:5 [▼
 
 * search.blade.php
     * 分页链接参数传递
+
+### npm
+* npm install
+* npm run xxx

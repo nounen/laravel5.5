@@ -122,13 +122,19 @@ array:5 [▼
 * 软连接设置 `php artisan storage:link`
 
 
+### npm
+* npm install
+* npm run xxx
+
+
 ### TODO
 * create.blade.php
     * 文件选择： 1.删除选中文件； 2.再次选择文件时没有选，但是图片预览还是存在；
 
-* search.blade.php
-    * 分页链接参数传递
+* []表单元素整理
 
-### npm
-* npm install
-* npm run xxx
+* []权限管理
+
+* []搜索支持排序
+
+* 

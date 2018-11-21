@@ -2,11 +2,11 @@
 
 // 路由别名决定视图位置。
 Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
+    // 登录相关
     Auth::routes();
 
-    Route::get('', function() {
-        return redirect(url('admin/login'));
-    });
+    // 后台首页
+    Route::get('', 'AdminController@index')->name('index');
 
     // auth 中间件： 需要登录验证业务
     Route::middleware(['auth'])->group(function () {

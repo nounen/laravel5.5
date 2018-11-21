@@ -26,7 +26,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/admin/tag';
+    protected $redirectTo = 'admin';
 
     /**
      * Create a new controller instance.
@@ -60,6 +60,6 @@ class LoginController extends Controller
 
         $request->session()->invalidate();
 
-        return redirect('/admin/login');
+        return redirect('admin/login');
     }
 }

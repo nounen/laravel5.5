@@ -13,7 +13,7 @@
     <div class="login-box-body">
         <p class="login-box-msg">Sign in to start your session</p>
 
-        <form method="POST" action="{{ route('admin.login') }}">
+        <form method="POST" action="{{ url('admin/login') }}">
             {{ csrf_field() }}
 
             <div class="form-group has-feedback">

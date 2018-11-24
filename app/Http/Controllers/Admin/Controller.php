@@ -37,6 +37,15 @@ class Controller extends BaseController
     // 主要仓库
     protected $repository;
 
+    // 模板目录
+    protected $viewDir;
+
+    // 模板文件名
+    protected $viewFile;
+
+    // 模板文件全名
+    protected $viewDirFile;
+
     // 视图渲染数据
     protected $data = [
         'title' => '',
@@ -65,13 +74,29 @@ class Controller extends BaseController
         $this->data['base_url'] = $baseUrl;
     }
 
+    // 视图模板目录
+    protected function setViewDir($dir)
+    {
+        $this->viewDir = $dir;
+    }
+
+    // 视图模板名字
+    protected function setViewName($name)
+    {
+        $this->viewFile = $name;
+    }
+
     /**
      * 视图渲染
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    protected function renderView()
+    protected function renderView($viewName = '')
     {
-        return view($this->getViewName(), $this->data);
+        if (empty($viewName)) {
+            $viewName = $this->getViewDirName();
+        }
+
+        return view($viewName, $this->data);
     }
 
     /**
@@ -231,9 +256,15 @@ class Controller extends BaseController
     /**
      * 模板名 = 路由别名
      */
-    protected function getViewName()
+    protected function getViewDirName()
     {
-        return Route::currentRouteName();
+        if (empty($this->viewDirFile)) {
+            $expName = explode('@', Route::getCurrentRoute()->getActionName());
+            $this->viewFile = end($expName);
+            $this->viewDirFile = "{$this->viewDir}.$this->viewFile";
+        }
+
+        return $this->viewDirFile;
     }
 
     protected function adminUser()

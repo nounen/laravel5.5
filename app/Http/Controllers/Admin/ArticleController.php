@@ -22,6 +22,7 @@ class ArticleController extends Controller
 
         $this->setTitle('文章');
         $this->setBaseUrl(url('admin/article'));
+        $this->setViewDir('admin.article');
 
         $this->model = $article;
         $this->repository = $articleRepository;

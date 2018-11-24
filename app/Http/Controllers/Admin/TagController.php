@@ -21,6 +21,7 @@ class TagController extends Controller
 
         $this->setTitle('标签');
         $this->setBaseUrl(url('admin/tag'));
+        $this->setViewDir('admin.tag');
 
         $this->model = $tag;
         $this->repository = $tagRepository;

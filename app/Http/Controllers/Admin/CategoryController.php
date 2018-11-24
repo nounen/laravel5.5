@@ -21,6 +21,7 @@ class CategoryController extends Controller
 
         $this->setTitle('分类');
         $this->setBaseUrl(url('admin/category'));
+        $this->setViewDir('admin.category');
 
         $this->model = $category;
         $this->repository = $categoryRepository;

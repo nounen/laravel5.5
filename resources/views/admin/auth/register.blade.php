@@ -60,7 +60,7 @@
             </div>
             --}}
 
-            <a href="{{ route('admin.login') }}" class="text-center">I already have a membership</a>
+            <a href="{{ url('admin/login') }}" class="text-center">I already have a membership</a>
         </div>
         <!-- /.form-box -->
     </div>

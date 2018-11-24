@@ -16,6 +16,6 @@ class AdminController extends Controller
 
     public function index()
     {
-        return $this->renderView();
+        return $this->renderView('admin.index');
     }
 }

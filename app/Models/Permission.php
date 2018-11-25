@@ -15,4 +15,14 @@ class Permission extends BaseModel
         'sort',
         'level',
     ];
+
+    public static function beOptions()
+    {
+        $fields = [
+            'id AS value',
+            'name',
+        ];
+
+        return self::get($fields)->toArray();
+    }
 }

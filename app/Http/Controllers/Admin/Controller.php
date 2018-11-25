@@ -28,6 +28,8 @@ class Controller extends BaseController
     // 返回视图
     const RETURN_VIEW = 3;
 
+    protected $baseUrl;
+
     // 是否有 user_id 且进行授权校验
     protected $authorize = true;
 
@@ -71,6 +73,7 @@ class Controller extends BaseController
     // 模块所属 url
     protected function setBaseUrl($baseUrl)
     {
+        $this->baseUrl = $baseUrl;
         $this->data['base_url'] = $baseUrl;
     }
 

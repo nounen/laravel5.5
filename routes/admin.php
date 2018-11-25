@@ -61,4 +61,24 @@ Route::namespace('Admin')->prefix('admin')->middleware(['auth'])->group(function
             Route::patch('{id}', 'ArticleController@update')->name('.文章修改');
         });
     });
+
+    // 系统管理
+    Route::name('系统管理')->group(function () {
+        // 角色管理
+        Route::prefix('role')->name('.角色管理')->group(function() {
+            // 列表页面, 详情页面, 删除数据
+            Route::get('', 'RoleController@index')->name('.角色列表');
+            Route::get('{id}', 'RoleController@show')->name('.角色详情');
+            Route::delete('{id}', 'RoleController@destroy')->name('.角色删除');
+
+            // 创建页面, 保存数据
+            Route::get('create', 'RoleController@create')->name('.角色创建_ignore');
+            Route::post('', 'RoleController@store')->name('.角色创建');
+
+            // 编辑页面, 更新数据
+            Route::get('{id}/edit', 'RoleController@edit');
+            Route::patch('{id}', 'RoleController@update')->name('.角色修改');
+        });
+    });
+
 });

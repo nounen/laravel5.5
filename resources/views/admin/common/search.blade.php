@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" style="padding-bottom: 10px;">
     <form role="form" method="get">
         @foreach($filters as $key => $filter)
             @switch($filter['element'])
@@ -25,36 +25,32 @@
                 {{-- 日期区间 --}}
                 @case('date-range')
                 <div class="col-xs-2">
-                    <div class="form-group">
-                        <div class="input-group date" id="{{ $key }}_start">
-                            <input type="text"
-                                   id="{{ $key }}_start_input"
-                                   class="form-control"
-                                   name="between[{{ $key }}][]"
-                                   value="{{ $filter['date_start']['default'] }}"
-                                   placeholder="{{ $filter['date_start']['placeholder'] }}"/>
+                    <div class="input-group date" id="{{ $key }}_start">
+                        <input type="text"
+                               id="{{ $key }}_start_input"
+                               class="form-control"
+                               name="between[{{ $key }}][]"
+                               value="{{ $filter['date_start']['default'] }}"
+                               placeholder="{{ $filter['date_start']['placeholder'] }}"/>
 
-                            <span class="input-group-addon">
-                                <span class="glyphicon glyphicon-calendar"></span>
-                            </span>
-                        </div>
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
                     </div>
                 </div>
 
                 <div class="col-xs-2">
-                    <div class="form-group">
-                        <div class="input-group date" id="{{ $key }}_end">
-                            <input type="text"
-                                   id="{{ $key }}_end_input"
-                                   class="form-control"
-                                   name="between[{{ $key }}][]"
-                                   value="{{ $filter['date_end']['default'] }}"
-                                   placeholder="{{ $filter['date_end']['placeholder'] }}"/>
+                    <div class="input-group date" id="{{ $key }}_end">
+                        <input type="text"
+                               id="{{ $key }}_end_input"
+                               class="form-control"
+                               name="between[{{ $key }}][]"
+                               value="{{ $filter['date_end']['default'] }}"
+                               placeholder="{{ $filter['date_end']['placeholder'] }}"/>
 
-                            <span class="input-group-addon">
-                                <span class="glyphicon glyphicon-calendar"></span>
-                             </span>
-                        </div>
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                         </span>
                     </div>
                 </div>
 

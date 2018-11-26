@@ -108,7 +108,13 @@ var loadFile = function(event, id) {
                         <label>
                             <input name="{{ $key }}[]"
                                    value="{{ $option['value'] }}"
-                                   {!! getCheckedResult($option['value'], old($field['key'], $field['value'])) !!}
+                                    @if(is_array(old($field['key'], $field['value'])))
+                                        @foreach(old($field['key'], $field['value']) as $value)
+                                        {!! getCheckedResult($option['value'], $value) !!}
+                                        @endforeach
+                                    @else
+                                        {!! getCheckedResult($option['value'], old($field['key'], $field['value'])) !!}
+                                    @endif
                                    {!! $field['attribute'] !!} >
                             {{ $option['name'] }}
                         </label>

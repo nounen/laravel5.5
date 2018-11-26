@@ -78,7 +78,6 @@
 
                         <div class="checkbox col-sm-10" id="{{ $key }}">
                             @foreach($field['options']() as $option)
-
                             <label>
                                 <input name="{{ $key }}[]"
                                        value="{{ $option['value'] }}"

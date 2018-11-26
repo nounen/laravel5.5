@@ -101,12 +101,19 @@
                         </label>
 
                         <div class="checkbox col-sm-10" id="{{ $key }}">
-                            @foreach($field['options'] as $option)
+                            @foreach($field['options']() as $option)
                             <label>
                                 <input name="{{ $key }}[]"
                                        value="{{ $option['value'] }}"
+                                        @if(is_array(old($field['key'], $item->$key)))
+                                            @foreach(old($field['key'], $item->$key) as $value)
+                                            {!! getCheckedResult($option['value'], $value) !!}
+                                            @endforeach
+                                        @else
+                                            {!! getCheckedResult($option['value'], old($field['key'], $item->$key)) !!}
+                                        @endif
                                        {!! $field['attribute'] !!}
-                                       @if($option['value'] == $item->{$key})checked="checked"@endif>
+                                       >
                                 {{ $option['name'] }}
                             </label>
                             @endforeach

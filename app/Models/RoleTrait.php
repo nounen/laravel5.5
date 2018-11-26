@@ -125,4 +125,27 @@ trait RoleTrait
             'permission_ids',
         ];
     }
+
+    public static function detailKeys()
+    {
+        return [
+            'id',
+            'name',
+            'description',
+            'role_type',
+            'permission_ids',
+            'created_at',
+            'updated_at',
+        ];
+    }
+
+    public static function updateKeys()
+    {
+        return [
+            'name',
+            'description',
+            'role_type',
+            'permission_ids',
+        ];
+    }
 }

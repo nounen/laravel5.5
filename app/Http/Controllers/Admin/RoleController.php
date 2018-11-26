@@ -12,7 +12,7 @@ class RoleController extends Controller
     {
         parent::__construct();
 
-//        $this->authorize = false;
+        $this->authorize = false;
         $this->setTitle('角色');
         $this->setBaseUrl(url('admin/role'));
         $this->setViewDir('admin.role');
@@ -22,12 +22,38 @@ class RoleController extends Controller
     }
 
     /**
-     * @param TagRequest $request
+     * @param RoleRequest $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(RoleRequest $request)
     {
         $this->repository->store($request);
         return redirect($this->baseUrl);
+    }
+
+    /**
+     * @param RoleRequest $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function update(RoleRequest $request, $id)
+    {
+        $article = parent::_update($request, $id, self::RETURN_MODEL);
+
+        $article->permissions()->sync($request->get('permissions_ids'));
+
+        return redirect($this->baseUrl);
+    }
+
+
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function destroy($id)
+    {
+        return parent::_destroy($id);
     }
 }

@@ -336,14 +336,4 @@ trait ArticleTrait
             'updated_at',
         ];
     }
-
-    public static function getEditFieldsHook($article)
-    {
-        $article->tag_ids = Tag::getTagIds($article->id);
-    }
-
-    public static function getShowFieldsHook($article)
-    {
-        $article->tag_ids = Tag::getTagIds($article->id);
-    }
 }

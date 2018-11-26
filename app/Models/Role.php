@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Facades\DB;
+
 class Role extends BaseModel
 {
     use RoleTrait;
@@ -54,5 +56,14 @@ class Role extends BaseModel
     public function getRoleTypeNameAttribute()
     {
         return getAttributeName($this->getRoleTypes(), $this->role_type);
+    }
+
+    /**
+     * 关联的权限 ids
+     * @return array
+     */
+    public function getPermissionIdsAttribute()
+    {
+        return array_pluck($this->permissions, 'id');
     }
 }

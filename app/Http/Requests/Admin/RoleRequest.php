@@ -31,9 +31,9 @@ class RoleRequest extends FormRequest
 
         // 更新时不包含自己
         if (isUpdateAction($request)) {
-            $rules['title'][] = Rule::unique('role')->ignore($request->id);
+            $rules['name'][] = Rule::unique('role')->ignore($request->id);
         } else {
-            $rules['title'][] = Rule::unique('role');
+            $rules['name'][] = Rule::unique('role');
         }
 
         return $rules;

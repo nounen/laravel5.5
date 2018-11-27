@@ -1,0 +1,14 @@
+<?php
+
+namespace DummyNamespace;
+
+class ModelNameClass extends BaseModel
+{
+    use ModelNameTrait;
+
+    protected $table = '';
+
+    protected $fillable = [
+
+    ];
+}

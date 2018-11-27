@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 
 class RoutesToPermission extends Command
 {
-    protected $signature = 'seed:permission';
+    protected $signature = 'curd:seed_permission';
 
     protected $description = '权限填充: 按照层级 (必须是三级做填充)';
 

@@ -56,7 +56,7 @@ trait ArticleTrait
      *
      * @return array
      */
-    public static function getFields()
+    public static function allFields()
     {
         return [
             'id' => [

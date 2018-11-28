@@ -13,7 +13,7 @@ trait BaseModelTrait
     {
         $rules = [];
 
-        $fields = self::getFields();
+        $fields = self::allFields();
 
         foreach($fields as $fieldKey => $field) {
             if (isset($field['rule'])) {
@@ -35,7 +35,7 @@ trait BaseModelTrait
     {
         $attributes = [];
 
-        $fields = self::getFields();
+        $fields = self::allFields();
 
         foreach($fields as $fieldKey => $field) {
             $attributes[$fieldKey] = $field['name'];
@@ -53,7 +53,7 @@ trait BaseModelTrait
     {
         $rows = [];
         $keys = self::tableKeys();
-        $fields = self::getFields();
+        $fields = self::allFields();
 
         foreach ($keys as $key) {
             $field = $fields[$key];
@@ -99,7 +99,7 @@ trait BaseModelTrait
      */
     public static function getShowFields()
     {
-        return self::dealFields(self::detailKeys(), self::getFields());
+        return self::dealFields(self::detailKeys(), self::allFields());
     }
 
     /**
@@ -118,7 +118,7 @@ trait BaseModelTrait
      */
     public static function getCreateFields()
     {
-        return self::dealFields(self::createKeys(), self::getFields());
+        return self::dealFields(self::createKeys(), self::allFields());
     }
 
     /**
@@ -160,7 +160,7 @@ trait BaseModelTrait
      */
     public static function getEditFields()
     {
-        return self::dealFields(self::updateKeys(), self::getFields());
+        return self::dealFields(self::updateKeys(), self::allFields());
     }
 
     /**

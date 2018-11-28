@@ -20,20 +20,18 @@ trait TagTrait
         return [
             'id' => [
                 'name'   => '主键',
-                'update' => true,
                 'element'=> 'input',
                 'attributes' => [
                     'type'     => 'hidden',
                 ],
             ],
+
             'name' => [
                 'name'   => '标签名',
                 'slots'  => [
                     'table' => true,
                 ],
                 'detail' => 'slot',
-                'create' => true,
-                'update' => true,
                 'rule'   => [
                     'required',
                     'max:10'
@@ -44,10 +42,9 @@ trait TagTrait
                     'required' => 'required',
                 ],
             ],
+
             'sort' => [
                 'name'   => '排序',
-                'create' => true,
-                'update' => true,
                 'rule'   => [
                     'required',
                     'numeric',
@@ -58,18 +55,18 @@ trait TagTrait
                     'required' => 'required',
                 ],
             ],
+
             'created_at' => [
                 'name'   => '创建时间',
-                'update' => true,
                 'element'=> 'input',
                 'attributes' => [
                     'type'     => 'text',
                     'disabled' => 'disabled',
                 ],
             ],
+
             'updated_at' => [
                 'name'   => '更新时间',
-                'update' => true,
                 'element'=> 'input',
                 'attributes' => [
                     'type'     => 'text',

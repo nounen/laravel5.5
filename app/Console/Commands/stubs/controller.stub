@@ -1,0 +1,59 @@
+<?php
+
+namespace App\Http\Controllers\DirName;
+
+use App\Models\ModelName;
+use App\Repositories\DirName\ModelNameRepository;
+use App\Http\Requests\DirName\ModelNameRequest;
+
+class ModelNameController extends Controller
+{
+    /**
+     * 第一个参数是主要模型, 第二个参数是主要仓库
+     *
+     * ModelNameController constructor.
+     * @param ModelNameRepository $modelNameRepository
+     * @param ModelName $modelName
+     */
+    public function __construct(ModelName $modelName, ModelNameRepository $modelNameRepository)
+    {
+        parent::__construct();
+
+        $this->setTitle('xx');
+        $this->setBaseUrl(url('admin/modelUrl'));
+        $this->setViewDir('admin.modelUrl');
+
+        $this->model = $modelName;
+        $this->repository = $modelNameRepository;
+    }
+
+    /**
+     * @param ModelNameRequest $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function store(ModelNameRequest $request)
+    {
+        return parent::_store($request);
+    }
+
+    /**
+     * @param ModelNameRequest $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function update(ModelNameRequest $request, $id)
+    {
+        return parent::_update($request, $id);
+    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function destroy($id)
+    {
+        return parent::_destroy($id);
+    }
+}

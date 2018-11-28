@@ -2,7 +2,7 @@
 
 namespace DummyNamespace;
 
-class ModelNameClass extends BaseModel
+class ModelName extends BaseModel
 {
     use ModelNameTrait;
 

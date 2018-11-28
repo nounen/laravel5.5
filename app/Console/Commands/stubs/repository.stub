@@ -1,0 +1,34 @@
+<?php
+
+namespace App\Repositories\DirName;
+
+use App\Models\ModelName;
+
+class ModelNameRepository extends BaseRepository
+{
+    /**
+     * @param $request
+     */
+    public function store($request)
+    {
+        $input = $request->only(ModelName::getStoreKeys());
+        ModelName::create($input);
+    }
+
+    /**
+     * 分页数据
+     */
+    public function paginate()
+    {
+        $fieldMaps = [
+        ];
+
+        $list = search(ModelName::class, $fieldMaps)
+            ->with([
+            ])
+            ->orderBy('created_at', 'DESC')
+            ->paginate(10);
+
+        return $list;
+    }
+}

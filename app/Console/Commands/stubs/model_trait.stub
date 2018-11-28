@@ -1,0 +1,42 @@
+<?php
+
+namespace App\Models;
+
+trait ModelNameTrait
+{
+    /**
+     * 所有字段
+     * @return array
+     */
+    allFieldsMethod
+
+    /**
+     * 搜索字段
+     * @return array
+     */
+    searchFieldsMethod
+
+    /**
+     * 列表字段
+     * @return array
+     */
+    tableKeysMethod
+
+    /**
+     * 创建字段
+     * @return array
+     */
+    createKeysMethod
+
+    /**
+     * 编辑字段
+     * @return array
+     */
+    updateKeysMethod
+
+    /**
+     * 详情字段
+     * @return array
+     */
+    detailKeysMethod
+}

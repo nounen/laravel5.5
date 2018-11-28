@@ -110,7 +110,7 @@ class Controller extends BaseController
     public function index()
     {
         $this->data['title'] = "{$this->data['title']}列表";
-        $this->data['filters'] = $this->model->getSearchFields();
+        $this->data['filters'] = $this->model->searchFields();
         $this->data['fields'] = $this->model->getIndexFields();
         $this->data['list'] = $this->repository->paginate();
         return $this->renderView();

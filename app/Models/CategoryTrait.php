@@ -4,7 +4,7 @@ namespace App\Models;
 
 trait CategoryTrait
 {
-    public function getSearchFields()
+    public function searchFields()
     {
         return [];
     }

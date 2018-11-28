@@ -5,7 +5,7 @@ namespace App\Models;
 trait TagTrait
 {
 
-    public static function getSearchFields()
+    public static function searchFields()
     {
         return [];
     }

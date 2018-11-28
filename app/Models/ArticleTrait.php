@@ -4,7 +4,7 @@ namespace App\Models;
 
 trait ArticleTrait
 {
-    public static function getSearchFields()
+    public static function searchFields()
     {
         $input = request()->all();
 

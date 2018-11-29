@@ -61,6 +61,9 @@ class CurdMakeModel extends GeneratorCommand
             if (file_put_contents(__DIR__.'/stubs/model_tmp.stub', $content)) {
                 return __DIR__.'/stubs/model_tmp.stub';
             }
+        } else {
+            $this->error("{$table} 表不存在，请先创建！");
+            exit();
         }
     }
 

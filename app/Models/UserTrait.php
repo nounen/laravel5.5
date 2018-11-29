@@ -40,7 +40,10 @@ trait UserTrait
 				'element' => 'input',
 				'slots' => [],
 				'attributes' => [],
-				'rule' => [],
+				'rule' => [
+                    'required',
+                    'min:6',
+                ],
 			],
 
 			'remember_token' => [

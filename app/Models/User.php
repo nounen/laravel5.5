@@ -59,4 +59,16 @@ class User extends BaseModel implements
             return '';
         }
     }
+
+    // 详情钩子
+    public static function getShowFieldsHook($item)
+    {
+        $item->password = '';
+    }
+
+    // 编辑钩子
+    public static function getEditFieldsHook($item)
+    {
+        $item->password = '';
+    }
 }

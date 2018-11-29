@@ -15,7 +15,7 @@ class CurdMakeModelTrait extends GeneratorCommand
 {
     protected $name = 'curd:make_model_trait';
 
-    protected $description = '模型生成';
+    protected $description = '模型 trait 生成: php artisan curd:make_model_trait Admin/RolePermissionTrait';
 
     protected $type = 'Model';
 

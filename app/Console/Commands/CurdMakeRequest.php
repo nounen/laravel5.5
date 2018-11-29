@@ -14,7 +14,7 @@ class CurdMakeRequest extends GeneratorCommand
 {
     protected $name = 'curd:make_request';
 
-    protected $description = '生成仓库: php artisan curd:make_request Admin/RolePermissionRequest';
+    protected $description = '生成表单验证: php artisan curd:make_request Admin/RolePermissionRequest';
 
     protected $type = 'Request';
 

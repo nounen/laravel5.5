@@ -15,7 +15,7 @@ class CurdMakeModel extends GeneratorCommand
 {
     protected $name = 'curd:make_model';
 
-    protected $description = '模型生成';
+    protected $description = '模型生成: php artisan curd:make_model RolePermission';
 
     protected $type = 'Model';
 

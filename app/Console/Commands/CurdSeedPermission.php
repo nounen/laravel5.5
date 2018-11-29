@@ -6,7 +6,7 @@ use App\Models\Permission;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Route;
 
-class RoutesToPermission extends Command
+class CurdSeedPermission extends Command
 {
     protected $signature = 'curd:seed_permission';
 

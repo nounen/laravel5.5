@@ -66,4 +66,19 @@ class Role extends BaseModel
     {
         return array_pluck($this->permissions, 'id');
     }
+
+    /**
+     * 作为下拉选项
+     *
+     * @return mixed
+     */
+    public static function beOptions()
+    {
+        $fields = [
+            'id AS value',
+            'name',
+        ];
+
+        return self::get($fields);
+    }
 }

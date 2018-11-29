@@ -65,6 +65,22 @@ Route::namespace('Admin')->prefix('admin')->middleware(['auth'])->group(function
     // 系统管理
     Route::name('系统管理')->group(function () {
         // 角色管理
+        Route::prefix('user')->name('.用户管理')->group(function() {
+            // 列表页面, 详情页面, 删除数据
+            Route::get('', 'UserController@index')->name('.用户列表');
+            Route::get('{id}', 'UserController@show')->name('.用户详情');
+            Route::delete('{id}', 'UserController@destroy')->name('.用户删除');
+
+            // 创建页面, 保存数据
+            Route::get('create', 'UserController@create')->name('.用户创建_ignore');
+            Route::post('', 'UserController@store')->name('.用户创建');
+
+            // 编辑页面, 更新数据
+            Route::get('{id}/edit', 'UserController@edit');
+            Route::patch('{id}', 'UserController@update')->name('.用户修改');
+        });
+
+        // 角色管理
         Route::prefix('role')->name('.角色管理')->group(function() {
             // 列表页面, 详情页面, 删除数据
             Route::get('', 'RoleController@index')->name('.角色列表');

@@ -146,6 +146,12 @@ class CurdMakeModelTrait extends GeneratorCommand
 
         if (str_contains($type, ['int', 'string'])) {
             $value = 'input';
+        } elseif ($type == 'text') {
+            $value = 'textarea';
+        } elseif ($type == 'longtext') {
+            $value = 'wang-editor';
+        } elseif ($type == 'timestamp') {
+            $value = 'input';
         }
 
         return "\t\t\t\t'element' => '{$value}',\n";

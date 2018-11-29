@@ -1,0 +1,40 @@
+<?php
+
+namespace App\Http\Requests\DirName;
+
+use App\Models\ModelName;
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+
+class ModelNameRequest extends FormRequest
+{
+    public function authorize()
+    {
+        return true;
+    }
+
+    public function rules(Request $request)
+    {
+        // 更多规则可以自己添加
+        $rules = ModelName::getRequestRules();
+
+//        // 更新时不包含自己
+//        if (isUpdateAction($request)) {
+//            $rules['name'][] = Rule::unique('tableName')->ignore($request->id);
+//        } else {
+//            $rules['name'][] = Rule::unique('tableName');
+//        }
+
+        return $rules;
+    }
+
+    public function attributes()
+    {
+        $attributes = ModelName::getRequestAttributes();
+
+        // $attributes['more'] = '更多';
+
+        return $attributes;
+    }
+}

@@ -144,7 +144,7 @@ class CurdMakeModelTrait extends GeneratorCommand
     {
         $value = '';
 
-        if (str_contains($type, ['int', 'string'])) {
+        if (str_contains($type, ['int', 'varchar'])) {
             $value = 'input';
         } elseif ($type == 'text') {
             $value = 'textarea';

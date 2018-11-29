@@ -72,6 +72,11 @@ class CurdMakeViews extends Command
 
     protected function makeView($view, $path)
     {
+        if (file_exists($path)) {
+            $this->error("{$view} already exists!");
+            return ;
+        }
+
         // 生成新模板
         $content = file_get_contents(__DIR__."/stubs/views.{$view}");
         if ($content) {

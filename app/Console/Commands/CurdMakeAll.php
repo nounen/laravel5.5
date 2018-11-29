@@ -50,5 +50,6 @@ class CurdMakeAll extends Command
         $this->call("curd:make_controller", ["name" => "{$dirAndName}Controller"] );
         $this->call("curd:make_repository",  ["name" => "{$dirAndName}Repository"]);
         $this->call("curd:make_request",  ["name" => "{$dirAndName}Request"]);
+        $this->call("curd:make_views", ["name" => "$dirAndName"]);
     }
 }

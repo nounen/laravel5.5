@@ -74,6 +74,8 @@ php artisan serve
 
 * form_checkbox 表: id, form_id, checkbox
 
+### artisan
+* `php artisan curd:`
 
 ### 策略 -- policy
 * `php artisan make:policy TagPolicy --model=Models/Tag`
@@ -87,34 +89,6 @@ if ($this->auth->cant('view', $tag)) {
 
 // 策略处理方式 2
 $this->authorize('view', $tag);
-```
-
-
-### index.blade.php
-```
-// 模板 fields 变量 eg： 
-array:5 [▼
-  "id" => array:2 [▶
-    "name" => "主键"
-    "is_slot" => false
-  ]
-  "name" => array:2 [▶
-    "name" => "标签名"
-    "is_slot" => true
-  ]
-  "sort" => array:2 [▶
-    "name" => "排序"
-    "is_slot" => false
-  ]
-  "created_at" => array:2 [▶
-    "name" => "创建时间"
-    "is_slot" => false
-  ]
-  "updated_at" => array:2 [▶
-    "name" => "更新时间"
-    "is_slot" => false
-  ]
-]
 ```
 
 
@@ -133,8 +107,8 @@ array:5 [▼
 
 * []表单元素整理
 
-* []权限管理
+* [] 权限管理
 
-* []搜索支持排序
+* [x] 搜索支持排序
 
 * 

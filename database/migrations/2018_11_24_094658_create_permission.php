@@ -21,6 +21,7 @@ class CreatePermission extends Migration
             $table->string('uri')->default('');
             // 必须唯一，相同业务需要在不同模块控制权限那就写两个路由和控制器，业务代码指向同一个仓库方法即可
             $table->string('action')->default('')->index()->comment('控制器方法名');
+            $table->string('class')->default('')->comment('css class');
             $table->integer('sort')->default(0);
             $table->integer('level')->default(0)->comment();
             $table->timestamps();

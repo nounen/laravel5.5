@@ -33,7 +33,12 @@ class UserRepository extends BaseRepository
 
     public function update($input, $id)
     {
-        $input['password'] = Hash::make($input['password']);
+        if (! empty($input['password'])) {
+            $input['password'] = Hash::make($input['password']);
+        } else {
+            unset($input['password']);
+        }
+dd($input);
         $user = User::findOrFail($id);
         $user->update($input);
     }

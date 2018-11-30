@@ -39,9 +39,11 @@ trait UserTrait
 				'name' => '密码',
 				'element' => 'input',
 				'slots' => [],
-				'attributes' => [],
+				'attributes' => [
+				    'placeholder' => '修改密码则填写',
+                ],
 				'rule' => [
-                    'required',
+                    'nullable',
                     'min:6',
                 ],
 			],

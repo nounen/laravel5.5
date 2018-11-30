@@ -20,7 +20,7 @@
             @foreach($menus AS $menu)
             <li class="active treeview">
                 <a href="#">
-                    <i class="fa {{ $menu['icon'] }}"></i>
+                    <i class="{{ $menu['class'] }}"></i>
                     <span>{{ $menu['name'] }}</span>
                     <span class="pull-right-container">
                       <i class="fa fa-angle-left pull-right"></i>
@@ -29,10 +29,10 @@
 
                 {{-- 菜单二级 --}}
                 <ul class="treeview-menu">
-                    @foreach($menu['childrens'] AS $children)
-                    <li class="{{ getActiveClass($children['url']) }}">
-                        <a href="{{ $children['url'] }}">
-                            <i class="fa {{ $children['icon'] }}"></i> {{ $children['name'] }}
+                    @foreach($menu['children'] AS $children)
+                    <li class="{{ getActiveClass($children['uri']) }}">
+                        <a href="{{ url($children['uri']) }}">
+                            <i class="{{ $children['class'] }}"></i> {{ $children['name'] }}
                         </a>
                     </li>
                     @endforeach

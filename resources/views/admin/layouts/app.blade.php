@@ -12,41 +12,41 @@
 </head>
 <body id="sidebar-effect" class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
-
+    {{-- header 隐藏--}}
     @if(isset($hidden_header) && $hidden_header)
-        {{-- 设置不需要 header : 左侧菜单隐藏--}}
-        <style>
-            .content-wrapper, .main-footer {
-                margin-left: 0px;
-            }
-        </style>
+    <style>
+    .content-wrapper, .main-footer {
+        margin-left: 0px;
+    }
+    </style>
     @else
         @include('admin.layouts.header')
     @endif
 
+    {{-- sidebar 隐藏 --}}
     @if(isset($hidden_sidebar) && $hidden_sidebar)
-        {{-- 设置不需要 sidebar --}}
     @else
         @include('admin.layouts.sidebar')
     @endif
 
+    {{-- 主内容 --}}
     <div class="content-wrapper">
         <section class="content-header">
-            @if(isset($hidden_sidebar) && $hidden_sidebar)
-            @else
-                <h1>
-                {{ $title }}
-                </h1>
-            @endif
+        @if(isset($hidden_sidebar) && $hidden_sidebar)
+        @else
+            <h1>
+            {{ $title }}
+            </h1>
+        @endif
         </section>
 
         <section class="content">
-            @yield('content')
+        @yield('content')
         </section>
     </div>
 
+    {{-- footer 隐藏 --}}
     @if(isset($hidden_footer) && $hidden_footer)
-        {{-- 设置不需要 footer --}}
     @else
         @include('admin.layouts.footer')
     @endif
@@ -54,7 +54,6 @@
 
 {{-- common 目录下文件 js 扩展 --}}
 @yield('common_js')
-
 @yield('js')
 
 @include('admin.common.error')

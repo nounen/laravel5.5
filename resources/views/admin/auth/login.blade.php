@@ -38,6 +38,19 @@
             </div>
         </form>
 
+        {{-- 登录错误 --}}
+        <div class="form-group">
+            @if (count($errors) > 0)
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        </div>
+
         <div class="social-auth-links text-center">
             <p>
                 <a href="{{ url('admin/password/reset') }}" class="btn btn-link">Forgot Your Password? </a>

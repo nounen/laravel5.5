@@ -29,4 +29,8 @@ editor{{ $key }}.customConfig.uploadImgShowBase64 = true
 editor{{ $key }}.create();
 editor{{ $key }}.txt.html(`{!! $value !!}`);
 textarea{{ $key }}.html(editor{{ $key }}.txt.html())
+
+// 文本狂高度
+$(".w-e-text-container").css('min-height', '300px');
+$('.w-e-text-container').height("auto");
 </script>

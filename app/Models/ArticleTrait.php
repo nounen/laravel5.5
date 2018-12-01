@@ -243,7 +243,6 @@ trait ArticleTrait
 
             'created_at' => [
                 'name'   => '创建时间',
-                'update' => false,
                 'element'=> 'input',
                 'attributes' => [
                     'type'     => 'text',
@@ -253,7 +252,6 @@ trait ArticleTrait
 
             'updated_at' => [
                 'name'   => '更新时间',
-                'update' => false,
                 'element'=> 'input',
                 'attributes' => [
                     'type'     => 'text',

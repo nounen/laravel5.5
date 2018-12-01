@@ -48,6 +48,12 @@ class ArticleController extends Controller
     {
         $article = parent::_update($request, $id, self::RETURN_MODEL);
 
+        $cover = $request->file('cover');
+        if (!is_null($cover)) {
+            $article->cover = saveFile($cover, 'covers');
+            $article->save();
+        }
+
         $article->tags()->sync($request->get('tag_ids'));
 
         return redirect($this->baseUrl);

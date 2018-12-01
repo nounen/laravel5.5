@@ -49,13 +49,10 @@ if (! function_exists('getCheckedResult')) {
 if (! function_exists('getSelectName')) {
     /**
      * select 的name属性计算
-     * @param $field
-     * @param $field
-     * @return string
      */
-    function getSelectName($field)
+    function getSelectName($attribute, $key)
     {
-        return strpos($field['attribute'], 'multiple') ? "{$field['key']}[]" : $field['key'];
+        return strpos($attribute, 'multiple') ? "{$key}[]" : $key;
     }
 }
 

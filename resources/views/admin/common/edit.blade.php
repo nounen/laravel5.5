@@ -1,9 +1,9 @@
 <style>
-    {{-- 重写 text-align --}}
+{{-- 重写 text-align --}}
 .form-horizontal .control-label {
-        padding-top: 7px;
-        margin-bottom: 0;
-        text-align: center;
+    padding-top: 7px;
+    margin-bottom: 0;
+    text-align: center;
 }
 
 /* 避免内容太多把标题挤没了 */
@@ -12,14 +12,6 @@
     max-width: 120px;
 }
 </style>
-
-<script>
-    // 图片预览
-    var loadFile = function(event, id) {
-        var output = document.getElementById(id);
-        output.src = URL.createObjectURL(event.target.files[0]);
-    };
-</script>
 
 <div class="box box-primary">
     <form role="form"
@@ -35,181 +27,78 @@
             @foreach($fields as $key => $field)
                 @switch($field['element'])
                     @case('input')
-                    <div class="form-group {{ getHiddenClass($field['attribute']) }}">
-                        <label for="{{ $key }}"
-                               class="col-sm-2 table_title_width control-label">
-                            {{ $field['name'] }}:
-                        </label>
-
-                        <div class="col-sm-10">
-                            <input id="{{ $key }}"
-                                   name="{{ $key }}"
-                                   value="{{ $item->{$key} }}"
-                                   class="form-control"
-                                   {!! $field['attribute'] !!} >
-                        </div>
-                    </div>
+                        @include('admin.common.form.input',[
+                             'key' => $key,
+                             'name' => $field['name'],
+                             'value' => $item->$key,
+                             'attribute' => $field['attribute'],
+                         ])
                     @break
 
                     @case('input-image')
-                    <div class="form-group">
-                        <label for="{{ $key }}"
-                               class="col-sm-2 table_title_width control-label">
-                            {{ $field['name'] }}:
-                        </label>
-
-                        <div class="col-sm-10">
-                            <input name="{{ $key }}"
-                                   type="file"
-                                   accept="image/*"
-                                   onchange="loadFile(event, 'input-image-{{ $key }}')"
-                                   style="margin-bottom: 15px;">
-
-                            <img id="input-image-{{ $key }}"
-                                 src="{{ getAssetUrl($item->{$key}) }}"
-                                 class="img-responsive"/>
-                        </div>
-                    </div>
+                        @include('admin.common.form.input-image', [
+                           'key' => $key,
+                           'name' => $field['name'],
+                           'value' => old($key, $item->$key),
+                        ])
                     @break
 
                     @case('radio')
-                    <div class="form-group">
-                        <label for="{{ $key }}"
-                               class="col-sm-2 table_title_width control-label">
-                            {{ $field['name'] }}:
-                        </label>
-
-                        <div class="radio col-sm-10" id="{{ $key }}">
-                            @foreach($field['options']() as $option)
-                            <label>
-                                <input name="{{ $key }}"
-                                       value="{{ $option['value'] }}"
-                                        {!! getCheckedResult($option['value'], old($field['key'], $item->$key)) !!}
-                                        {!! $field['attribute'] !!} >
-                                {{ $option['name'] }}
-                            </label>
-                            @endforeach
-                        </div>
-                    </div>
+                        @include('admin.common.form.radio', [
+                            'key' => $key,
+                            'name' => $field['name'],
+                            'value' => old($key, $item->$key),
+                            'options' => $field['options'],
+                            'attribute' => $field['attribute'],
+                        ])
                     @break
 
                     @case('checkbox')
-                    <div class="form-group">
-                        <label for="{{ $key }}"
-                               class="col-sm-2 table_title_width control-label">
-                            {{ $field['name'] }}:
-                        </label>
-
-                        <div class="checkbox col-sm-10" id="{{ $key }}">
-                            @foreach($field['options']() as $option)
-                            <label>
-                                <input name="{{ $key }}[]"
-                                       value="{{ $option['value'] }}"
-                                        @if(is_array(old($field['key'], $item->$key)))
-                                            @foreach(old($field['key'], $item->$key) as $value)
-                                            {!! getCheckedResult($option['value'], $value) !!}
-                                            @endforeach
-                                        @else
-                                            {!! getCheckedResult($option['value'], old($field['key'], $item->$key)) !!}
-                                        @endif
-                                       {!! $field['attribute'] !!}
-                                       >
-                                {{ $option['name'] }}
-                            </label>
-                            @endforeach
-                        </div>
-                    </div>
+                        @include('admin.common.form.checkbox', [
+                            'key' => $key,
+                            'name' => $field['name'],
+                            'value' => old($key, $item->$key),
+                            'options' => $field['options'],
+                            'attribute' => $field['attribute'],
+                        ])
                     @break
 
                     @case('select')
-                    <div class="form-group">
-                        <label for="{{ $key }}"
-                               class="col-sm-2 table_title_width control-label">
-                            {{ $field['name'] }}:
-                        </label>
-
-                        <div class="col-sm-10">
-                            <select id="{{ $key }}"
-                                    name="{{ getSelectName($field) }}"
-                                    class="form-control"
-                                    {!! $field['attribute'] !!}>
-
-                                @foreach($field['options']() as $option)
-                                <option value="{{ $option['value'] }}"
-                               {{-- 多选 OR 单选 --}}
-                                @if(is_array(old($key, $item->$key)))
-                                    @foreach(old($key, $item->$key) as $value)
-                                    {{ getSelectResult($option['value'], $value) }}
-                                    @endforeach
-                                @else
-                                    {{ getSelectResult($option['value'], old($key, $item->$key)) }}
-                                @endif
-                                >{{ $option['name'] }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
+                        @include('admin.common.form.select', [
+                            'key' => $key,
+                            'name' => $field['name'],
+                            'value' => old($key, $item->$key),
+                            'options' => $field['options'],
+                            'attribute' => $field['attribute'],
+                        ])
                     @break
 
                     @case('textarea')
-                    <div class="form-group">
-                        <label for="{{ $key }}"
-                               class="col-sm-2 table_title_width control-label">
-                            {{ $field['name'] }}:
-                        </label>
-
-                        <div class="col-sm-10">
-                            <textarea id="{{ $key }}"
-                                      name="{{ $key }}"
-                                      class="form-control"
-                                      {!! $field['attribute'] !!}>{{ $item->{$key} }}</textarea>
-                        </div>
-                    </div>
+                        @include('admin.common.form.textarea', [
+                            'key' => $key,
+                            'name' => $field['name'],
+                            'value' => old($key, $item->$key),
+                            'attribute' => $field['attribute'],
+                        ]);
                     @break
 
                     {{-- wangEditor --}}
                     @case('wang-editor')
-                    <div class="form-group">
-                        <label for="{{ $key }}"
-                               class="col-sm-2 table_title_width control-label">
-                            {{ $field['name'] }}:
-                        </label>
-
-                        <div class="col-sm-10">
-                            <div id="wang-editor-{{ $key }}"></div>
-                        </div>
-
-                        <textarea id="wang-editor-textarea-{{ $key }}"
-                                  name="{{ $key }}"
-                                  class="hidden">{!! old($key, $item->$key)  !!}</textarea>
-
-                        <script type="text/javascript">
-                        // wangEditor 编辑器初始化
-                        var E = window.wangEditor;
-                        var editor{{ $key }} = new E('#wang-editor-{{ $key }}');
-                        var textarea{{ $key }} = $("#wang-editor-textarea-{{ $key }}");
-
-                        // wangEditor 内容变化监测，同步更新到 textarea
-                        editor{{ $key }}.customConfig.onchange = function (html) {
-                            textarea{{ $key }}.html(html);
-                        }
-
-                        // 初始化
-                        editor{{ $key }}.customConfig.uploadImgShowBase64 = true
-                        editor{{ $key }}.create();
-                        editor{{ $key }}.txt.html(`{!! old($key, $item->$key)  !!}`);
-                        textarea{{ $key }}.html(editor{{ $key }}.txt.html())
-                        </script>
-                    </div>
+                        @include('admin.common.form.wang-editor', [
+                            'key' => $key,
+                            'name' => $field['name'],
+                            'value' => old($key, $item->$key),
+                        ])
                     @break
 
                     @case('slot')
-                    {{ ${$key} }}
+                        @include('admin.common.form.slot', [
+                            'key' => $key,
+                        ])
                     @break
 
                     @default
-                    <h3>字段元素配置错误: {{ $key }} !</h3>
-
+                        @include('admin.common.form.default')
                 @endswitch
             @endforeach
         </div>
@@ -221,13 +110,3 @@
         </div>
     </form>
 </div>
-
-@section('common_js')
-<script>
-// textarea 高度自适应
-$.each($("textarea"), function(i, n){
-    // 为什么 + 5: 因为高度还是差一点, 导致出现滚轴
-    $(n).css("height", (n.scrollHeight + 5) + "px");
-})
-</script>
-@endsection

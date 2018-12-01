@@ -63,7 +63,7 @@ class Controller extends BaseController
 
     public function __construct()
     {
-        $this->data['menus'] = $this->getMockMenus();
+        $this->data['menus'] = $this->getMenus();
     }
 
     // <title></title> 设置
@@ -278,26 +278,11 @@ class Controller extends BaseController
     }
 
     /**
-     * 权限
+     * 左侧菜单数据
      *
      * @return array
      */
-    protected function permissions()
-    {
-        return [
-            'create' => true,
-            'show'   => true,
-            'edit'   => true,
-            'delete' => true,
-        ];
-    }
-
-    /**
-     * 模拟左侧菜单数据
-     *
-     * @return array
-     */
-    protected function getMockMenus()
+    protected function getMenus()
     {
         $permissions = Permission::all()->toArray();
         $menus = Tree::makeTree($permissions);

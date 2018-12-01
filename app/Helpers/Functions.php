@@ -134,11 +134,15 @@ if (! function_exists('getAssetUrl')) {
      */
     function getAssetUrl($relateUrl)
     {
-        return str_replace(
-            '/public/',
-            '/',
-            asset("storage/$relateUrl")
-        );
+        if (! empty($relateUrl)) {
+            return str_replace(
+                '/public/',
+                '/',
+                asset("storage/$relateUrl")
+            );
+        } else {
+            return "";
+        }
     }
 }
 

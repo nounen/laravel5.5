@@ -33,7 +33,7 @@
                         'value' => old($key, $field['value']),
                         'attribute' => $field['attribute'],
                     ])
-                @break
+                    @break
 
                 {{-- 输入框: 图片上传 --}}
                 @case('input-image')
@@ -42,7 +42,7 @@
                         'name' => $field['name'],
                         'value' => old($key, $field['value']),
                     ])
-                @break
+                    @break
 
                 {{-- 单选按钮 --}}
                 @case('radio')
@@ -53,7 +53,7 @@
                         'options' => $field['options'],
                         'attribute' => $field['attribute'],
                     ])
-                @break
+                    @break
 
                 {{-- 复选框 --}}
                 @case('checkbox')
@@ -64,7 +64,7 @@
                         'options' => $field['options'],
                         'attribute' => $field['attribute'],
                     ])
-                @break
+                    @break
 
                 {{-- 下拉列表 --}}
                 @case('select')
@@ -75,7 +75,7 @@
                         'options' => $field['options'],
                         'attribute' => $field['attribute'],
                     ])
-                @break
+                    @break
 
                 {{-- 文本域 --}}
                 @case('textarea')
@@ -85,7 +85,7 @@
                         'value' => old($key, $field['value']),
                         'attribute' => $field['attribute'],
                     ])
-                @break
+                    @break
 
                 {{-- wangEditor --}}
                 @case('wang-editor')
@@ -94,18 +94,21 @@
                         'name' => $field['name'],
                         'value' => old($key, $field['value']),
                     ])
-                @break
+                    @break
 
                 {{-- blade 自定义扩展 --}}
                 @case('slot')
                     @include('admin.common.form.slot', [
                         'key' => $key,
                     ])
-                @break
+                    @break
 
                 {{-- 配置错误 --}}
                 @default
-                    @include('admin.common.form.default')
+                    @include('admin.common.form.default', [
+                        'key' => $key,
+                        'element' => $field['element'],
+                    ])
             @endswitch
         @endforeach
         </div>

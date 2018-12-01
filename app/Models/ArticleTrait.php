@@ -107,7 +107,7 @@ trait ArticleTrait
 
             'cover_url' => [
                 'name'   => '封面',
-                'element'=> 'image-single',
+                'element'=> 'show-single-image',
             ],
 
             'content' => [

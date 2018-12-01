@@ -33,7 +33,7 @@
                              'value' => $item->$key,
                              'attribute' => $field['attribute'],
                          ])
-                    @break
+                        @break
 
                     @case('input-image')
                         @include('admin.common.form.input-image', [
@@ -41,7 +41,7 @@
                            'name' => $field['name'],
                            'value' => old($key, $item->$key),
                         ])
-                    @break
+                        @break
 
                     @case('radio')
                         @include('admin.common.form.radio', [
@@ -51,7 +51,7 @@
                             'options' => $field['options'],
                             'attribute' => $field['attribute'],
                         ])
-                    @break
+                        @break
 
                     @case('checkbox')
                         @include('admin.common.form.checkbox', [
@@ -61,7 +61,7 @@
                             'options' => $field['options'],
                             'attribute' => $field['attribute'],
                         ])
-                    @break
+                        @break
 
                     @case('select')
                         @include('admin.common.form.select', [
@@ -71,7 +71,7 @@
                             'options' => $field['options'],
                             'attribute' => $field['attribute'],
                         ])
-                    @break
+                        @break
 
                     @case('textarea')
                         @include('admin.common.form.textarea', [
@@ -79,8 +79,8 @@
                             'name' => $field['name'],
                             'value' => old($key, $item->$key),
                             'attribute' => $field['attribute'],
-                        ]);
-                    @break
+                        ])
+                        @break
 
                     {{-- wangEditor --}}
                     @case('wang-editor')
@@ -89,16 +89,19 @@
                             'name' => $field['name'],
                             'value' => old($key, $item->$key),
                         ])
-                    @break
+                        @break
 
                     @case('slot')
                         @include('admin.common.form.slot', [
                             'key' => $key,
                         ])
-                    @break
+                        @break
 
                     @default
-                        @include('admin.common.form.default')
+                        @include('admin.common.form.default', [
+                            'key' => $key,
+                            'element' => $field['element'],
+                        ])
                 @endswitch
             @endforeach
         </div>

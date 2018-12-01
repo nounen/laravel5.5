@@ -30,7 +30,9 @@ editor{{ $key }}.create();
 editor{{ $key }}.txt.html(`{!! $value !!}`);
 textarea{{ $key }}.html(editor{{ $key }}.txt.html())
 
-// 文本狂高度
-$(".w-e-text-container").css('min-height', '300px');
-$('.w-e-text-container').height("auto");
+// 详情页高度特殊设置
+@if(isset($from) && $from == 'show') {
+    $('.w-e-text-container').height("auto");
+}
+@endif
 </script>

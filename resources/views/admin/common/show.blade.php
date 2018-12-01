@@ -106,7 +106,7 @@
 
                         <div class="col-sm-10">
                             <select id="{{ $key }}"
-                                    name="{{ getSelectName($field) }}"
+                                    name="{{ getSelectName($field['attribute'], $key) }}"
                                     class="form-control"
                                     {!! $field['attribute'] !!}
                                     disabled>

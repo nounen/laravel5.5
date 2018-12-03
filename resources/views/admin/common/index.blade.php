@@ -38,7 +38,7 @@
                                     {{ ${"slot_{$key}_{$item->id}"} }}
                                     @break
 
-                                    @case('image-single')
+                                    @case('show-single-image')
                                     <img class="img-responsive"
                                          style="display: unset; max-width: 80px;"
                                          src="{{ $item->{$key} }}" >
